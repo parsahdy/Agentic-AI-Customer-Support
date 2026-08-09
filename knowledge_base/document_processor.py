@@ -34,11 +34,9 @@ class TextProcessor(BaseProcessor):
             content = unicodedata.normalize("NFKC", content)
             content = content.replace("\r\n", "\n")
             content = content.replace("\r", "\n")
-            content = re.sub(r"[^\w\s?!]", "", content)
             content = re.sub(r"\s+", " ", content).strip()
             content = "".join(char for char in content
                         if char.isprintable() or char in "\n\t")
-            content = content.lower()
 
             processed_document = document.copy()
             processed_document["content"] = content
