@@ -43,24 +43,24 @@ class JSONDocumentLoader(BaseDocumentLoader):
 
 class PDFDocumentLoader(BaseDocumentLoader):
 
-    def load(self, source: str | Path) -> list:
+    def load(self, source: str | Path) -> list[dict]:
 
-        reader = PdfReader(source)
+        document = []
+        for pdf in source.glob("*.pdf"):
+            reader = PdfReader(pdf)
 
-        documents = []
-        for page in reader.pages:
-            text = page.extract_text()
+            for page_number, page in enumerate(reader.pages, start=1):
+                text = page.extract_text() or ""
 
-            if text:
-                documents.append(text)
+                document.append(
+                    {
+                        "page_content": text,
+                        "metadata": {
+                            "page_number": page_number,
+                            "filename": pdf.name,
+                            "source": str(pdf)
+                        }
+                    }
+                )
 
-        return documents
-
-
-class DocumentLoaderService:
-
-    def __init__(self, loader: BaseDocumentLoader):
-        self.loader = loader
-
-    def load_document(self, source: str | Path) -> list:
-        return self.loader.load(source)
+        return document
