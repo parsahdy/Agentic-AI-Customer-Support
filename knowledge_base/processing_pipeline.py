@@ -19,13 +19,13 @@ class ProcessFactory:
 
         processor = processor.lower().strip()
 
-        if processor not in cls._process:
+        if processor not in cls._processors:
             raise ValueError(
                 f"Unknown processor: {processor}."
-                f"Valid processors: {list(cls._process.keys())}"
+                f"Valid processors: {list(cls._processors.keys())}"
             )
 
-        processor_class = cls._process[processor]
+        processor_class = cls._processors[processor]
         return processor_class()
 
 
