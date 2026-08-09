@@ -6,10 +6,10 @@ def faq_to_document(row: dict) -> dict:
     document_id = row.get("document_id", "")
 
     return {
-            "content": (
+            "content": 
                 f"Question: {question}\n"
                 f"Answer: {answer}"
-            ),
+            ,
             "metadata": {
                 "document_id": document_id,
                 "source": "faq_clean.csv",
@@ -27,10 +27,10 @@ def ticket_to_document(row: dict) -> dict:
     language = row.get("language", "")
 
     return {
-        "content": (
+        "content": 
             f"Message: {message}\n"
             f"Response: {response}"
-        ),
+        ,
         "metadata": {
             "tag": tag,
             "category": category,
