@@ -1,4 +1,3 @@
-
 def faq_to_document(row: dict) -> dict:
 
     question = row.get("question", "")
@@ -39,4 +38,3 @@ def ticket_to_document(row: dict) -> dict:
             "source_type": "csv",
         }
     }
-
