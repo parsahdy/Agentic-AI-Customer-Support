@@ -1,5 +1,5 @@
-from knowledge_base.document_transform import faq_transform
-from knowledge_base.processing_pipeline import build_pipeline
+from knowledge_base.document_loader.document_transform import faq_transform
+from knowledge_base.document_loader.processing_pipeline import build_pipeline
 
 
 def test():
