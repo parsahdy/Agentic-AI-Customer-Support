@@ -45,7 +45,7 @@ class DocumentMapping:
                       indices: np.ndarray,
                       scores: np.ndarray) -> list[dict]:
 
-        mapping = self.repositor.load_metadata()
+        mapping = self.repository.load_metadata()
 
         results = []
 
