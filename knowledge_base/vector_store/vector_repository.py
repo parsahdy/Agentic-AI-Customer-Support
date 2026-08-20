@@ -7,13 +7,19 @@ import json
 
 class VectorStoreRepository:
 
-    def __init__(self, index_path: Path, metadata_path: Path):
+    def __init__(self, index_path: Path | None=None, 
+                 metadata_path: Path | None=None):
 
         self.index_path = index_path
         self.metadata_path = metadata_path
 
 
     def save_index(self, index: faiss.Index) -> None:
+
+        if self.index_path is None:
+            raise RuntimeError(
+                "Index path must be given."
+            )
 
         self.index_path.parent.mkdir(parents=True, exist_ok=True)
         faiss.write_index(index, str(self.index_path))
@@ -30,6 +36,11 @@ class VectorStoreRepository:
 
 
     def save_metadata(self, metadata: list[dict]) -> None:
+
+        if self.metadata_path is None:
+            raise RuntimeError(
+                "Metadata path must be given."
+            )
 
         self.doc_path.parent.mkdir(parents=True, exist_ok=True)
         with open(self.metadata_path, "w", encoding="utf-8") as file:
