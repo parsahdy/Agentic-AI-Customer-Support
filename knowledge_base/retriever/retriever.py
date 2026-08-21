@@ -75,9 +75,9 @@ class BM25Retriever(BaseRetriever):
 
         retriever = LangChainBM25Retriever.from_documents(
             documents,
+            k=k
             )
         
-        retriever.k = k
 
         return retriever.invoke(query)
 
@@ -131,7 +131,7 @@ class HybridRetriever(BaseRetriever):
     def _merge_results(
         bm25_docs: list[dict],
         vector_docs: list[dict],
-        k: int):
+        k: int = K):
 
         merged = []
         seen_ids = set()
@@ -150,7 +150,7 @@ class HybridRetriever(BaseRetriever):
             seen_ids.add(document_id)
             merged.append(document)
 
-            if len(merged) >= K:
+            if len(merged) >= k:
                 break
 
         return merged
