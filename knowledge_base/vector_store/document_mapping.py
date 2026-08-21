@@ -60,7 +60,7 @@ class DocumentMapping:
 
             results.append(
                 {
-                   "vector_id": vector_id,
+                    "vector_id": vector_id,
                     "document_id": document["document_id"],
                     "chunk_id": document["chunk_id"],
                     "metadata": document["metadata"],
