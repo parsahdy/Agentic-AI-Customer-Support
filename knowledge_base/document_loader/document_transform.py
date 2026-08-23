@@ -1,10 +1,10 @@
 from pathlib import Path
 
 from .document_factory import LoaderFactory
-from .document_loader import faq_to_document, ticket_to_document
+from .document_converter import faq_to_document, ticket_to_document
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 INPUT_DIR = PROJECT_ROOT / "data" / "cleaned"
 PDF_DIR = PROJECT_ROOT / "data" / "pdf"
 
