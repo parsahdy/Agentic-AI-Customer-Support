@@ -1,12 +1,9 @@
-from retriever import (
+from .retriever import (
     BaseRetriever,
     VectorRetriever,
     BM25Retriever,
     HybridRetriever,
 )
-from ..vector_store.vector_repository import VectorStoreRepository
-from ..vector_store.document_mapping import DocumentMapping
-
 
 class RetrieverFactory:
 
