@@ -46,7 +46,12 @@ class VectorRetriever(BaseRetriever):
                 "query_embedding is required for VectorRetriever."
             )
 
-        index = self.repository.load_index(self.index_path)
+        if query_embedding.ndim == 1:
+            query_embedding = query_embedding.reshape(1, -1)
+            
+        query_embedding = query_embedding.astype(np.float32)
+
+        index = self.repository.load_index()
         scores, indices = index.search(query_embedding, k)
 
         return self.mapping.get_documents(
