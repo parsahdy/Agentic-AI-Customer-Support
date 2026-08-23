@@ -7,8 +7,8 @@ from .retrieval_config import K
 from ..vector_store.vector_repository import VectorStoreRepository
 
 
-def retriever_pipeline(retriever_type: str, 
-                       query: str,
+def retriever_pipeline(retriever_type: str,
+                       query: str | None=None,
                        query_embedding: np.ndarray | None=None,
                        documents: list[dict] | None=None,
                        repository: VectorStoreRepository | None=None,
