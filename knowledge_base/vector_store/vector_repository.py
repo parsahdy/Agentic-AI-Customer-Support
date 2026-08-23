@@ -27,6 +27,11 @@ class VectorStoreRepository:
 
     def load_index(self) -> faiss.Index:
 
+        if self.index_path is None:
+            raise RuntimeError(
+                f"Index path must be given."
+            )
+
         if not self.index_path.exists():
             raise FileNotFoundError(
                 f"Vector index not found: {self.index_path}"
@@ -42,12 +47,15 @@ class VectorStoreRepository:
                 "Metadata path must be given."
             )
 
-        self.doc_path.parent.mkdir(parents=True, exist_ok=True)
+        self.metadata_path.parent.mkdir(parents=True, exist_ok=True)
         with open(self.metadata_path, "w", encoding="utf-8") as file:
             json.dump(metadata, file, ensure_ascii=False, indent=4)
 
 
     def load_metadata(self):
+
+        if self.metadata_path is None:
+            raise RuntimeError("Metadata path must be given.")
 
         if not self.metadata_path.exists():
             raise FileNotFoundError(
@@ -59,5 +67,5 @@ class VectorStoreRepository:
 
 
     def exists(self) -> bool:
-        return self.index_path.exists()
+        return self.index_path is not None and self.index_path.exists()
         
