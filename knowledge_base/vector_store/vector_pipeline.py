@@ -22,5 +22,7 @@ def vectorstore_pipeline(embeddings: np.ndarray,
         repository = VectorStoreRepository(INDEX_PATH)
         repository.save_index(vector_store.index)
 
+        print("Vector store created successfully.")
+
 
     return vector_store
