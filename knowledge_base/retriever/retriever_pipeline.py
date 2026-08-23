@@ -3,7 +3,7 @@ from pathlib import Path
 import numpy as np
 
 from .retriever_factory import RetrieverFactory
-from .retrieval_config import K
+from ..config import K
 from ..vector_store.vector_repository import VectorStoreRepository
 
 

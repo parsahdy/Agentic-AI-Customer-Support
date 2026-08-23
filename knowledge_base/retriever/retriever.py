@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 from langchain_community.retrievers import BM25Retriever as LangChainBM25Retriever
 
-from .retrieval_config import K
+from ..config import K
 from ..vector_store.vector_repository import VectorStoreRepository
 from ..vector_store.document_mapping import DocumentMapping
 
