@@ -1,0 +1,950 @@
+[
+    {
+        "vector_id": 0,
+        "document_id": "faq_1",
+        "chunk_id": "faq_1_chunk_0",
+        "metadata": {
+            "document_id": "faq_1",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_1_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 1,
+        "document_id": "faq_2",
+        "chunk_id": "faq_2_chunk_0",
+        "metadata": {
+            "document_id": "faq_2",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_2_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 2,
+        "document_id": "faq_3",
+        "chunk_id": "faq_3_chunk_0",
+        "metadata": {
+            "document_id": "faq_3",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_3_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 3,
+        "document_id": "faq_4",
+        "chunk_id": "faq_4_chunk_0",
+        "metadata": {
+            "document_id": "faq_4",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_4_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 4,
+        "document_id": "faq_5",
+        "chunk_id": "faq_5_chunk_0",
+        "metadata": {
+            "document_id": "faq_5",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_5_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 5,
+        "document_id": "faq_6",
+        "chunk_id": "faq_6_chunk_0",
+        "metadata": {
+            "document_id": "faq_6",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_6_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 6,
+        "document_id": "faq_7",
+        "chunk_id": "faq_7_chunk_0",
+        "metadata": {
+            "document_id": "faq_7",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_7_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 7,
+        "document_id": "faq_8",
+        "chunk_id": "faq_8_chunk_0",
+        "metadata": {
+            "document_id": "faq_8",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_8_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 8,
+        "document_id": "faq_9",
+        "chunk_id": "faq_9_chunk_0",
+        "metadata": {
+            "document_id": "faq_9",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_9_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 9,
+        "document_id": "faq_10",
+        "chunk_id": "faq_10_chunk_0",
+        "metadata": {
+            "document_id": "faq_10",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_10_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 10,
+        "document_id": "faq_11",
+        "chunk_id": "faq_11_chunk_0",
+        "metadata": {
+            "document_id": "faq_11",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_11_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 11,
+        "document_id": "faq_12",
+        "chunk_id": "faq_12_chunk_0",
+        "metadata": {
+            "document_id": "faq_12",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_12_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 12,
+        "document_id": "faq_13",
+        "chunk_id": "faq_13_chunk_0",
+        "metadata": {
+            "document_id": "faq_13",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_13_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 13,
+        "document_id": "faq_14",
+        "chunk_id": "faq_14_chunk_0",
+        "metadata": {
+            "document_id": "faq_14",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_14_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 14,
+        "document_id": "faq_15",
+        "chunk_id": "faq_15_chunk_0",
+        "metadata": {
+            "document_id": "faq_15",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_15_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 15,
+        "document_id": "faq_16",
+        "chunk_id": "faq_16_chunk_0",
+        "metadata": {
+            "document_id": "faq_16",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_16_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 16,
+        "document_id": "faq_17",
+        "chunk_id": "faq_17_chunk_0",
+        "metadata": {
+            "document_id": "faq_17",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_17_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 17,
+        "document_id": "faq_18",
+        "chunk_id": "faq_18_chunk_0",
+        "metadata": {
+            "document_id": "faq_18",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_18_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 18,
+        "document_id": "faq_19",
+        "chunk_id": "faq_19_chunk_0",
+        "metadata": {
+            "document_id": "faq_19",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_19_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 19,
+        "document_id": "faq_20",
+        "chunk_id": "faq_20_chunk_0",
+        "metadata": {
+            "document_id": "faq_20",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_20_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 20,
+        "document_id": "faq_21",
+        "chunk_id": "faq_21_chunk_0",
+        "metadata": {
+            "document_id": "faq_21",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_21_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 21,
+        "document_id": "faq_22",
+        "chunk_id": "faq_22_chunk_0",
+        "metadata": {
+            "document_id": "faq_22",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_22_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 22,
+        "document_id": "faq_23",
+        "chunk_id": "faq_23_chunk_0",
+        "metadata": {
+            "document_id": "faq_23",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_23_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 23,
+        "document_id": "faq_24",
+        "chunk_id": "faq_24_chunk_0",
+        "metadata": {
+            "document_id": "faq_24",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_24_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 24,
+        "document_id": "faq_25",
+        "chunk_id": "faq_25_chunk_0",
+        "metadata": {
+            "document_id": "faq_25",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_25_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 25,
+        "document_id": "faq_26",
+        "chunk_id": "faq_26_chunk_0",
+        "metadata": {
+            "document_id": "faq_26",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_26_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 26,
+        "document_id": "faq_27",
+        "chunk_id": "faq_27_chunk_0",
+        "metadata": {
+            "document_id": "faq_27",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_27_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 27,
+        "document_id": "faq_28",
+        "chunk_id": "faq_28_chunk_0",
+        "metadata": {
+            "document_id": "faq_28",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_28_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 28,
+        "document_id": "faq_29",
+        "chunk_id": "faq_29_chunk_0",
+        "metadata": {
+            "document_id": "faq_29",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_29_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 29,
+        "document_id": "faq_30",
+        "chunk_id": "faq_30_chunk_0",
+        "metadata": {
+            "document_id": "faq_30",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_30_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 30,
+        "document_id": "faq_31",
+        "chunk_id": "faq_31_chunk_0",
+        "metadata": {
+            "document_id": "faq_31",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_31_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 31,
+        "document_id": "faq_32",
+        "chunk_id": "faq_32_chunk_0",
+        "metadata": {
+            "document_id": "faq_32",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_32_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 32,
+        "document_id": "faq_33",
+        "chunk_id": "faq_33_chunk_0",
+        "metadata": {
+            "document_id": "faq_33",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_33_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 33,
+        "document_id": "faq_34",
+        "chunk_id": "faq_34_chunk_0",
+        "metadata": {
+            "document_id": "faq_34",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_34_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 34,
+        "document_id": "faq_35",
+        "chunk_id": "faq_35_chunk_0",
+        "metadata": {
+            "document_id": "faq_35",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_35_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 35,
+        "document_id": "faq_36",
+        "chunk_id": "faq_36_chunk_0",
+        "metadata": {
+            "document_id": "faq_36",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_36_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 36,
+        "document_id": "faq_37",
+        "chunk_id": "faq_37_chunk_0",
+        "metadata": {
+            "document_id": "faq_37",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_37_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 37,
+        "document_id": "faq_38",
+        "chunk_id": "faq_38_chunk_0",
+        "metadata": {
+            "document_id": "faq_38",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_38_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 38,
+        "document_id": "faq_39",
+        "chunk_id": "faq_39_chunk_0",
+        "metadata": {
+            "document_id": "faq_39",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_39_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 39,
+        "document_id": "faq_40",
+        "chunk_id": "faq_40_chunk_0",
+        "metadata": {
+            "document_id": "faq_40",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_40_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 40,
+        "document_id": "faq_41",
+        "chunk_id": "faq_41_chunk_0",
+        "metadata": {
+            "document_id": "faq_41",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_41_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 41,
+        "document_id": "faq_42",
+        "chunk_id": "faq_42_chunk_0",
+        "metadata": {
+            "document_id": "faq_42",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_42_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 42,
+        "document_id": "faq_43",
+        "chunk_id": "faq_43_chunk_0",
+        "metadata": {
+            "document_id": "faq_43",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_43_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 43,
+        "document_id": "faq_44",
+        "chunk_id": "faq_44_chunk_0",
+        "metadata": {
+            "document_id": "faq_44",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_44_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 44,
+        "document_id": "faq_45",
+        "chunk_id": "faq_45_chunk_0",
+        "metadata": {
+            "document_id": "faq_45",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_45_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 45,
+        "document_id": "faq_46",
+        "chunk_id": "faq_46_chunk_0",
+        "metadata": {
+            "document_id": "faq_46",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_46_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 46,
+        "document_id": "faq_47",
+        "chunk_id": "faq_47_chunk_0",
+        "metadata": {
+            "document_id": "faq_47",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_47_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 47,
+        "document_id": "faq_48",
+        "chunk_id": "faq_48_chunk_0",
+        "metadata": {
+            "document_id": "faq_48",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_48_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 48,
+        "document_id": "faq_49",
+        "chunk_id": "faq_49_chunk_0",
+        "metadata": {
+            "document_id": "faq_49",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_49_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 49,
+        "document_id": "faq_50",
+        "chunk_id": "faq_50_chunk_0",
+        "metadata": {
+            "document_id": "faq_50",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_50_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 50,
+        "document_id": "faq_51",
+        "chunk_id": "faq_51_chunk_0",
+        "metadata": {
+            "document_id": "faq_51",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_51_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 51,
+        "document_id": "faq_52",
+        "chunk_id": "faq_52_chunk_0",
+        "metadata": {
+            "document_id": "faq_52",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_52_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 52,
+        "document_id": "faq_53",
+        "chunk_id": "faq_53_chunk_0",
+        "metadata": {
+            "document_id": "faq_53",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_53_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 53,
+        "document_id": "faq_54",
+        "chunk_id": "faq_54_chunk_0",
+        "metadata": {
+            "document_id": "faq_54",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_54_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 54,
+        "document_id": "faq_55",
+        "chunk_id": "faq_55_chunk_0",
+        "metadata": {
+            "document_id": "faq_55",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_55_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 55,
+        "document_id": "faq_56",
+        "chunk_id": "faq_56_chunk_0",
+        "metadata": {
+            "document_id": "faq_56",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_56_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 56,
+        "document_id": "faq_57",
+        "chunk_id": "faq_57_chunk_0",
+        "metadata": {
+            "document_id": "faq_57",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_57_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 57,
+        "document_id": "faq_58",
+        "chunk_id": "faq_58_chunk_0",
+        "metadata": {
+            "document_id": "faq_58",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_58_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 58,
+        "document_id": "faq_59",
+        "chunk_id": "faq_59_chunk_0",
+        "metadata": {
+            "document_id": "faq_59",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_59_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 59,
+        "document_id": "faq_60",
+        "chunk_id": "faq_60_chunk_0",
+        "metadata": {
+            "document_id": "faq_60",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_60_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 60,
+        "document_id": "faq_61",
+        "chunk_id": "faq_61_chunk_0",
+        "metadata": {
+            "document_id": "faq_61",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_61_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 61,
+        "document_id": "faq_62",
+        "chunk_id": "faq_62_chunk_0",
+        "metadata": {
+            "document_id": "faq_62",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_62_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 62,
+        "document_id": "faq_63",
+        "chunk_id": "faq_63_chunk_0",
+        "metadata": {
+            "document_id": "faq_63",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_63_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 63,
+        "document_id": "faq_64",
+        "chunk_id": "faq_64_chunk_0",
+        "metadata": {
+            "document_id": "faq_64",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_64_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 64,
+        "document_id": "faq_65",
+        "chunk_id": "faq_65_chunk_0",
+        "metadata": {
+            "document_id": "faq_65",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_65_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 65,
+        "document_id": "faq_66",
+        "chunk_id": "faq_66_chunk_0",
+        "metadata": {
+            "document_id": "faq_66",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_66_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 66,
+        "document_id": "faq_67",
+        "chunk_id": "faq_67_chunk_0",
+        "metadata": {
+            "document_id": "faq_67",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_67_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 67,
+        "document_id": "faq_68",
+        "chunk_id": "faq_68_chunk_0",
+        "metadata": {
+            "document_id": "faq_68",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_68_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 68,
+        "document_id": "faq_69",
+        "chunk_id": "faq_69_chunk_0",
+        "metadata": {
+            "document_id": "faq_69",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_69_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 69,
+        "document_id": "faq_70",
+        "chunk_id": "faq_70_chunk_0",
+        "metadata": {
+            "document_id": "faq_70",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_70_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 70,
+        "document_id": "faq_71",
+        "chunk_id": "faq_71_chunk_0",
+        "metadata": {
+            "document_id": "faq_71",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_71_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 71,
+        "document_id": "faq_72",
+        "chunk_id": "faq_72_chunk_0",
+        "metadata": {
+            "document_id": "faq_72",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_72_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 72,
+        "document_id": "faq_73",
+        "chunk_id": "faq_73_chunk_0",
+        "metadata": {
+            "document_id": "faq_73",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_73_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 73,
+        "document_id": "faq_74",
+        "chunk_id": "faq_74_chunk_0",
+        "metadata": {
+            "document_id": "faq_74",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_74_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 74,
+        "document_id": "faq_75",
+        "chunk_id": "faq_75_chunk_0",
+        "metadata": {
+            "document_id": "faq_75",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_75_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 75,
+        "document_id": "faq_76",
+        "chunk_id": "faq_76_chunk_0",
+        "metadata": {
+            "document_id": "faq_76",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_76_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 76,
+        "document_id": "faq_77",
+        "chunk_id": "faq_77_chunk_0",
+        "metadata": {
+            "document_id": "faq_77",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_77_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 77,
+        "document_id": "faq_78",
+        "chunk_id": "faq_78_chunk_0",
+        "metadata": {
+            "document_id": "faq_78",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_78_chunk_0",
+            "chunk_index": 0
+        }
+    },
+    {
+        "vector_id": 78,
+        "document_id": "faq_79",
+        "chunk_id": "faq_79_chunk_0",
+        "metadata": {
+            "document_id": "faq_79",
+            "source": "faq_clean.csv",
+            "source_type": "csv",
+            "chunk_id": "faq_79_chunk_0",
+            "chunk_index": 0
+        }
+    }
+]
