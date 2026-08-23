@@ -2,11 +2,11 @@ from pathlib import Path
 import numpy as np
 
 from .vector_repository import VectorStoreRepository
+from knowledge_base import config
 
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-KB_DIR = PROJECT_ROOT / "data" / "knowledge_base" 
-METADATA_PATH = KB_DIR / "vector_metadata.json"
+PROJECT_ROOT = config.PROJECT_ROOT
+KB_DIR = config.KB_DIR
+METADATA_PATH = config.METADATA_PATH
 
 
 class DocumentMapping:

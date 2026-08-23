@@ -4,11 +4,12 @@ import numpy as np
 
 from .vector_factory import VectorStoreFactory
 from .vector_repository import VectorStoreRepository
+from knowledge_base import config
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-KB_DIR = PROJECT_ROOT / "data" / "knowledge_base" 
-INDEX_PATH = KB_DIR / "vector_index.faiss"
+PROJECT_ROOT = config.PROJECT_ROOT
+KB_DIR = config.KB_DIR
+INDEX_PATH = config.INDEX_PATH
 
 
 def vectorstore_pipeline(embeddings: np.ndarray,
