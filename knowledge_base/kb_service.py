@@ -12,6 +12,8 @@ from knowledge_base.monitoring.monitor_pipeline import monitor_pipeline
 
 from knowledge_base.statistics.statistics_pipeline import statistics_pipeline
 
+from knowledge_base.versioning.version_pipeline import versioning_pipeline
+
 
 
 class KnowledgeBaseService:
@@ -83,8 +85,21 @@ class KnowledgeBaseService:
             embeddings=embeddings
         )
 
+        version_data = versioning_pipeline(
+            version="v1",
+            embedding_model=self.config.SENTENCE_EMBEDDING_MODEL,
+            chunker_type=self.config.CHUNKER_TYPE,
+            chunk_size=self.config.CHUNK_SIZE,
+            chunk_overlap=self.config.CHUNK_OVERLAP,
+            vector_store_type=self.config.VECTOR_STORE_TYPE,
+            document_count=len(documents),
+            chunk_count=len(chunked_documents),
+            embedding_dimension=embeddings.shape[1],
+        )
+
         result = {
             "status": "success",
+            "version": version_data,
             "statistics": statistics,
             "monitoring": monitor.records,
         }
@@ -103,6 +118,9 @@ def kb_pipeline() -> dict:
 
 if __name__ == "__main__":
     result = kb_pipeline()
+
+    print("\nKnowledgeBase version:")
+    print(result["version"])
 
     print("\nKnowledge Base Statistics:")
     print(result["statistics"])
