@@ -1,5 +1,10 @@
 from pathlib import Path
 
+
+## TRANSFORM
+CURRENT_TRANSFORM="faq"
+
+
 #3 Chnking
 CHUNKER = {
     "chunk_size": 1000,
