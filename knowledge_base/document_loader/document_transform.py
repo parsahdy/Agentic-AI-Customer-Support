@@ -2,11 +2,11 @@ from pathlib import Path
 
 from .document_factory import LoaderFactory
 from .document_converter import faq_to_document, ticket_to_document
+from knowledge_base import config
 
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-INPUT_DIR = PROJECT_ROOT / "data" / "cleaned"
-PDF_DIR = PROJECT_ROOT / "data" / "pdf"
+PROJECT_ROOT = config.PROJECT_ROOT
+INPUT_DIR = config.INPUT_DIR
+PDF_DIR = config.PDF_DIR
 
 
 # faq Transform
