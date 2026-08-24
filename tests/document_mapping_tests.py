@@ -1,5 +1,5 @@
 from .chunking_tests import chunking
-from knowledge_base.vector_store.document_mapping import DocumentMapping
+from knowledge_base.document_mapping.document_mapping import DocumentMapping
 from knowledge_base.vector_store.vector_repository import VectorStoreRepository
 from knowledge_base.config import METADATA_PATH
 
