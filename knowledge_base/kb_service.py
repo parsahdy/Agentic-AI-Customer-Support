@@ -1,12 +1,16 @@
 from knowledge_base import config
 
-from .document_loader import document_transform
+from .document_loader.transform_registry import TRANSFORMS
 from .document_processor.processing_pipeline import build_pipeline
 from .chunking.chunking_pipeline import chunk_pipeline
 from .embedding.embedding_pipeline import embedding_pipeline
 from .vector_store.vector_pipeline import vectorstore_pipeline
 from .document_mapping.document_mapping import DocumentMapping
 
+from knowledge_base.monitoring.monitor import KnowledgeBaseMonitor
+from knowledge_base.monitoring.monitor_pipeline import monitor_pipeline
+
+from knowledge_base.statistics.statistics_pipeline import statistics_pipeline
 
 
 
@@ -17,45 +21,92 @@ class KnowledgeBaseService:
 
     def build(self):
 
+        monitor = KnowledgeBaseMonitor()
+
         # Document Transformation
-        documents = document_transform.faq_transform()
+        documents = monitor_pipeline(
+            monitor=monitor,
+            stage="document_tarnsformation",
+            function=TRANSFORMS[self.config.CURRENT_TRANSFORM],
+        )
 
         # Document Processing
         processed_pipeline = build_pipeline()
-        processed_documents = processed_pipeline.run(documents)
+        processed_documents = monitor_pipeline(
+            monitor=monitor,
+            stage="document_processing",
+            function=processed_pipeline.run,
+            documents=documents,
+        )
 
         # Chunking
-        chunked_documents = chunk_pipeline(
+        chunked_documents = monitor_pipeline(
+            monitor=monitor,
+            stage="chunking",
+            function=chunk_pipeline,
             documents=processed_documents,
             chunker_type=self.config.CHUNKER_TYPE
         )
 
         # Embedding
-        embeddings = embedding_pipeline(
+        embeddings = monitor_pipeline(
+            monitor=monitor,
+            stage="embedding",
+            function=embedding_pipeline,
             documents=chunked_documents,
             embedding_type=self.config.EMBEDDING_TYPE,
             model_name=self.config.SENTENCE_EMBEDDING_MODEL
         )
 
         # Vector store
-        vectorstore_pipeline(
+        monitor_pipeline(
+            monitor=monitor,
+            stage="vector_store",
+            function=vectorstore_pipeline,
             embeddings=embeddings,
             vector_type=self.config.VECTOR_STORE_TYPE
         )
 
         # Document mapping
         mapping = DocumentMapping()
-        mapping.save_mapping(chunked_documents)
+        monitor_pipeline(
+            monitor=monitor,
+            stage="document_mapping",
+            function=mapping.save_mapping,
+            chunked_documents=chunked_documents,
+        )
+
+        statistics = statistics_pipeline(
+            documents=documents,
+            processed_documents=processed_documents,
+            chunked_documents=chunked_documents,
+            embeddings=embeddings
+        )
+
+        result = {
+            "status": "success",
+            "statistics": statistics,
+            "monitoring": monitor.records,
+        }
 
         print("[INFO] Knowledge Base created successfully.")
 
+        return result
 
-def kb_pipeline() -> None:
+
+def kb_pipeline() -> dict:
 
     kb = KnowledgeBaseService()
-    kb.build()
+    return kb.build()
 
 
 
 if __name__ == "__main__":
-    kb_pipeline()
+    result = kb_pipeline()
+
+    print("\nKnowledge Base Statistics:")
+    print(result["statistics"])
+
+    print("\nPipeline Monitoring:")
+    for record in result["monitoring"]:
+        print(record)
