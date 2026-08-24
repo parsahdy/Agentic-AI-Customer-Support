@@ -6,10 +6,8 @@ CURRENT_TRANSFORM="faq"
 
 
 #3 Chnking
-CHUNKER = {
-    "chunk_size": 1000,
-    "chunk_overlap": 200,
-}
+CHUNK_SIZE=1000
+CHUNK_OVERLAP=200
 CHUNKER_TYPE="recursive"
 
 ## Embedding
@@ -31,5 +29,6 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 KB_DIR = PROJECT_ROOT / "data" / "knowledge_base" 
 INDEX_PATH = KB_DIR / "vector_index.faiss"
 METADATA_PATH = KB_DIR / "vector_metadata.json"
+VERSION_PATH = KB_DIR / "version.json"
 INPUT_DIR = PROJECT_ROOT / "data" / "cleaned"
 PDF_DIR = PROJECT_ROOT / "data" / "pdf"
