@@ -1,7 +1,7 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from abc import ABC, abstractmethod
 
-from ..config import CHUNKER
+from knowledge_base import config
 
 
 class ChunkerBase(ABC):
@@ -14,8 +14,8 @@ class RecursiveCunker(ChunkerBase):
 
     def __init__(self):
         self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=CHUNKER["chunk_size"],
-            chunk_overlap=CHUNKER["chunk_overlap"],
+            chunk_size=config.CHUNK_SIZE,
+            chunk_overlap=config.CHUNK_OVERLAP,
             length_function=len,
             is_separator_regex=False
         )
