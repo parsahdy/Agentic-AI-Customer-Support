@@ -6,7 +6,7 @@ from langchain_community.retrievers import BM25Retriever as LangChainBM25Retriev
 
 from ..config import K
 from ..vector_store.vector_repository import VectorStoreRepository
-from ..vector_store.document_mapping import DocumentMapping
+from ..document_mapping.document_mapping import DocumentMapping
 
 
 
