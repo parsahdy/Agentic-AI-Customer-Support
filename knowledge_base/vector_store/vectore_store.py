@@ -16,13 +16,6 @@ class BaseVectorStore(ABC):
         """
         pass
 
-    @abstractmethod
-    def search(self, query_embedding: np.ndarray,
-               k: int = K) -> tuple[np.ndarray, np.ndarray]:
-        """
-        Search the vector store and return scores and indices.
-        """
-        pass
 
 
 class FAISSVectorStore(BaseVectorStore):
@@ -52,28 +45,11 @@ class QdrantVectorStore(BaseVectorStore):
             "QdrantVectorStore is not implemented yet."
         )
 
-    def search(
-        self,
-        query_embedding: np.ndarray,
-        k: int = 5):
-
-        raise NotImplementedError(
-            "QdrantVectorStore is not implemented yet."
-        )
 
 
 class ChromaVectorStore(BaseVectorStore):
 
     def build(self, embeddings: np.ndarray) -> None:
-        raise NotImplementedError(
-            "ChromaVectorStore is not implemented yet."
-        )
-
-    def search(
-        self,
-        query_embedding: np.ndarray,
-        k: int = 5):
-        
         raise NotImplementedError(
             "ChromaVectorStore is not implemented yet."
         )
