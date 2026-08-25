@@ -61,6 +61,20 @@
 
 # Phase 3 — Agent Service 
 
+    -State
+    -Nodes
+    -Edges
+    -Conditional Edges
+    -Tool Calling
+    -Agent Loop
+    -Memory
+    -Routing
+    -Retry / Error Handling
+    -Human-in-the-loop
+    -Guardrails
+    -Observability
+    -Agent Evaluation
+
 
     - agent/
 
