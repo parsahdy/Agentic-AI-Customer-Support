@@ -2,22 +2,37 @@ from langchain_core.messages import HumanMessage
 
 from .llm import create_llm
 from .state import AgentState
+from router.router import KeywordRouter
 
 
 llm = create_llm()
+router = KeywordRouter()
+
+
+def router_node(state: AgentState) -> dict:
+    """
+    Determine the route for the current query.
+    """
+
+    route = router.route(state)
+
+    return {
+        "router": route,
+    }
+
 
 def llm_node(state: AgentState) -> dict:
     """
-    Generate an answer using the LLM.
+    Generate a direct answer using the LLM.
     """
 
-    query = state["query"]
-
     response = llm.invoke(
-        [HumanMessage(content=query)]
+       state["messages"]
     )
 
     return {
         "messages": [response],
         "final_answer": response.content,
     }
+
+
