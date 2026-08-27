@@ -2,11 +2,13 @@ from langchain_core.messages import HumanMessage
 
 from .llm import create_llm
 from .state import AgentState
-from router.router import KeywordRouter
+from router.router_factory import RouterFactory
+
+from . import config
 
 
 llm = create_llm()
-router = KeywordRouter()
+router = RouterFactory.create(config.ROUTER_TYPE)
 
 
 def router_node(state: AgentState) -> dict:
