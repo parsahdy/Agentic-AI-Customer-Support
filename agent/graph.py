@@ -5,6 +5,9 @@ from .nodes import llm_node
 
 
 def build_graph():
+    """
+    Build and compile the agent workflow.
+    """
 
     graph = StateGraph(AgentState)
 
