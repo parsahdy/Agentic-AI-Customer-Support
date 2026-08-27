@@ -6,15 +6,18 @@ from .state import AgentState
 
 llm = create_llm()
 
-
 def llm_node(state: AgentState) -> dict:
-    question = state["question"]
+    """
+    Generate an answer using the LLM.
+    """
+
+    query = state["query"]
 
     response = llm.invoke(
-        [HumanMessage(content=question)]
+        [HumanMessage(content=query)]
     )
 
     return {
-        "message": [response],
-        "answer": response.content,
+        "messages": [response],
+        "final_answer": response.content,
     }
