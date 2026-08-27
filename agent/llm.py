@@ -6,6 +6,10 @@ from . import config
 
 
 def create_llm() -> ChatOpenAI:
+    """
+    Create and configure the LLM client.
+    """
+
     api_key = os.getenv("OPENROUTER_API_KEY")
 
     if not api_key:
@@ -17,5 +21,5 @@ def create_llm() -> ChatOpenAI:
         model=config.LLM_MODEL,
         api_key=api_key,
         base_url=config.BASE_URL,
-        temperature=config.TEMPERATURE
+        temperature=config.TEMPERATURE,
     )
