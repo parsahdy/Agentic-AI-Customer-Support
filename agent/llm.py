@@ -3,6 +3,7 @@ import os
 from langchain_openai import ChatOpenAI
 
 from . import config
+from .tools.registry import ToolRegistry
 
 
 def create_llm() -> ChatOpenAI:
@@ -17,9 +18,13 @@ def create_llm() -> ChatOpenAI:
             "OPENROUTER_API_KEY is not set."
         )
 
-    return ChatOpenAI(
+    llm = ChatOpenAI(
         model=config.LLM_MODEL,
         api_key=api_key,
         base_url=config.BASE_URL,
         temperature=config.TEMPERATURE,
     )
+
+    tools = ToolRegistry.get_tools()
+
+    return llm.bind_tools(tools)
