@@ -56,3 +56,13 @@ class ToolRegistry:
     def list_tools(self) -> list[str]:
 
         return list(self._tools.keys())
+
+
+    def get_tools(self) -> list[BaseTool]:
+        return [
+            tool_class()
+            for tool_class in self._tools.values()
+        ]
+
+
+    

@@ -8,12 +8,13 @@ from .schemas import (
     CustomerInfoInput,
     ToolResult,
 )
-
+ 
 
 class BaseTool(ABC):
 
     name: str
     description: str
+    args_schema: type
 
     @abstractmethod
     def run(self, state: AgentState,
@@ -27,11 +28,11 @@ class BaseTool(ABC):
 class SearchKBTool(BaseTool):
 
     name = "search_knowledge_base"
-    description = "Search the knowledge base for relevant information."
-
-
-    def __init__(self):
-        self.kb = None
+    description = (
+        "Search the knowledge base for relevant "
+        "customer support information."
+    )
+    args_schema = None
 
 
     def run(self, state: AgentState,
@@ -59,6 +60,7 @@ class GetOrderTool(BaseTool):
 
     name = "get_order"
     description = "Get order information using an order ID."
+    args_schema = GetOrderInput
 
     def run(self, state: AgentState,
             arguments: dict) -> ToolResult:
@@ -86,7 +88,9 @@ class GetOrderTool(BaseTool):
 class CancelOrderTool(BaseTool):
     
     name = "cancel_order"
-    description = "Cancel an existing order using its order ID."
+    description = "Cancel an existing order using an order ID."
+    args_schema = CancelOrderInput
+
 
     def run(self, state: AgentState,
             arguments: dict) -> ToolResult:
@@ -103,7 +107,7 @@ class CancelOrderTool(BaseTool):
         return ToolResult(
             success=True,
             result={
-                "order_id": validated.oredr_id,
+                "order_id": validated.order_id,
                 "status": "cancelled",
             }
         )
@@ -113,6 +117,7 @@ class CreateTicketTool(BaseTool):
 
     name = "create_ticket"
     description = "Create a customer support ticket."
+    args_schema = CreateTicketInput
 
     def run(self, state: AgentState,
             arguments: dict) -> ToolResult:
@@ -121,7 +126,7 @@ class CreateTicketTool(BaseTool):
             validated = CreateTicketInput(**arguments)
         except Exception as exc:
             return ToolResult(
-                success=True,
+                success=False,
                 error=str(exc)
             )
 
@@ -141,6 +146,7 @@ class CustomerInfoTool(BaseTool):
 
     name = "get_customer_info"
     description = "Get customer information using a customer ID."
+    args_schema = CustomerInfoInput
 
 
     def run(self, state: AgentState,
