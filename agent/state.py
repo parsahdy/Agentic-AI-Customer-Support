@@ -3,6 +3,8 @@ from typing import TypedDict, Annotated, Literal
 from langchain_core.messages import BaseMessage
 from langgraph.graph.message import add_messages
 
+from . import config
+
 
 Route = Literal["rag", "tool", "direct"]
 
@@ -21,6 +23,8 @@ class AgentState(TypedDict):
 
     tool_calls: list[dict]
     tool_results: list[dict]
+    iteration: int
+    max_iteration: int = config.MAX_ITERATIONS
 
 
     final_answer: str
