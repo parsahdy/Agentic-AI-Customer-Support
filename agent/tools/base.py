@@ -25,37 +25,6 @@ class BaseTool(ABC):
         pass
 
 
-class SearchKBTool(BaseTool):
-
-    name = "search_knowledge_base"
-    description = (
-        "Search the knowledge base for relevant "
-        "customer support information."
-    )
-    args_schema = None
-
-
-    def run(self, state: AgentState,
-            arguments: dict) -> ToolResult:
-
-        query = state["query"]
-
-        if not query or not query.strip():
-            return ToolResult(
-                success=False,
-                error="Query cannot be empty."
-            )
-
-        # Retrieval will be connected here later.
-        return ToolResult(
-            success=True,
-            result={
-                "query": query,
-                "documents": []
-            }
-        )
-
-
 class GetOrderTool(BaseTool):
 
     name = "get_order"
