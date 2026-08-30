@@ -39,6 +39,14 @@ class CustomerInfoInput(BaseModel):
     )
 
 
+class SearchKBInput(BaseModel):
+    query: str = Field(
+        ...,
+        min_length=1,
+        description="Customer question to search in the knowledge base."
+    )
+
+
 class ToolResult(BaseModel):
     success: bool
     result: dict | None = None
