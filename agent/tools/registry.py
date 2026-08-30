@@ -1,24 +1,31 @@
 from .base import (
     BaseTool,
-    SearchKBTool,
     GetOrderTool,
     CancelOrderTool,
     CreateTicketTool,
     CustomerInfoTool,
 )
 
+from .kb_tool import SearchKBTool
+from knowledge_base.kb_service import KnowledgeBaseService
+
 
 class ToolRegistry:
 
-    def __init__(self):
+    def __init__(self, kb: KnowledgeBaseService | None=None) -> None: 
+
+        self.kb = kb
 
         self._tools: dict[str, type[BaseTool]] = {
-            SearchKBTool.name: SearchKBTool,
             GetOrderTool.name: GetOrderTool,
             CancelOrderTool.name: CancelOrderTool,
             CreateTicketTool.name: CreateTicketTool,
             CustomerInfoTool.name: CustomerInfoTool,
         }
+
+        if kb is not None:
+            self._tools[SearchKBTool.name] = SearchKBTool
+
 
     def register(self, tool: type[BaseTool]) -> None:
 
@@ -50,6 +57,14 @@ class ToolRegistry:
 
         tool_class = self.get(name)
 
+        if tool_class is SearchKBTool:
+            if self.kb is None:
+                raise RuntimeError(
+                    "KnowledgeBaseService is required for SearchKBTool."
+                )
+
+            return SearchKBTool(self.kb)
+
         return tool_class()
 
 
@@ -63,6 +78,10 @@ class ToolRegistry:
             tool_class()
             for tool_class in self._tools.values()
         ]
+
+
+    def get_tool(self, name: str) -> BaseTool:
+        return self.create(name)
 
 
     
