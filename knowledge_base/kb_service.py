@@ -3,7 +3,7 @@ from knowledge_base import config
 from .document_loader.transform_registry import TRANSFORMS
 from .document_processor.processing_pipeline import build_pipeline
 from .chunking.chunking_pipeline import chunk_pipeline
-from .embedding.embedding_pipeline import embedding_pipeline, query_embedding
+from .embedding.embedding_pipeline import build_embedding_pipeline
 from .vector_store.vector_pipeline import vectorstore_pipeline
 from .document_mapping.document_mapping import DocumentMapping
 
@@ -22,6 +22,11 @@ class KnowledgeBaseService:
 
     def __init__(self):
         self.config = config
+        self.embedding_pipeline = build_embedding_pipeline(
+            embedding_type=self.config.EMBEDDING_TYPE,
+            model_name=self.config.SENTENCE_EMBEDDING_MODEL,
+        )
+
 
     def build(self):
 
@@ -56,7 +61,7 @@ class KnowledgeBaseService:
         embeddings = monitor_pipeline(
             monitor=monitor,
             stage="embedding",
-            function=embedding_pipeline,
+            function=self.embedding_pipeline.documents_embedding,
             documents=chunked_documents,
             embedding_type=self.config.EMBEDDING_TYPE,
             model_name=self.config.SENTENCE_EMBEDDING_MODEL
@@ -118,7 +123,7 @@ class KnowledgeBaseService:
                 "Search query cannot be empty."
             )
 
-        embedding = query_embedding(
+        embedding = self.embedding_pipeline.query_embedding(
             query=query,
             embedding_type=self.config.EMBEDDING_TYPE,
             model_name=self.config.SENTENCE_EMBEDDING_MODEL
