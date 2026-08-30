@@ -3,7 +3,7 @@ from knowledge_base import config
 from .document_loader.transform_registry import TRANSFORMS
 from .document_processor.processing_pipeline import build_pipeline
 from .chunking.chunking_pipeline import chunk_pipeline
-from .embedding.embedding_pipeline import embedding_pipeline
+from .embedding.embedding_pipeline import embedding_pipeline, query_embedding
 from .vector_store.vector_pipeline import vectorstore_pipeline
 from .document_mapping.document_mapping import DocumentMapping
 
@@ -12,7 +12,9 @@ from knowledge_base.monitoring.monitor_pipeline import monitor_pipeline
 
 from knowledge_base.statistics.statistics_pipeline import statistics_pipeline
 
+from knowledge_base.vector_store.vector_repository import VectorStoreRepository
 from knowledge_base.versioning.version_pipeline import versioning_pipeline
+from knowledge_base.retriever.retriever_pipeline import retriever_pipeline
 
 
 
@@ -107,6 +109,34 @@ class KnowledgeBaseService:
         print("[INFO] Knowledge Base created successfully.")
 
         return result
+
+
+    def search(self, query: str) -> list[dict]:
+
+        if not query or not query.strip():
+            raise ValueError(
+                "Search query cannot be empty."
+            )
+
+        embedding = query_embedding(
+            query=query,
+            embedding_type=self.config.EMBEDDING_TYPE,
+            model_name=self.config.SENTENCE_EMBEDDING_MODEL
+        )
+
+        repository = VectorStoreRepository(
+            index_path=self.config.INDEX_PATH
+        )
+
+        retrieved_documents = retriever_pipeline(
+            retriever_type=self.config.RETRIEVER_TYPE,
+            query_embedding=embedding,
+            repository=repository,
+            index_path=self.config.INDEX_PATH
+        )
+
+        return retrieved_documents
+
 
 
 def kb_pipeline() -> dict:
