@@ -1,11 +1,21 @@
 from langgraph.graph import StateGraph, START, END
 
 from .state import AgentState
-from .nodes import llm_node, tool_node
+from .nodes import (
+    llm_node,
+    create_tool_node
+)
 
+from .memory.memory_service import MemoryService
+from .tools.registry import ToolRegistry
+from .tools.executor import ToolExecutor
 
 
 def route_after_llm(state: AgentState) -> str:
+    """
+    Decide whether the agent should execute tools
+    or finish the current turn.
+    """
 
     if state["iteration"] >= state["max_iteration"]:
         return "end"
@@ -16,10 +26,11 @@ def route_after_llm(state: AgentState) -> str:
     return "end"
 
 
-def build_graph():
-    """
-    Build and compile the agent workflow.
-    """
+def build_graph(memory: MemoryService,
+                registry: ToolRegistry):
+
+    executor = ToolExecutor(registry)
+    tool_node = create_tool_node(executor)
 
     graph = StateGraph(AgentState)
 
@@ -28,6 +39,7 @@ def build_graph():
 
     graph.add_edge(START, "llm")
 
+    # Agent Loop
     graph.add_conditional_edges(
         "llm",
         route_after_llm,
@@ -39,4 +51,7 @@ def build_graph():
 
     graph.add_edge("tool", "llm")
 
-    return graph.compile()
+    return graph.compile(
+        checkpointer=memory.get_checkpointer(),
+        store=memory.get_store(),
+    )
