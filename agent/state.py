@@ -23,9 +23,9 @@ class AgentState(TypedDict):
 
     tool_calls: list[dict]
     tool_results: list[dict]
+
     iteration: int
     max_iteration: int = config.MAX_ITERATIONS
-
 
     final_answer: str
     error: str | None
