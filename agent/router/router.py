@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 from ..llm import create_llm
 from ..state import AgentState, Route
 from .intent_detector import RouteDecision
-from .intents import INTENT_KEYWORDS
 from .intent_detector import KeywordIntentClassifier
+
 
 
 class BaseRouter(ABC):
