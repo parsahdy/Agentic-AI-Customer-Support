@@ -1,44 +1,59 @@
+from langchain_core.tools import StructuredTool
 from knowledge_base.kb_service import KnowledgeBaseService
 
-from .base import BaseTool
-from ..state import AgentState
 from .schemas import SearchKBInput, ToolResult
 
 
+def search_knowledge_base(
+    query: str,
+    kb: KnowledgeBaseService,
+) -> dict:
+    """
+    Search the knowledge base for relevant
+    customer support information.
+    """
 
-class SearchKBTool(BaseTool):
+    if not query.strip():
+        return ToolResult(
+            success=False,
+            error="Query cannot be empty.",
+        ).model_dump()
 
-    name = "search_knowledge_base"
-    description = (
-        "Search the knowledge base for relevant "
-        "customer support information."
-    )
-    args_schema = SearchKBInput
+    try:
+        documents = kb.search(query)
+
+        return ToolResult(
+            success=True,
+            result={
+                "query": query,
+                "documents": documents,
+            },
+        ).model_dump()
+
+    except Exception as exc:
+        return ToolResult(
+            success=False,
+            error=str(exc),
+        ).model_dump()
 
 
-    def __init__(self, kb: KnowledgeBaseService) -> None:
-        self.kb = kb
+class SearchKBTool:
 
+    @staticmethod
+    def create(kb: KnowledgeBaseService) -> StructuredTool:
 
-    def run(self, state: AgentState,
-            arguments: dict) -> ToolResult:
-
-        try:
-
-            validated = self.args_schema(**arguments)
-
-            documents = self.kb.search(validated.query)
-        
-            return ToolResult(
-                success=True,
-                result={
-                    "query": validated.query,
-                    "documents": documents,
-                }
+        def search(query: str) -> dict:
+            return search_knowledge_base(
+                query=query,
+                kb=kb,
             )
 
-        except Exception as exc:
-            return ToolResult(
-                success=False,
-                error=str(exc)
-            )
+        return StructuredTool.from_function(
+            func=search,
+            name="search_knowledge_base",
+            description=(
+                "Search the knowledge base for relevant "
+                "customer support information."
+            ),
+            args_schema=SearchKBInput,
+        )

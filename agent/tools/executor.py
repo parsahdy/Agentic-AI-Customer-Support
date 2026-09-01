@@ -1,14 +1,15 @@
+from langchain_core.tools import StructuredTool
+
 from ..state import AgentState
 from .registry import ToolRegistry
 from .schemas import ToolResult
-
 
 
 class ToolExecutor:
 
     def __init__(self, registry: ToolRegistry):
 
-        self. registry = registry
+        self.registry = registry
 
 
     def execute(self, tool_name: str,
@@ -17,14 +18,14 @@ class ToolExecutor:
 
         try:
 
-            tool = self.registry.create(tool_name)
+            tool: StructuredTool = self.registry.get(tool_name)
 
-            result = tool.run(
-                state=state,
-                arguments=arguments
+            result = tool.invoke(arguments)
+
+            return ToolResult(
+                success=True,
+                result=result,
             )
-
-            return result
 
         except Exception as exc:
             return ToolResult(

@@ -1,13 +1,16 @@
-from .base import (
-    BaseTool,
-    GetOrderTool,
-    CancelOrderTool,
-    CreateTicketTool,
-    CustomerInfoTool,
+from langchain_core.tools import StructuredTool
+
+from .tools import (
+    get_order_tool,
+    cancel_order_tool,
+    create_ticket_tool,
+    customer_info_tool,
 )
 
 from .kb_tool import SearchKBTool
+
 from knowledge_base.kb_service import KnowledgeBaseService
+
 
 
 class ToolRegistry:
@@ -16,22 +19,24 @@ class ToolRegistry:
 
         self.kb = kb
 
-        self._tools: dict[str, type[BaseTool]] = {
-            GetOrderTool.name: GetOrderTool,
-            CancelOrderTool.name: CancelOrderTool,
-            CreateTicketTool.name: CreateTicketTool,
-            CustomerInfoTool.name: CustomerInfoTool,
+        self._tools: dict[str, StructuredTool] = {
+            get_order_tool.name: get_order_tool,
+            cancel_order_tool.name: cancel_order_tool,
+            create_ticket_tool.name: create_ticket_tool,
+            customer_info_tool.name: customer_info_tool,
         }
 
         if kb is not None:
-            self._tools[SearchKBTool.name] = SearchKBTool
+            self._tools["search_knowledge_base"] = (
+                SearchKBTool.create(kb)
+            )
 
 
-    def register(self, tool: type[BaseTool]) -> None:
+    def register(self, tool: StructuredTool) -> None:
 
-        if not issubclass(tool, BaseTool):
-            raise ValueError(
-                "Registered tool must inherit from BaseTool."
+        if not isinstance(tool, StructuredTool):
+            raise TypeError(
+                "Registered tool must be a StructuredTool."
             )
 
         if tool.name in self._tools:
@@ -42,7 +47,7 @@ class ToolRegistry:
         self._tools[tool.name] = tool
 
 
-    def get(self, name: str) -> type[BaseTool]:
+    def get(self, name: str) -> type[StructuredTool]:
 
         if name not in self._tools:
             raise ValueError(
@@ -53,35 +58,19 @@ class ToolRegistry:
         return self._tools[name]
 
 
-    def create(self, name: str) -> BaseTool:
-
-        tool_class = self.get(name)
-
-        if tool_class is SearchKBTool:
-            if self.kb is None:
-                raise RuntimeError(
-                    "KnowledgeBaseService is required for SearchKBTool."
-                )
-
-            return SearchKBTool(self.kb)
-
-        return tool_class()
-
-
     def list_tools(self) -> list[str]:
 
         return list(self._tools.keys())
 
 
-    def get_tools(self) -> list[BaseTool]:
-        return [
-            tool_class()
-            for tool_class in self._tools.values()
-        ]
+    def get_tools(self) -> list[StructuredTool]:
+
+        return list(self._tools.values())
 
 
-    def get_tool(self, name: str) -> BaseTool:
-        return self.create(name)
+    def get_tool(self, name: str) -> StructuredTool:
+
+        return self.get(name)
 
 
     
