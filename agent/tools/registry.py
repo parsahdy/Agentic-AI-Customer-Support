@@ -47,7 +47,7 @@ class ToolRegistry:
         self._tools[tool.name] = tool
 
 
-    def get(self, name: str) -> type[StructuredTool]:
+    def get(self, name: str) -> StructuredTool:
 
         if name not in self._tools:
             raise ValueError(
