@@ -8,7 +8,11 @@ class AgentService:
 
     def __init__(self, memory: MemoryService | None=None):
 
-        self.memory = memory or MemoryService()
+        self.memory = (
+            memory
+            if memory is not None
+            else MemoryService()
+        )
         self.registry = ToolRegistry()
         self.graph = build_graph(
             memory=self.memory,
@@ -67,3 +71,15 @@ class AgentService:
             initial_state,
             config=config,
         )
+
+
+    def close(self) -> None:
+
+        short_term = self.memory.short_term
+        long_term = self.memory.long_term
+
+        if hasattr(short_term, "close"):
+            short_term.close()
+
+        if hasattr(long_term, "close"):
+            long_term.close()
