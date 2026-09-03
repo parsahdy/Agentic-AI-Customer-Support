@@ -45,12 +45,27 @@ class PostgresShortTermMemory(ShortTermMemory):
                 "DATBASE_URL is required for Postgres memory."
             )
 
-        self.checkpointer = PostgresSaver.from_conn_string(
+        self._checkpointer_context = PostgresSaver.from_conn_string(
             database_url
+        )
+
+        self.checkpointer = (
+            self._checkpointer_context.__enter__()
         )
 
         self.checkpointer.setup()
 
 
     def get_checkpointer(self) -> BaseCheckpointSaver:
-        return self.checkpointer
+
+        if self._checkpointer_context is not None:
+            self._checkpointer_context.__exit__(
+                None,
+                None,
+                None,
+            )
+
+            self._checkpointer_context = None
+            self.checkpointer = None
+
+            
