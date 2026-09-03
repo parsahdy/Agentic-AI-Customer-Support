@@ -15,7 +15,7 @@ from .long_term import (
     PostgresLongTermMemory,
 )
 
-from .config import MEMORY_BACKEND, DATABASE_URL
+from ..config import MEMORY_BACKEND, DATABASE_URL
 
 
 

@@ -10,3 +10,13 @@ ROUTER_TYPE="llm"
 
 # Loop
 MAX_ITERATIONS = 5
+
+
+# Memory
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+MEMORY_BACKEND = "postgres"
+
+DATABASE_URL = os.getenv("DATABASE_URL")
