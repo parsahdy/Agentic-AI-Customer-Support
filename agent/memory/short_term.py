@@ -58,6 +58,11 @@ class PostgresShortTermMemory(ShortTermMemory):
 
     def get_checkpointer(self) -> BaseCheckpointSaver:
 
+        return self.checkpointer
+
+
+    def close(self) -> None:
+
         if self._checkpointer_context is not None:
             self._checkpointer_context.__exit__(
                 None,
