@@ -34,12 +34,29 @@ class PostgresLongTermMemory(LongTermMemory):
                 "DATABASE_URL is required for Postgres memory."
             )
 
-        self.store = PostgresStore.from_conn_string(
+        self._store_context = PostgresStore.from_conn_string(
             database_url
         )
+
+        self.store = self._store_context.__enter__()
 
         self.store.setup()
 
 
     def get_store(self) -> BaseStore:
-        return self.store 
+
+        return self.store
+
+
+    def close(self) -> None:
+
+        if self._store_context is not None:
+            self._store_context.__exit__(
+                None,
+                None,
+                None,
+            )
+
+            self._store_context = None
+            self.store = None
+
