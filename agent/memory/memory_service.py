@@ -27,9 +27,17 @@ class MemoryService:
         long_term: LongTermMemory | None=None,
     ):
 
-        self.short_term = short_term or self._create_short_term()
+        self.short_term = (
+            short_term
+            if short_term is not None
+            else self._create_short_term()
+        )
 
-        self.long_term = long_term or self._create_long_term()
+        self.long_term = (
+            long_term
+            if long_term is not None
+            else self._create_long_term()
+        )
 
 
     def _create_short_term(self) -> ShortTermMemory:
@@ -85,12 +93,13 @@ class MemoryService:
 
 
     def search_memories(self, user_id: str,
-                        query: str):
+                        query: str, limit: int = 5):
 
         namespace = ("users", user_id)
 
         return self.get_store().search(
             namespace,
             query=query,
+            limit=limit,
         )
         

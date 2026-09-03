@@ -1,4 +1,4 @@
-from typing import TypedDict, Annotated, Literal
+from typing import TypedDict, Annotated, Literal, Any
 
 from langchain_core.messages import BaseMessage
 from langgraph.graph.message import add_messages
@@ -33,3 +33,5 @@ class AgentState(TypedDict):
     metadata: dict
 
     route: Route | None
+
+    memory_context: list[dict[str, Any]]

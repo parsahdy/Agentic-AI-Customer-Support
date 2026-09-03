@@ -2,8 +2,11 @@ from langgraph.graph import StateGraph, START, END
 
 from .state import AgentState
 from .nodes import (
-    llm_node,
-    create_tool_node
+    llm_node, 
+    router_node, 
+    create_tool_node, 
+    load_memory_node, 
+    save_memory_node,
 )
 
 from .memory.memory_service import MemoryService
@@ -12,18 +15,11 @@ from .tools.executor import ToolExecutor
 
 
 def route_after_llm(state: AgentState) -> str:
-    """
-    Decide whether the agent should execute tools
-    or finish the current turn.
-    """
 
-    if state["iteration"] >= state["max_iteration"]:
-        return "end"
-
-    if state["tool_calls"]:
+    if state.get("tool_calls"):
         return "tool"
 
-    return "end"
+    return "save_memory"
 
 
 def build_graph(memory: MemoryService,
@@ -34,10 +30,15 @@ def build_graph(memory: MemoryService,
 
     graph = StateGraph(AgentState)
 
+    graph.add_node("load_memory",
+                   lambda state: load_memory_node(state, memory))
     graph.add_node("llm", llm_node)
     graph.add_node("tool", tool_node)
+    graph.add_node("save_memory",
+                   lambda state: save_memory_node(state, memory))
 
-    graph.add_edge(START, "llm")
+    graph.add_edge(START, "load_memory")
+    graph.add_edge("load_memory", "llm")
 
     # Agent Loop
     graph.add_conditional_edges(
@@ -45,11 +46,12 @@ def build_graph(memory: MemoryService,
         route_after_llm,
         {
             "tool": "tool",
-            "end": END,
+            "save_memory": "save_memory",
         },
     )
 
     graph.add_edge("tool", "llm")
+    graph.add_edge("save_memory", END)
 
     return graph.compile(
         checkpointer=memory.get_checkpointer(),
