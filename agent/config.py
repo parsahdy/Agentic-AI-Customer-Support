@@ -19,4 +19,4 @@ load_dotenv()
 
 MEMORY_BACKEND = "postgres"
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+MEMORY_DATABASE_URL = os.getenv("MEMORY_DATABASE_URL")

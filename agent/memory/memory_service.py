@@ -15,7 +15,7 @@ from .long_term import (
     PostgresLongTermMemory,
 )
 
-from ..config import MEMORY_BACKEND, DATABASE_URL
+from ..config import MEMORY_BACKEND, MEMORY_DATABASE_URL
 
 
 
@@ -44,7 +44,7 @@ class MemoryService:
 
         if MEMORY_BACKEND == "postgres":
             return PostgresShortTermMemory(
-                DATABASE_URL
+                MEMORY_DATABASE_URL
             )
 
         return InMemoryShortTermMemory()
@@ -54,7 +54,7 @@ class MemoryService:
 
         if MEMORY_BACKEND == "postgres":
             return PostgresLongTermMemory(
-                DATABASE_URL
+                MEMORY_DATABASE_URL
             )
 
         return InMemoryLongTermMemory()
