@@ -28,7 +28,7 @@ class AgentState(TypedDict):
     max_iteration: int = config.MAX_ITERATIONS
 
     final_answer: str
-    error: str | None
+    error: dict[str, Any] | None
 
     metadata: dict
 
