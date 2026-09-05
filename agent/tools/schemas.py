@@ -51,3 +51,5 @@ class ToolResult(BaseModel):
     success: bool
     result: dict | None = None
     error: str | None = None
+    error_type: str | None = None
+    retry_count: int | None = None
