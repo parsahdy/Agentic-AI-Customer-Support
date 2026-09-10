@@ -25,19 +25,9 @@ class HumanLoopHandler:
     def __init__(self, policy: HumanPolicy) -> None:
 
         self.policy = policy
-
-
-    def should_intervene(self, request: HumanReviewRequest) -> bool:
-
-        return self.policy.should_intervene(request)
-
+        
 
     def request_human_decision(self, request: HumanReviewRequest) -> HumanDecision:
-
-        if not self.should_intervene(request):
-            raise ValueError(
-                "Human intervention is not required."
-            )
 
         payload = {
             "type": "human_review",
