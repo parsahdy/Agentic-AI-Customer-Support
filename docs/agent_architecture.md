@@ -170,6 +170,29 @@ Long-term memory
 ## Sprint 3.11 — Human-in-the-Loop
 
 
+3.11.3
+Human Review Node
+    ↓
+nodes.py / graph integration
+
+
+3.11.5
+State Integration
+    ↓
+state.py
+
+3.11.6
+Graph Routing
+    ↓
+graph.py
+
+3.11.7
+Interrupt / Resume
+    ↓
+thread_id + persistence
+
+
+
 ## Sprint 3.12 — Guardrails
 
     Input Guardrail

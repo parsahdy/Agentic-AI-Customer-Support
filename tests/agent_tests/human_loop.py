@@ -203,9 +203,7 @@ class HumanLoopTest:
             return_value={"decision": "invalid_decision"}):
 
             try:
-                handler.request_human_decision(
-                    request
-                )
+                handler.request_human_decision(request)
 
                 assert False
 
@@ -227,12 +225,12 @@ class HumanLoopTest:
             reason="Normal request.",
         )
 
-        with patch("agent.human_loop.handler.interrupt") as mock_interrupt:
+        with patch(
+            "agent.human_loop.handler.interrupt"
+            ) as mock_interrupt:
 
             try:
-                handler.request_human_decision(
-                    request
-                )
+                handler.request_human_decision(request)
 
                 assert False
 
