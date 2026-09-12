@@ -29,16 +29,14 @@ class RetrieverFactory:
         if retriever_type == "vector":
             return retriever_class(
                 repository=kwargs["repository"],
-                index_path=kwargs["index_path"],
             )
 
         if retriever_type == "bm25":
             return retriever_class()
 
         if retriever_type == "hybrid":
-            vector_retriever = vector_retriever(
+            vector_retriever = retriever_class(
                 repository=kwargs["repository"],
-                index_path=kwargs["index_path"],
             )
 
             return retriever_class(

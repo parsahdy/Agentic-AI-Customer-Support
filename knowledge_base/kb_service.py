@@ -137,7 +137,6 @@ class KnowledgeBaseService:
             retriever_type=self.config.RETRIEVER_TYPE,
             query_embedding=embedding,
             repository=repository,
-            index_path=self.config.INDEX_PATH
         )
 
         return retrieved_documents

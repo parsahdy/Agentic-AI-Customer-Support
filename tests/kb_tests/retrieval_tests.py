@@ -6,14 +6,13 @@ from knowledge_base.config import INDEX_PATH, METADATA_PATH, SENTENCE_EMBEDDING_
 
 def retriever():
 
-    query = input("Ask question: ")
+    query = "I want to cancel my latest order."
     query_embedding = EmbeddingFactory.create(
         embedding_type="sentence",
         model_name=SENTENCE_EMBEDDING_MODEL).embed_query(query)
     retreive_documents = retriever_pipeline(
         retriever_type="vector",
         query_embedding=query_embedding,
-        index_path=INDEX_PATH,
         repository=VectorStoreRepository(index_path=INDEX_PATH,
                                          metadata_path=METADATA_PATH),
         k=5

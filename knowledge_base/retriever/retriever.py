@@ -27,19 +27,17 @@ class BaseRetriever(ABC):
 class VectorRetriever(BaseRetriever):
 
     def __init__(self,
-                 repository: VectorStoreRepository,
-                 index_path: Path) -> list[dict]:
+                 repository: VectorStoreRepository) -> None:
         
         self.repository = repository
-        self.index_path = index_path
-        self.mapping = DocumentMapping(repository)
+        self.mapping = DocumentMapping()
 
 
     def retrive(self, 
                 query: str | None=None,
                 query_embedding: np.ndarray | None=None,
                 documents: list[dict] | None=None,
-                k: int = K) -> list[dict]:
+                k: int = K) -> dict:
 
         if query_embedding is None:
             raise ValueError(
@@ -48,16 +46,22 @@ class VectorRetriever(BaseRetriever):
 
         if query_embedding.ndim == 1:
             query_embedding = query_embedding.reshape(1, -1)
-            
+
         query_embedding = query_embedding.astype(np.float32)
 
         index = self.repository.load_index()
         scores, indices = index.search(query_embedding, k)
 
-        return self.mapping.get_documents(
+        retrieval_documents = self.mapping.get_documents(
             indices=indices,
-            scores=scores
+            scores=scores,
         )
+
+        return {
+            "retrieval_documents": retrieval_documents,
+            "top1_score": round(float(scores[0][0]), 2),
+            "mean_topk_score": round(float(np.mean(scores[0])), 2),
+        }
 
 
 class BM25Retriever(BaseRetriever):

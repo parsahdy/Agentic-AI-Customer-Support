@@ -12,7 +12,6 @@ def retriever_pipeline(retriever_type: str,
                        query_embedding: np.ndarray | None=None,
                        documents: list[dict] | None=None,
                        repository: VectorStoreRepository | None=None,
-                       index_path: Path | None=None,
                        k: int = K) -> list[dict]:
 
     if repository is None:
@@ -20,15 +19,9 @@ def retriever_pipeline(retriever_type: str,
             "VectorStoreRepository is required."
         )
 
-    if index_path is None:
-        raise ValueError(
-            "Vector index path is required."
-        )
-
     retriever = RetrieverFactory.create(
         retriever_type=retriever_type,
         repository=repository,
-        index_path=index_path
         )
 
     return retriever.retrive(

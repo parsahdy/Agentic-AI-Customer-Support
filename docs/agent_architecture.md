@@ -192,6 +192,42 @@ Interrupt / Resume
 thread_id + persistence
 
 
+knowledge_base/
+│
+├── embedding/
+├── vector_store/
+├── retriever/
+│       ↓
+│   retrieval_score
+│
+└── kb_service.py
+        ↓
+     documents
+     + scores
+
+
+evaluation/
+│
+├── retrieval/
+├── response/
+└── confidence/
+        ↓
+   evaluation results
+        ↓
+   confidence_score
+
+
+agent/
+│
+└── graph/
+        ↓
+   Retrieval Gate
+        ↓
+   Human Policy
+        ↓
+   Human Review
+
+
 
 ## Sprint 3.12 — Guardrails
 
@@ -265,3 +301,36 @@ Observability را صرفاً با print() انجام نمی‌دهیم. ابز�
     ├── Retry
     └── Observability
 
+
+
+## Architecture
+
+User Request
+      ↓
+Agent
+      ↓
+KB Search
+      ↓
+Documents + retrieval_score
+      ↓
+Retrieval Gate
+      │
+      ├── score پایین
+      │       ↓
+      │   Stop / No relevant documents
+      │
+      └── score مناسب
+              ↓
+             LLM
+              ↓
+           Answer
+              ↓
+      Groundedness / Faithfulness
+              ↓
+       confidence_score
+              ↓
+       Human Policy Node
+          ↙          ↘
+       False          True
+         ↓              ↓
+     Return Answer   Human Review
