@@ -86,7 +86,6 @@ class BM25Retriever(BaseRetriever):
             documents,
             k=k
             )
-        
 
         return retriever.invoke(query)
 
