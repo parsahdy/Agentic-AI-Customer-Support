@@ -23,6 +23,7 @@ from .human_loop.policy import (
 )
 
 from evaluation.confidence.confidence_evaluator import ConfidenceEvaluator
+from knowledge_base.kb_service import KnowledgeBaseService
 
 
 llm = create_tool_llm()
@@ -209,6 +210,20 @@ def llm_node(state: AgentState) -> dict:
     }
 
 
+def rag_node(
+        state: AgentState,
+        kb: KnowledgeBaseService
+) -> dict:
+
+    query = state["query"]
+
+    retrieved_documents = kb.search(query)
+
+    return {
+        "retrieved_documents": retrieved_documents,
+    }
+    
+
 def confidence_evaluation_node(
         state: AgentState) -> dict:
 
@@ -314,7 +329,6 @@ def create_tool_node(executor: ToolExecutor):
             result = executor.execute(
                 tool_name=tool_name,
                 arguments=arguments,
-                state=state,
             )
 
             tool_results.append({
