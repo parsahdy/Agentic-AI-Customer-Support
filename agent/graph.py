@@ -33,18 +33,6 @@ def route_after_router(state: AgentState) -> str:
     return route
 
 
-def route_after_llm(state: AgentState) -> str:
-    """
-    Determine whether the LLM requested a tool call
-    or the response is ready for human policy evaluation.
-    """
-
-    if state.get("tool_calls"):
-        return "tool"
-
-    return "human_policy"
-
-
 def route_after_human_policy(state: AgentState) -> str:
     """
     Determine whether human review is required.
@@ -73,8 +61,6 @@ def build_graph(
     graph.add_node("llm", llm_node)
     graph.add_node("rag", rag_node)
     graph.add_node("tool", tool_node)
-    graph.add_node("confidence_evaluation", 
-                   confidence_evaluation_node)
     graph.add_node("human_policy", human_policy_node)
     graph.add_node("human_review", human_review_node)
     graph.add_node("save_memory",
@@ -94,18 +80,9 @@ def build_graph(
         },
     )
 
-    # Direct LLM / Tool-calling loop
-    graph.add_conditional_edges(
-        "llm",
-        route_after_llm,
-        {
-            "tool": "tool",
-            "human_policy": "human_policy"
-        }
-    )
-
     graph.add_edge("tool", "llm")
-    graph.add_edge("rag", "human_policy")
+    graph.add_edge("rag", "llm")
+    graph.add_edge("llm", "human_policy")
 
     graph.add_conditional_edges(
         "human_policy",
