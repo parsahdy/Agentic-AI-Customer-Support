@@ -2,7 +2,6 @@ from langgraph.graph import END, START, StateGraph
 
 from .memory.memory_service import MemoryService
 from .nodes import (
-    confidence_evaluation_node,
     create_tool_node,
     human_policy_node,
     human_review_node,
@@ -16,6 +15,8 @@ from .state import AgentState, Route
 from .tools.executor import ToolExecutor
 from .tools.registry import ToolRegistry
 from .errors.retry_policy import RetryPolicy
+
+from knowledge_base.kb_service import KnowledgeBaseService
 
 
 def route_after_router(state: AgentState) -> str:
@@ -48,6 +49,7 @@ def build_graph(
         memory: MemoryService,
         registry: ToolRegistry,
         retry_policy: RetryPolicy,
+        kb: KnowledgeBaseService,
     ):
 
     executor = ToolExecutor(registry, retry_policy)
@@ -59,7 +61,8 @@ def build_graph(
                    lambda state: load_memory_node(state, memory))
     graph.add_node("router", router_node)
     graph.add_node("llm", llm_node)
-    graph.add_node("rag", rag_node)
+    graph.add_node("rag",
+                   lambda state: rag_node(state, kb))
     graph.add_node("tool", tool_node)
     graph.add_node("human_policy", human_policy_node)
     graph.add_node("human_review", human_review_node)
