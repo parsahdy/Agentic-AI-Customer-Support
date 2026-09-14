@@ -1,19 +1,41 @@
 import json
 import re
 
-from langchain_core.messages import ToolMessage, HumanMessage, SystemMessage
+from langchain_core.messages import (
+    ToolMessage,
+    HumanMessage,
+    SystemMessage,
+)
 
+from . import config
 from .llm import create_tool_llm
 from .state import AgentState
 from .router.router_factory import RouterFactory
 from .tools.executor import ToolExecutor
 from .memory.memory_service import MemoryService
 
-from . import config
+from .human_loop.handler import HumanLoopHandler
+from .human_loop.models import HumanReviewRequest
+from .human_loop.policy import (
+    CompositeHumanPolicy,
+    LowConfidencePolicy,
+    SensitiveOperationPolicy,
+)
+
+from evaluation.confidence.confidence_evaluator import ConfidenceEvaluator
 
 
 llm = create_tool_llm()
 router = RouterFactory.create(config.ROUTER_TYPE)
+human_policy = CompositeHumanPolicy(
+    policies = [
+        LowConfidencePolicy(),
+        SensitiveOperationPolicy(),
+    ]
+)
+human_loop_handler = HumanLoopHandler()
+confidence_evaluator = ConfidenceEvaluator()
+
 
 
 def load_memory_node(state: AgentState,
@@ -96,7 +118,7 @@ def save_memory_node(state: AgentState,
     if not should_save:
         return {}
 
-    memory_text = re.sub( r"^\s*(remember that|remember|don't forget|keep in mind)\s*",
+    memory_text = re.sub(r"^\s*(remember that|remember|don't forget|keep in mind)\s*",
                          "", 
                          content, 
                          flags=re.IGNORECASE, ).strip()
@@ -184,6 +206,90 @@ def llm_node(state: AgentState) -> dict:
         "messages": [response],
         "tool_calls": tool_calls, 
         "final_answer": response.content,
+    }
+
+
+def confidence_evaluation_node(
+        state: AgentState) -> dict:
+
+    top1_score = state.get("top1_score")
+    mean_topk_score = state.get("mean_topk_score")
+    faithfilness_score = state.get("faithfulness_score")
+
+    if (
+        top1_score is None
+        or mean_topk_score is None
+        or faithfilness_score is None
+    ):
+        return {
+            "confidence_score": None,
+        }
+
+    confidence_score = confidence_evaluator.calculate(
+        top1_score=top1_score,
+        mean_topk_score=mean_topk_score,
+        faithfulness_score=faithfilness_score,
+    )
+
+    return {
+        "confidence_score": confidence_score,
+    }
+
+
+def human_policy_node(state: AgentState) -> dict:
+
+    confidence_score = state.get(
+        "confidence_score"
+    )
+
+    operation = None
+
+    if state.get("tool_calls"):
+        operation = state["tool_calls"][0].get("name")
+
+    request = HumanReviewRequest(
+        request=state["query"],
+        reason="Human intervention evaluation.",
+        confidence_score=confidence_score,
+        operation=operation,
+    )
+
+    should_intervene = human_policy.should_intervene(
+        request
+    )
+
+    return {
+        "human_review_required": should_intervene,
+        "human_review_request": (
+            request.model_dump()
+            if should_intervene
+            else None
+        ),
+    }
+
+
+def human_review_node(state: AgentState) -> dict:
+
+    if not state.get("human_review_required"):
+        return {}
+
+    review_data = state.get("human_review_request")
+
+    if review_data is None:
+        raise ValueError(
+            "Human review request is required."
+        )
+
+    request = HumanReviewRequest.model_validate(
+        review_data
+    )
+
+    decision = human_loop_handler.request_human_decision(
+        request
+    )
+
+    return {
+        "human_decision": decision.model_dump()
     }
 
 

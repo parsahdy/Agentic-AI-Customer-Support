@@ -1,17 +1,19 @@
-from langgraph.graph import StateGraph, START, END
-
-from .state import AgentState
-from .nodes import (
-    llm_node, 
-    router_node, 
-    create_tool_node, 
-    load_memory_node, 
-    save_memory_node,
-)
+from langgraph.graph import END, START, StateGraph
 
 from .memory.memory_service import MemoryService
-from .tools.registry import ToolRegistry
+from .nodes import (
+    confidence_evaluation_node,
+    create_tool_node,
+    human_policy_node,
+    human_review_node,
+    llm_node,
+    load_memory_node,
+    router_node,
+    save_memory_node,
+)
+from .state import AgentState
 from .tools.executor import ToolExecutor
+from .tools.registry import ToolRegistry
 
 
 def route_after_llm(state: AgentState) -> str:
@@ -19,11 +21,21 @@ def route_after_llm(state: AgentState) -> str:
     if state.get("tool_calls"):
         return "tool"
 
+    return "human_policy"
+
+
+def route_after_human_policy(state: AgentState) -> str:
+
+    if state.get("human_review_required"):
+        return "human_review"
+
     return "save_memory"
 
 
-def build_graph(memory: MemoryService,
-                registry: ToolRegistry):
+def build_graph(
+        memory: MemoryService,
+        registry: ToolRegistry
+    ):
 
     executor = ToolExecutor(registry)
     tool_node = create_tool_node(executor)
@@ -32,13 +44,19 @@ def build_graph(memory: MemoryService,
 
     graph.add_node("load_memory",
                    lambda state: load_memory_node(state, memory))
+    graph.add_node("router", router_node)
     graph.add_node("llm", llm_node)
     graph.add_node("tool", tool_node)
+    graph.add_node("confidence_evaluation", 
+                   confidence_evaluation_node)
+    graph.add_node("human_policy", human_policy_node)
+    graph.add_node("human_review", human_review_node)
     graph.add_node("save_memory",
                    lambda state: save_memory_node(state, memory))
 
     graph.add_edge(START, "load_memory")
-    graph.add_edge("load_memory", "llm")
+    graph.add_edge("load_memory", "router")
+    graph.add_edge("router", "llm")
 
     # Agent Loop
     graph.add_conditional_edges(
@@ -46,11 +64,21 @@ def build_graph(memory: MemoryService,
         route_after_llm,
         {
             "tool": "tool",
-            "save_memory": "save_memory",
+            "human_policy": "human_policy",
         },
     )
 
     graph.add_edge("tool", "llm")
+
+    graph.add_conditional_edges(
+        "human_policy",
+        route_after_human_policy,
+        {
+            "human_review": "human_review",
+            "save_memory": "save_memory",
+        },
+    )
+
     graph.add_edge("save_memory", END)
 
     return graph.compile(

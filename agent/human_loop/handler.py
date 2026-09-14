@@ -5,8 +5,6 @@ from typing import Any
 from langgraph.types import interrupt
 
 from .models import HumanReviewRequest, HumanDecision
-from .policy import HumanPolicy
-
 
 
 class HumanLoopHandler:
@@ -21,11 +19,6 @@ class HumanLoopHandler:
     - interrupting the workflow
     - validating the human decision
     """
-
-    def __init__(self, policy: HumanPolicy) -> None:
-
-        self.policy = policy
-        
 
     def request_human_decision(self, request: HumanReviewRequest) -> HumanDecision:
 

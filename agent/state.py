@@ -3,10 +3,9 @@ from typing import TypedDict, Annotated, Literal, Any
 from langchain_core.messages import BaseMessage
 from langgraph.graph.message import add_messages
 
-from . import config
-
 
 Route = Literal["rag", "tool", "direct"]
+
 
 class AgentState(TypedDict):
     """
@@ -21,17 +20,28 @@ class AgentState(TypedDict):
 
     retrieved_documents: list[dict]
 
+    retrieval_score: float | None
+    top1_score: float | None
+    mean_topk_score: float | None
+
+    faithfulness_score: float | None
+    confidence_score: float | None
+
     tool_calls: list[dict]
     tool_results: list[dict]
 
     iteration: int
-    max_iteration: int = config.MAX_ITERATIONS
+    max_iteration: int
 
     final_answer: str
     error: dict[str, Any] | None
 
-    metadata: dict
+    metadata: dict[str, Any]
 
     route: Route | None
 
     memory_context: list[dict[str, Any]]
+
+    human_review_required: bool
+    human_review_request: dict[str, Any] | None
+    human_decision: dict[str, Any] | None
