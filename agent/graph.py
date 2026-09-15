@@ -36,6 +36,16 @@ def route_after_router(state: AgentState) -> str:
     return route
 
 
+def route_after_llm(state: AgentState) -> str:
+
+    route = state.get("route")
+
+    if route == "direct":
+        return "save_memory"
+
+    return "human_policy"
+
+
 def route_after_human_policy(state: AgentState) -> str:
     """
     Determine whether human review is required.
@@ -87,10 +97,18 @@ def build_graph(
         },
     )
 
+    graph.add_edge("rag", "llm")
     graph.add_edge("tool_call", "tool")
     graph.add_edge("tool", "llm")
-    graph.add_edge("rag", "llm")
-    graph.add_edge("llm", "human_policy")
+
+    graph.add_conditional_edges(
+        "llm",
+        route_after_llm,
+        {
+            "save_memory": "save_memory",
+            "human_policy": "human_policy",
+        }
+    )
 
     graph.add_conditional_edges(
         "human_policy",
