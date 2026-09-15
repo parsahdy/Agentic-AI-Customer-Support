@@ -8,10 +8,11 @@ from langchain_core.messages import (
 )
 
 from . import config
-from .llm import create_tool_llm
+from .llm import create_llm, create_tool_llm
 from .state import AgentState
 from .router.router_factory import RouterFactory
 from .tools.executor import ToolExecutor
+from .tools.registry import ToolRegistry
 from .memory.memory_service import MemoryService
 
 from .human_loop.handler import HumanLoopHandler
@@ -26,14 +27,15 @@ from evaluation.confidence.confidence_evaluator import ConfidenceEvaluator
 from knowledge_base.kb_service import KnowledgeBaseService
 
 
-llm = create_tool_llm()
 router = RouterFactory.create(config.ROUTER_TYPE)
+
 human_policy = CompositeHumanPolicy(
     policies = [
         LowConfidencePolicy(),
         SensitiveOperationPolicy(),
     ]
 )
+
 human_loop_handler = HumanLoopHandler()
 confidence_evaluator = ConfidenceEvaluator()
 
@@ -157,6 +159,8 @@ def llm_node(state: AgentState) -> dict:
     Generate a direct answer using the LLM.
     """
 
+    llm = create_llm()
+
     messages = list(state["messages"])
 
     memory_context = state.get(
@@ -201,13 +205,36 @@ def llm_node(state: AgentState) -> dict:
 
     response = llm.invoke(messages)
 
-    tool_calls = getattr(response, "tool_calls", [])
-
     return {
         "messages": [response],
-        "tool_calls": tool_calls, 
         "final_answer": response.content,
     }
+
+
+def create_tool_call_node(registry: ToolRegistry):
+    """
+    Create a node that asks the LLM to generate tool calls.
+    """
+
+    llm = create_tool_llm(registry)
+
+    def tool_call_node(state: AgentState) -> dict:
+        """
+        Generate tool calls for the current user request.
+        """
+
+        messages = list(state["messages"])
+
+        response = llm.invoke(messages)
+
+        tool_calls = getattr(response, "tool_calls", [])
+
+        return {
+            "messages": [response],
+            "tool_calls": tool_calls,
+        }
+
+    return tool_call_node
 
 
 def rag_node(
