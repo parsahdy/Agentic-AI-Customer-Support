@@ -2,6 +2,7 @@ from langgraph.graph import END, START, StateGraph
 
 from .memory.memory_service import MemoryService
 from .nodes import (
+    create_tool_call_node,
     create_tool_node,
     human_policy_node,
     human_review_node,
@@ -11,12 +12,27 @@ from .nodes import (
     save_memory_node,
     rag_node,
 )
-from .state import AgentState, Route
+from .state import AgentState
 from .tools.executor import ToolExecutor
 from .tools.registry import ToolRegistry
 from .errors.retry_policy import RetryPolicy
 
 from knowledge_base.kb_service import KnowledgeBaseService
+
+
+def route_after_router(state: AgentState) -> str:
+    """
+    Return the route selected by the router.
+    """
+
+    route = state.get("route")
+
+    if route is None:
+        raise ValueError(
+            "Route is required after router node."
+        )
+
+    return route
 
 
 def route_after_router(state: AgentState) -> str:
@@ -53,6 +69,7 @@ def build_graph(
     ):
 
     executor = ToolExecutor(registry, retry_policy)
+    too_call_node = create_tool_call_node(registry)
     tool_node = create_tool_node(executor)
 
     graph = StateGraph(AgentState)
@@ -79,10 +96,11 @@ def build_graph(
         {
             "direct": "llm",
             "rag": "rag",
-            "tool": "tool",
+            "tool": "tool_call",
         },
     )
 
+    graph.add_edge("tool_call", "tool")
     graph.add_edge("tool", "llm")
     graph.add_edge("rag", "llm")
     graph.add_edge("llm", "human_policy")
