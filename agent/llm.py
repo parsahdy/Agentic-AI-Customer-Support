@@ -31,8 +31,7 @@ def create_llm() -> ChatOpenAI:
 
 
 def create_tool_llm(registry: ToolRegistry | None = None) -> ChatOpenAI:
-    llm = create_llm()
 
-    registry = registry or ToolRegistry()
+    llm = create_llm()
 
     return llm.bind_tools(registry.get_tools())
