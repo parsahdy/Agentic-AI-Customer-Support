@@ -20,20 +20,6 @@ from .errors.retry_policy import RetryPolicy
 from knowledge_base.kb_service import KnowledgeBaseService
 
 
-def route_after_router(state: AgentState) -> str:
-    """
-    Return the route selected by the router.
-    """
-
-    route = state.get("route")
-
-    if route is None:
-        raise ValueError(
-            "Route is required after router node."
-        )
-
-    return route
-
 
 def route_after_router(state: AgentState) -> str:
     """
@@ -69,7 +55,7 @@ def build_graph(
     ):
 
     executor = ToolExecutor(registry, retry_policy)
-    too_call_node = create_tool_call_node(registry)
+    tool_call_node = create_tool_call_node(registry)
     tool_node = create_tool_node(executor)
 
     graph = StateGraph(AgentState)
@@ -80,6 +66,7 @@ def build_graph(
     graph.add_node("llm", llm_node)
     graph.add_node("rag",
                    lambda state: rag_node(state, kb))
+    graph.add_node("tool_call", tool_call_node)
     graph.add_node("tool", tool_node)
     graph.add_node("human_policy", human_policy_node)
     graph.add_node("human_review", human_review_node)
