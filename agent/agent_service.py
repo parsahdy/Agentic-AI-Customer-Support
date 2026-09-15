@@ -1,29 +1,59 @@
 from .graph import build_graph
 from .memory.memory_service import MemoryService
 from .tools.registry import ToolRegistry
+from .errors.retry_policy import RetryPolicy
 
+from knowledge_base.kb_service import KnowledgeBaseService
 
 
 class AgentService:
 
-    def __init__(self, memory: MemoryService | None=None):
+    def __init__(
+            self, 
+            memory: MemoryService | None=None,
+            registry: ToolRegistry | None = None,
+            kb: KnowledgeBaseService | None = None,
+            retry_policy: RetryPolicy | None = None,
+    ):
 
         self.memory = (
             memory
             if memory is not None
             else MemoryService()
         )
-        self.registry = ToolRegistry()
+
+        self.registry = (
+            registry
+            if registry is not None
+            else ToolRegistry()
+        )
+
+        self.kb = (
+            kb
+            if kb is not None
+            else KnowledgeBaseService()
+        )
+
+        self.retry_policy = (
+            retry_policy
+            if retry_policy is not None
+            else RetryPolicy()
+        )
+
         self.graph = build_graph(
             memory=self.memory,
             registry=self.registry,
+            kb = self.kb,
+            retry_policy=self.retry_policy
         )
 
 
-    def run(self, 
-            query: str,
-            user_id: str,
-            session_id: str):
+    def run(
+        self, 
+        query: str,
+        user_id: str,
+        session_id: str
+    ):
         """
         Run the agent with a user query.
         """
