@@ -3,13 +3,8 @@ from __future__ import annotations
 from enum import Enum
 
 from .exceptions import (
-    AuthenticationError,
-    AuthorizationError,
-    InvalidOrderIdError,
-    PermanentError,
-    ToolNotFoundError,
     TransientError,
-    ValidationError,
+    PermanentError,
 )
 
 
@@ -57,27 +52,12 @@ class ErrorClassifier:
         if isinstance(error, PermanentError):
             return ErrorType.PERMANENT
 
-        if isinstance(error, (TimeoutError, ConnectionError)):
+        status_code = getattr(error, "status_code", None)
+
+        if status_code in cls._TRANSIENT_STATUS_CODES:
             return ErrorType.TRANSIENT
 
-        if isinstance(error, (ValueError, TypeError, KeyError)):
-            return ErrorType.PERMANENT
-
-        if isinstance(error, (
-            ToolNotFoundError,
-            ValidationError,
-            AuthenticationError,
-            AuthorizationError,
-            InvalidOrderIdError,
-        )):
-            return ErrorType.PERMANENT
-
-        status_cose = getattr(error, "status_code", None)
-
-        if status_cose in cls._TRANSIENT_STATUS_CODES:
-            return ErrorType.TRANSIENT
-
-        if status_cose in cls._PERMANENT_STATUS_CODES:
+        if status_code in cls._PERMANENT_STATUS_CODES:
             return ErrorType.PERMANENT
 
         return ErrorType.UNKNOWN
