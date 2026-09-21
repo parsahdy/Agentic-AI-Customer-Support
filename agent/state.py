@@ -14,6 +14,8 @@ class AgentState(TypedDict):
 
     messages: Annotated[list[BaseMessage], add_messages]
 
+    current_node: str
+
     user_id: str
     session_id: str
     query: str
