@@ -1,4 +1,4 @@
-from .classifier import ErrorClassifier, ErrorType
+from .error_classifier import ErrorClassifier, ErrorType
 
 from .exceptions import (
             AgentError,
