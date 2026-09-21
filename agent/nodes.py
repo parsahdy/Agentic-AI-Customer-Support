@@ -1,7 +1,10 @@
 import json
 import re
+import time
 
 from typing import Callable
+
+from langgraph.types import Command
 
 from langchain_core.messages import (
     ToolMessage,
@@ -16,6 +19,8 @@ from .router.router_factory import RouterFactory
 from .tools.executor import ToolExecutor
 from .tools.registry import ToolRegistry
 from .memory.memory_service import MemoryService
+from .errors.retry_policy import RetryPolicy
+from .errors.error_policy import ErrorPolicy, RecoveryAction
 
 from .human_loop.handler import HumanLoopHandler
 from .human_loop.models import HumanReviewRequest
@@ -44,16 +49,58 @@ confidence_evaluator = ConfidenceEvaluator()
 
 def wrap_node(
         node: Callable[[AgentState], dict],
-        node_name: str) -> Callable[[AgentState], dict]:
-    """
-    Wrap a graph node to track the currently executing node.
-    """
+        node_name: str,
+        error_policy: ErrorPolicy,
+        retry_policy: RetryPolicy,
+        ) -> Callable[[AgentState], dict]:
     
     def wrapped(state: AgentState) -> dict:
 
         state["current_node"] = node_name
-        return node(state)
 
+        retry_count = 0
+
+        while True:
+            try:
+                return node(state)
+            
+            except Exception as exc:
+                action = error_policy.policy(exc, state)
+
+                if action == RecoveryAction.RETRY:
+                    if retry_count >= retry_policy.max_retries:
+                        return Command(
+                            goto="save_memory",
+                            update={
+                                "status": "fail",
+                                "error": str(exc),
+                            },
+                        )
+
+                    retry_count += 1
+
+                    delay = retry_policy.get_delay(retry_count)
+                    time.sleep(delay)
+
+                    continue
+
+                if action == RecoveryAction.HUMAN_REVIEW:
+                    return Command(
+                        goto="human_review",
+                        update={
+                            "error": str(exc),
+                            "status": "human_review",
+                        },
+                    )
+
+                return Command(
+                    goto="save_memory",
+                    update={ 
+                        "error": str(exc),
+                        "status": "fail",
+                    },
+                )
+                
     return wrapped
 
 
