@@ -1,6 +1,8 @@
 import json
 import re
 
+from typing import Callable
+
 from langchain_core.messages import (
     ToolMessage,
     HumanMessage,
@@ -40,106 +42,124 @@ human_loop_handler = HumanLoopHandler()
 confidence_evaluator = ConfidenceEvaluator()
 
 
+def wrap_node(
+        node: Callable[[AgentState], dict],
+        node_name: str) -> Callable[[AgentState], dict]:
+    """
+    Wrap a graph node to track the currently executing node.
+    """
+    
+    def wrapped(state: AgentState) -> dict:
 
-def load_memory_node(state: AgentState,
-                     memory: MemoryService) -> dict:
+        state["current_node"] = node_name
+        return node(state)
 
-    user_id = state["user_id"]
-    messages = state.get("messages", [])
+    return wrapped
 
-    if not messages:
+
+def Memory_loader(memory: MemoryService):
+    def load_memory_node(state: AgentState) -> dict:
+
+        user_id = state["user_id"]
+        messages = state.get("messages", [])
+
+        if not messages:
+            return {
+                "memory_context": []
+            }
+
+        latest_user_message = None
+
+        for message in reversed(messages):
+            if isinstance(message, HumanMessage):
+                latest_user_message = message
+                break
+
+        if latest_user_message is None:
+            return {
+                "memory_context": []
+            }
+
+        query = latest_user_message.content
+
+        memories = memory.search_memories(
+            user_id=user_id,
+            query=query,
+            limit=5,
+        )
+
+        memory_context = []
+
+        for item in memories:
+            memory_context.append({
+                "key": item.key,
+                "value": item.value,
+            })
+
         return {
-            "memory_context": []
+            "memory_context": memory_context,
         }
 
-    latest_user_message = None
+    return load_memory_node
 
-    for message in reversed(messages):
-        if isinstance(message, HumanMessage):
-            latest_user_message = message
-            break
 
-    if latest_user_message is None:
-        return {
-            "memory_context": []
+def Memory_saver(memory: MemoryService):
+    def save_memory_node(state: AgentState) -> dict:
+
+        user_id = state["user_id"]
+        messages = state.get("messages", [])
+
+        if not messages: 
+            return {}
+
+        latest_user_message = None
+
+        for message in reversed(messages):
+            if isinstance(message, HumanMessage):
+                latest_user_message = message
+                break
+
+        if latest_user_message is None:
+            return {}
+
+        content = latest_user_message.content.strip()
+
+        remember_patterns = {
+            r"\bremember that\b", 
+            r"\bremember\b", 
+            r"\bdon't forget\b", 
+            r"\bkeep in mind\b",
         }
 
-    query = latest_user_message.content
+        should_save = any(
+            re.search(pattern, content, re.IGNORECASE)
+            for pattern in remember_patterns
+        )
 
-    memories = memory.search_memories(
-        user_id=user_id,
-        query=query,
-        limit=5,
-    )
+        if not should_save:
+            return {}
 
-    memory_context = []
+        memory_text = re.sub(r"^\s*(remember that|remember|don't forget|keep in mind)\s*",
+                            "", 
+                            content, 
+                            flags=re.IGNORECASE, ).strip()
 
-    for item in memories:
-        memory_context.append({
-            "key": item.key,
-            "value": item.value,
-        })
+        if not memory_text:
+            return {}
 
-    return {
-        "memory_context": memory_context,
-    }
+        key = "user_preference"
 
+        memory.save_memory(
+            user_id=user_id,
+            key=key,
+            value={
+                "content": memory_text,
+            }
+        )
 
-def save_memory_node(state: AgentState,
-                     memory: MemoryService) -> dict:
-
-    user_id = state["user_id"]
-    messages = state.get("messages", [])
-
-    if not messages: 
         return {}
 
-    latest_user_message = None
-
-    for message in reversed(messages):
-        if isinstance(message, HumanMessage):
-            latest_user_message = message
-            break
-
-    if latest_user_message is None:
-        return {}
-
-    content = latest_user_message.content.strip()
-
-    remember_patterns = {
-        r"\bremember that\b", 
-        r"\bremember\b", 
-        r"\bdon't forget\b", 
-        r"\bkeep in mind\b",
-    }
-
-    should_save = any(
-        re.search(pattern, content, re.IGNORECASE)
-        for pattern in remember_patterns
-    )
-
-    if not should_save:
-        return {}
-
-    memory_text = re.sub(r"^\s*(remember that|remember|don't forget|keep in mind)\s*",
-                         "", 
-                         content, 
-                         flags=re.IGNORECASE, ).strip()
-
-    if not memory_text:
-        return {}
-
-    key = "user_preference"
-
-    memory.save_memory(
-        user_id=user_id,
-        key=key,
-        value={
-            "content": memory_text,
-        }
-    )
-
-    return {}
+    return save_memory_node
 
 
 def router_node(state: AgentState) -> dict:
@@ -237,22 +257,22 @@ def create_tool_call_node(registry: ToolRegistry):
     return tool_call_node
 
 
-def rag_node(
-        state: AgentState,
-        kb: KnowledgeBaseService
-) -> dict:
+def create_rag_node(kb: KnowledgeBaseService):
+    def rag_node(
+            state: AgentState,
+    ) -> dict:
 
-    query = state["query"]
+        query = state["query"]
 
-    retrieved_documents = kb.search(query)
+        retrieved_documents = kb.search(query)
 
-    return {
-        "retrieved_documents": retrieved_documents,
-    }
+        return {
+            "retrieved_documents": retrieved_documents,
+        }
+    return rag_node
     
 
-def confidence_evaluation_node(
-        state: AgentState) -> dict:
+def confidence_evaluation_node(state: AgentState) -> dict:
 
     top1_score = state.get("top1_score")
     mean_topk_score = state.get("mean_topk_score")
