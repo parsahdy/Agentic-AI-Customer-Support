@@ -17,6 +17,7 @@ from .state import AgentState
 from .tools.executor import ToolExecutor
 from .tools.registry import ToolRegistry
 from .errors.retry_policy import RetryPolicy
+from .errors.error_policy import ErrorPolicy
 
 from knowledge_base.kb_service import KnowledgeBaseService
 
@@ -58,10 +59,20 @@ def route_after_human_policy(state: AgentState) -> str:
     return "save_memory"
 
 
+def route_after_error_policy(state: AgentState) -> str:
+    """
+    Return the route selected by error policy.
+    """
+
+    return state.get("error_policy")
+
+
+
 def build_graph(
     memory: MemoryService,
     registry: ToolRegistry,
     retry_policy: RetryPolicy,
+    error_policy: ErrorPolicy,
     kb: KnowledgeBaseService,
 ):
 
@@ -78,39 +89,79 @@ def build_graph(
 
     graph.add_node(
         "load_memory",
-        wrap_node(load_memory_node, "memory_loader"),
+        wrap_node(
+            node = load_memory_node, 
+            node_name = "memory_loader",
+            error_policy = error_policy,
+            retry_policy = retry_policy,
+        ),
     )
     graph.add_node(
         "router",
-        wrap_node(router_node, "router"),
+        wrap_node(
+            node = router_node, 
+            node_name = "router",
+            error_policy = error_policy,
+            retry_policy = retry_policy,
+        ),
     )
     graph.add_node(
         "llm",
-        wrap_node(llm_node, "llm"),
+        wrap_node(
+            node = llm_node, 
+            node_name = "llm",
+            error_policy = error_policy,
+            retry_policy = retry_policy,
+        ),
     )
     graph.add_node(
         "rag",
-        wrap_node(rag_node, "rag"),
+        wrap_node(
+            node = rag_node, 
+            node_name = "rag",
+            error_policy = error_policy,
+            retry_policy = retry_policy,
+        ),
     )
     graph.add_node(
         "tool_call",
-        wrap_node(tool_call_node, "tool_call"),
+       wrap_node(
+            node = tool_call_node, 
+            node_name = "tool_call",
+            error_policy = error_policy,
+            retry_policy = retry_policy,
+        ),
     )
     graph.add_node(
         "tool",
-        wrap_node(tool_node, "tool"),
+        tool_node
     )
     graph.add_node(
         "human_policy",
-        wrap_node(human_policy_node, "human_policy"),
+        wrap_node(
+            node = human_policy_node, 
+            node_name = "human_policy",
+            error_policy = error_policy,
+            retry_policy = retry_policy,
+        ),
     )
     graph.add_node(
         "human_review",
-        wrap_node(human_review_node, "human_review"),
+        wrap_node(
+            node = human_review_node, 
+            node_name = "human_review",
+            error_policy = error_policy,
+            retry_policy = retry_policy,
+        ),
     )
     graph.add_node(
         "save_memory",
-        wrap_node(save_memory_node, "memory_saver"),
+        wrap_node(
+            node = save_memory_node, 
+            node_name = "save_memory",
+            error_policy = error_policy,
+            retry_policy = retry_policy,
+        ),
     )
 
     graph.add_edge(START, "load_memory")
@@ -146,6 +197,11 @@ def build_graph(
             "human_review": "human_review",
             "save_memory": "save_memory",
         },
+    )
+
+    graph.add_conditional_edges(
+        "error_policy",
+
     )
 
     graph.add_edge("save_memory", END)
