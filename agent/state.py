@@ -37,6 +37,7 @@ class AgentState(TypedDict):
 
     final_answer: str
     error: dict[str, Any] | None
+    error_policy: str | None
 
     metadata: dict[str, Any]
 
