@@ -3,7 +3,7 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass
 
-from .classifier import ErrorClassifier, ErrorType
+from .error_classifier import ErrorClassifier, ErrorType
 
 
 

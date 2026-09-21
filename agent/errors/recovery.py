@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from .classifier import ErrorClassifier, ErrorType
+from .error_classifier import ErrorClassifier, ErrorType
 
 
 class RecoveryHandler:
