@@ -47,9 +47,9 @@ class RetryPolicy:
         retry_count represents how many retries have already happened.
         """
 
-        error_type = ErrorClassifier.classify(error)
+        error_info = ErrorClassifier.classify(error)
 
-        if error_type != ErrorType.TRANSIENT:
+        if error_info["error_type"] != ErrorType.TRANSIENT:
             return False
 
         return retry_count < self.max_retries
