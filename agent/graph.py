@@ -59,14 +59,6 @@ def route_after_human_policy(state: AgentState) -> str:
     return "save_memory"
 
 
-def route_after_error_policy(state: AgentState) -> str:
-    """
-    Return the route selected by error policy.
-    """
-
-    return state.get("error_policy")
-
-
 
 def build_graph(
     memory: MemoryService,
