@@ -199,11 +199,6 @@ def build_graph(
         },
     )
 
-    graph.add_conditional_edges(
-        "error_policy",
-
-    )
-
     graph.add_edge("save_memory", END)
 
     return graph.compile(
