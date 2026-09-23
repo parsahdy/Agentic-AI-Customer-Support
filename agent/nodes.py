@@ -4,8 +4,6 @@ import time
 
 from typing import Callable
 
-from langgraph.types import Command
-
 from langchain_core.messages import (
     ToolMessage,
     HumanMessage,
@@ -57,6 +55,7 @@ def wrap_node(
     def wrapped(state: AgentState) -> dict:
 
         state["current_node"] = node_name
+        state["status"] = "running"
 
         retry_count = 0
 
@@ -65,18 +64,34 @@ def wrap_node(
                 return node(state)
             
             except Exception as exc:
+                print(
+                    f"[ERROR] Node '{node_name}' failed: "
+                    f"{type(exc).__name__}: {exc}"
+                )
                 action = error_policy.policy(exc, state)
+                print(
+                    f"[ERROR] Recovery action: {action}"
+                )
 
                 if action == RecoveryAction.RETRY:
-                    if retry_count >= retry_policy.max_retries:
-                        return Command(
-                            goto="save_memory",
-                            update={
-                                "status": "fail",
-                                "error": str(exc),
-                            },
+                    if retry_count > retry_policy.max_retries:
+                        print(
+                            f"[ERROR] Node '{node_name}'"
+                            f"reached maximum retry attempts."
                         )
-
+                        return {
+                            "status": "fail",
+                            "error": {
+                                "type": type(exc).__name__,
+                                "message": str(exc),
+                                "node": node_name,
+                                "recovery_action": (
+                                    "retry_exhausted"
+                                ),
+                                "retry_attempts": retry_count,
+                            },
+                        }
+                    
                     retry_count += 1
 
                     delay = retry_policy.get_delay(retry_count)
@@ -85,21 +100,31 @@ def wrap_node(
                     continue
 
                 if action == RecoveryAction.HUMAN_REVIEW:
-                    return Command(
-                        goto="human_review",
-                        update={
-                            "error": str(exc),
-                            "status": "human_review",
+                    return {
+                        "status": "human_review",
+                        "error": {
+                            "type": type(exc).__name__,
+                            "message": str(exc),
+                            "node": node_name,
+                            "recovery_action": (
+                                RecoveryAction.HUMAN_REVIEW.value
+                            ),
+                            "retry_attempts": retry_count,
                         },
-                    )
+                    }
 
-                return Command(
-                    goto="save_memory",
-                    update={ 
-                        "error": str(exc),
-                        "status": "fail",
+                return {
+                    "status": "fail",
+                    "error": {
+                        "type": type(exc).__name__,
+                        "message": str(exc),
+                        "node": node_name,
+                        "recovery_action": (
+                            RecoveryAction.FAIL.value
+                        ),
+                        "retry_attempts": retry_count,
                     },
-                )
+                }
                 
     return wrapped
 
@@ -215,6 +240,8 @@ def router_node(state: AgentState) -> dict:
     """
 
     route = router.route(state)
+
+    print(f"[DEBUG] Router returned: {route!r}")
 
     return {
         "route": route,
