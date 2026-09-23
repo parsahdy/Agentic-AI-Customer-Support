@@ -6,6 +6,13 @@ from langgraph.graph.message import add_messages
 
 Route = Literal["rag", "tool", "direct"]
 
+AgentStatus = Literal[
+    "running",
+    "success",
+    "fail",
+    "human_review",
+]
+
 
 class AgentState(TypedDict):
     """
@@ -36,6 +43,9 @@ class AgentState(TypedDict):
     max_iteration: int
 
     final_answer: str
+
+    status: AgentStatus
+    
     error: dict[str, Any] | None
     error_policy: str | None
 
