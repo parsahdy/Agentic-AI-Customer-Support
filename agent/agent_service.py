@@ -1,9 +1,23 @@
+import os
+
 from .graph import build_graph
 from .memory.memory_service import MemoryService
 from .tools.registry import ToolRegistry
 from .errors import RetryPolicy, ErrorPolicy
 
 from knowledge_base.kb_service import KnowledgeBaseService
+from evaluation import (
+    RetrievalEvaluator,
+    FaithfulnessEvaluator,
+    ConfidenceEvaluator,
+)
+
+from openai import OpenAI
+from dotenv import load_dotenv
+from agent import config
+
+load_dotenv()
+
 
 
 class AgentService:
@@ -13,6 +27,9 @@ class AgentService:
         memory: MemoryService | None = None,
         registry: ToolRegistry | None = None,
         kb: KnowledgeBaseService | None = None,
+        retrieval_evaluator: RetrievalEvaluator | None = None,
+        faithfulness_evaluator: FaithfulnessEvaluator | None = None,
+        confidence_evaluator: ConfidenceEvaluator | None = None,
         retry_policy: RetryPolicy | None = None,
         error_policy: ErrorPolicy | None = None,
     ):
@@ -29,10 +46,36 @@ class AgentService:
             else ToolRegistry()
         )
 
-        self.kb = (
-            kb
-            if kb is not None
-            else KnowledgeBaseService()
+        #self.kb = (
+        #    kb
+        #    if kb is not None
+        #    else KnowledgeBaseService()
+        #)
+
+        self.kb = kb
+
+        self.retrieval_evaluator = (
+            retrieval_evaluator
+            if retrieval_evaluator is not None
+            else RetrievalEvaluator()
+        )
+
+        self.faithfulness_evaluator = (
+            faithfulness_evaluator
+            if faithfulness_evaluator is not None
+            else FaithfulnessEvaluator(
+                client=OpenAI(
+                    api_key=os.getenv("OPENROUTER_API_KEY"),
+                    base_url=config.BASE_URL,
+                ),
+                model=config.LLM_MODEL,
+            )
+        )
+
+        self.confidence_evaluator = (
+            confidence_evaluator
+            if confidence_evaluator is not None
+            else ConfidenceEvaluator()
         )
 
         self.retry_policy = (
@@ -51,6 +94,9 @@ class AgentService:
             memory=self.memory,
             registry=self.registry,
             kb=self.kb,
+            retrieval_evaluator=self.retrieval_evaluator,
+            faithfulness_evaluator=self.faithfulness_evaluator,
+            confidence_evaluator=self.confidence_evaluator,
             retry_policy=self.retry_policy,
             error_policy=self.error_policy,
         )
@@ -96,7 +142,7 @@ class AgentService:
             "iteration": 0,
             "max_iteration": 5,
             "final_answer": "",
-            "error": {},
+            "error": None,
             "error_policy": "",
             "metadata": {},
             "route": None,

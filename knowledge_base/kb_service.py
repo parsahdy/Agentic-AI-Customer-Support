@@ -125,21 +125,19 @@ class KnowledgeBaseService:
 
         embedding = self.embedding_pipeline.query_embedding(
             query=query,
-            embedding_type=self.config.EMBEDDING_TYPE,
-            model_name=self.config.SENTENCE_EMBEDDING_MODEL
         )
 
         repository = VectorStoreRepository(
             index_path=self.config.INDEX_PATH
         )
 
-        retrieved_documents = retriever_pipeline(
+        retrieveds = retriever_pipeline(
             retriever_type=self.config.RETRIEVER_TYPE,
             query_embedding=embedding,
             repository=repository,
         )
 
-        return retrieved_documents
+        return retrieveds
 
 
 

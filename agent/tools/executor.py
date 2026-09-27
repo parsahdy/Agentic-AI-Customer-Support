@@ -3,7 +3,6 @@ import time
 
 from langchain_core.tools import StructuredTool
 
-from ..state import AgentState
 from ..errors import ErrorClassifier, RetryPolicy
 from .registry import ToolRegistry
 from .schemas import ToolResult
@@ -12,15 +11,21 @@ from .schemas import ToolResult
 
 class ToolExecutor:
 
-    def __init__(self, registry: ToolRegistry,
-                 retry_policy: RetryPolicy | None = None):
+    def __init__(
+        self,
+        registry: ToolRegistry,
+        retry_policy: RetryPolicy | None = None
+    ):
 
         self.registry = registry
         self.retry_policy = retry_policy or RetryPolicy()
 
 
-    def execute(self, tool_name: str,
-                arguments: dict) -> ToolResult:
+    def execute(
+        self,
+        tool_name: str,
+        arguments: dict
+    ) -> ToolResult:    
 
         retry_count = 0
 

@@ -28,8 +28,14 @@ from .human_loop.policy import (
     SensitiveOperationPolicy,
 )
 
-from evaluation.confidence.confidence_evaluator import ConfidenceEvaluator
 from knowledge_base.kb_service import KnowledgeBaseService
+from evaluation import (
+    RetrievalEvaluator, 
+    FaithfulnessEvaluator, 
+    ConfidenceEvaluator,
+)
+
+from langgraph.errors import GraphInterrupt
 
 
 router = RouterFactory.create(config.ROUTER_TYPE)
@@ -62,6 +68,11 @@ def wrap_node(
         while True:
             try:
                 return node(state)
+
+            except GraphInterrupt:
+                raise InterruptedError(
+                    "Agent workflow Interrupted."
+                )
             
             except Exception as exc:
                 print(
@@ -318,10 +329,22 @@ def create_tool_call_node(registry: ToolRegistry):
         """
 
         messages = list(state["messages"])
-
         response = llm.invoke(messages)
 
+        print("[DEBUG] Tool-call LLM response:", response)
+        print("[DEBUG] Tool calls:", getattr(response, "tool_calls", []))   
+
         tool_calls = getattr(response, "tool_calls", [])
+
+        if not tool_calls:
+            return {
+                "messages": [response],
+                "tool_calls": [],
+                "human_review_required": True,
+                "human_review_request": {
+                    "reason": "no proper tool found"
+                }
+            }
 
         return {
             "messages": [response],
@@ -331,45 +354,72 @@ def create_tool_call_node(registry: ToolRegistry):
     return tool_call_node
 
 
-def create_rag_node(kb: KnowledgeBaseService):
+def create_rag_node(
+        kb: KnowledgeBaseService,
+        retrieval_evaluator: RetrievalEvaluator,
+    ):
     def rag_node(
             state: AgentState,
     ) -> dict:
+        
+        print("[DEBUG] >>> RAG NODE ENTERED")
 
         query = state["query"]
 
-        retrieved_documents = kb.search(query)
+        retrieveds = kb.search(query)
+
+        print("[DEBUG] retrieveds:", retrieveds)
+
+        top1_score = retrieveds["top1_score"]
+        mean_topk_score = retrieveds["mean_topk_score"]
+        retrieval_score = retrieval_evaluator.evaluate(
+            top1_score,
+            mean_topk_score,
+        )
 
         return {
-            "retrieved_documents": retrieved_documents,
+            "retrieved_documents": retrieveds["retrieval_documents"],
+            "top1_score": top1_score,
+            "mean_topk_score": mean_topk_score,
+            "retrieval_score": retrieval_score,
         }
+    
     return rag_node
     
 
-def confidence_evaluation_node(state: AgentState) -> dict:
+def create_evaluation_node(
+    faithfulness_evaluator: FaithfulnessEvaluator,
+    confidence_evaluator: ConfidenceEvaluator,
+):
 
-    top1_score = state.get("top1_score")
-    mean_topk_score = state.get("mean_topk_score")
-    faithfilness_score = state.get("faithfulness_score")
+    def evaluation_node(state: AgentState):
 
-    if (
-        top1_score is None
-        or mean_topk_score is None
-        or faithfilness_score is None
-    ):
+        query = state.get("query")
+        final_answer = state.get("final_answer")
+        retrieved_documents = state.get("retrieved_documents")
+        top1_score = state.get("top1_score")
+        mean_topk_score = state.get("mean_topk_score")
+
+        faithfulness_score = faithfulness_evaluator.evaluate(
+            query=query,
+            answer=final_answer,
+            retrieved_contexts=retrieved_documents,
+        )
+
+        print("[DEBUG] faithfulness_score:", faithfulness_score)
+
+        confidence_score = confidence_evaluator.calculate(
+            top1_score=top1_score,
+            mean_topk_score=mean_topk_score,
+            faithfulness_score=faithfulness_score,
+        )
+
         return {
-            "confidence_score": None,
+            "faithfulness_score": faithfulness_score,
+            "confidence_score": confidence_score,
         }
 
-    confidence_score = confidence_evaluator.calculate(
-        top1_score=top1_score,
-        mean_topk_score=mean_topk_score,
-        faithfulness_score=faithfilness_score,
-    )
-
-    return {
-        "confidence_score": confidence_score,
-    }
+    return evaluation_node
 
 
 def human_policy_node(state: AgentState) -> dict:

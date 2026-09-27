@@ -26,18 +26,22 @@ class BaseRetriever(ABC):
 
 class VectorRetriever(BaseRetriever):
 
-    def __init__(self,
-                 repository: VectorStoreRepository) -> None:
+    def __init__(
+        self,
+        repository: VectorStoreRepository
+    ) -> None:
         
         self.repository = repository
         self.mapping = DocumentMapping()
 
 
-    def retrive(self, 
-                query: str | None=None,
-                query_embedding: np.ndarray | None=None,
-                documents: list[dict] | None=None,
-                k: int = K) -> dict:
+    def retrive(
+        self, 
+        query: str | None=None,
+        query_embedding: np.ndarray | None=None,
+        documents: list[dict] | None=None,
+        k: int = K
+    ) -> dict:
 
         if query_embedding is None:
             raise ValueError(
@@ -66,11 +70,13 @@ class VectorRetriever(BaseRetriever):
 
 class BM25Retriever(BaseRetriever):
 
-    def retrive(self, 
-                query: str | None=None,
-                query_embedding: np.ndarray | None=None,
-                documents: list[dict] | None=None,
-                k: int = K) -> list[dict]:
+    def retrive(
+        self, 
+        query: str | None=None,
+        query_embedding: np.ndarray | None=None,
+        documents: list[dict] | None=None,
+        k: int = K
+    ) -> list[dict]:
 
         if query is None:
             raise ValueError(
@@ -92,17 +98,21 @@ class BM25Retriever(BaseRetriever):
 
 class HybridRetriever(BaseRetriever):
 
-    def __init__(self,
-                 vector_retriever: VectorRetriever):
+    def __init__(
+        self,
+        vector_retriever: VectorRetriever
+    ):
 
         self.vector_retriever = vector_retriever
         self.bm25_retriever = BM25Retriever()
 
-    def retrive(self, 
-                query: str | None=None,
-                query_embedding: np.ndarray | None=None,
-                documents: list[dict] | None=None,
-                k: int = K) -> list[dict]:
+    def retrive(
+        self, 
+        query: str | None=None,
+        query_embedding: np.ndarray | None=None,
+        documents: list[dict] | None=None,
+        k: int = K
+    ) -> list[dict]:
 
         if query is None:
             raise ValueError(
@@ -139,7 +149,8 @@ class HybridRetriever(BaseRetriever):
     def _merge_results(
         bm25_docs: list[dict],
         vector_docs: list[dict],
-        k: int = K):
+        k: int = K
+    ):
 
         merged = []
         seen_ids = set()

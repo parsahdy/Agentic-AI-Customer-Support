@@ -1,6 +1,6 @@
 
 # LLM
-LLM_MODEL="qwen/qwen3.8-27b:free"
+LLM_MODEL="openrouter/free"
 BASE_URL="https://openrouter.ai/api/v1"
 TEMPERATURE=0.3
 

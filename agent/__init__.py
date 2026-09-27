@@ -15,7 +15,7 @@ from .nodes import (
     create_tool_call_node,
     create_tool_node,
     create_rag_node,
-    confidence_evaluation_node,
+    create_evaluation_node,
     human_policy_node,
     human_review_node,
 )
@@ -35,7 +35,7 @@ __all__ = [
     "create_tool_call_node",
     "create_tool_node",
     "create_rag_node",
-    "confidence_evaluation_node",
+    "create_evaluation_node",
     "human_policy_node",
     "human_review_node",
 ]

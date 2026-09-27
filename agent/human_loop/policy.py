@@ -14,12 +14,11 @@ class HumanPolicy(ABC):
 
     @abstractmethod
     def should_intervene(self, request: HumanReviewRequest) -> bool:
-        class HumanPolicy(ABC):
-            """
-            Base strategy for deciding whether human intervention is required.
-            """
+        """
+        Base strategy for deciding whether human intervention is required.
+        """
 
-            raise NotImplementedError
+        raise NotImplementedError
 
 
 class LowConfidencePolicy(HumanPolicy):
@@ -41,7 +40,7 @@ class LowConfidencePolicy(HumanPolicy):
     def should_intervene(self, request: HumanReviewRequest) -> bool:
 
         if request.confidence_score is None:
-            return True
+            return 
 
         return request.confidence_score < self.review_threshold
 

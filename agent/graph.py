@@ -12,6 +12,7 @@ from .nodes import (
     router_node,
     Memory_saver,
     create_rag_node,
+    create_evaluation_node,
 )
 from .state import AgentState
 from .tools.executor import ToolExecutor
@@ -20,6 +21,11 @@ from .errors.retry_policy import RetryPolicy
 from .errors.error_policy import ErrorPolicy
 
 from knowledge_base.kb_service import KnowledgeBaseService
+from evaluation import (
+    RetrievalEvaluator, 
+    FaithfulnessEvaluator, 
+    ConfidenceEvaluator,
+)
 
 
 
@@ -55,7 +61,24 @@ def route_after_router(state: AgentState) -> str:
             "Route is required after router node."
         )
 
+    print(
+        f"[DEBUG] route_after_router | "
+        f"error={state.get('error')!r} | "
+        f"route={state.get('route')!r}"
+    )
+
     return route
+
+
+def route_after_tool_call(state: AgentState) -> str:
+    """
+    Determine the next step after the tool call node.
+    """
+
+    if state.get("human_review_required"):
+        return "human_review"
+
+    return "tool"
 
 
 def route_after_llm(state: AgentState) -> str:
@@ -76,6 +99,9 @@ def route_after_llm(state: AgentState) -> str:
         return "save_memory"
 
     route = state.get("route")
+
+    if route == "rag":
+        return "evaluation"
 
     if route == "direct":
         return "save_memory"
@@ -109,19 +135,30 @@ def route_after_human_policy(state: AgentState) -> str:
 def build_graph(
     memory: MemoryService,
     registry: ToolRegistry,
+    kb: KnowledgeBaseService,
+    retrieval_evaluator: RetrievalEvaluator,
+    faithfulness_evaluator: FaithfulnessEvaluator,
+    confidence_evaluator: ConfidenceEvaluator,
     retry_policy: RetryPolicy,
     error_policy: ErrorPolicy,
-    kb: KnowledgeBaseService,
 ):
 
     executor = ToolExecutor(registry, retry_policy)
 
     tool_call_node = create_tool_call_node(registry=registry)
     tool_node = create_tool_node(executor=executor)
-    rag_node = create_rag_node(kb=kb)
+    rag_node = create_rag_node(
+        kb=kb,
+        retrieval_evaluator=retrieval_evaluator,
+    )
 
     load_memory_node = Memory_loader(memory=memory)
     save_memory_node = Memory_saver(memory=memory)
+
+    evaluation_node = create_evaluation_node(
+        faithfulness_evaluator=faithfulness_evaluator,
+        confidence_evaluator=confidence_evaluator,
+    ) 
 
     graph = StateGraph(AgentState)
 
@@ -193,6 +230,15 @@ def build_graph(
         ),
     )
     graph.add_node(
+        "evaluation",
+        wrap_node(
+            node=evaluation_node,
+            node_name="evaluation_node",
+            error_policy=error_policy,
+            retry_policy=retry_policy,
+        ),
+    )
+    graph.add_node(
         "save_memory",
         wrap_node(
             node = save_memory_node, 
@@ -218,13 +264,24 @@ def build_graph(
     )
 
     graph.add_edge("rag", "llm")
-    graph.add_edge("tool_call", "tool")
+    graph.add_edge("evaluation", 'save_memory')
+
+    graph.add_conditional_edges(
+        "tool_call",
+        route_after_tool_call,
+        {
+            "tool": "tool",
+            "human_review": "human_review",
+        }
+    )
+    
     graph.add_edge("tool", "llm")
 
     graph.add_conditional_edges(
         "llm",
         route_after_llm,
         {
+            "evaluation": "evaluation",
             "save_memory": "save_memory",
             "human_review": "human_review",
             "human_policy": "human_policy",
@@ -241,7 +298,7 @@ def build_graph(
     )
 
     graph.add_edge("save_memory", END)
-    graph.add_edge( "human_review", END)
+    graph.add_edge("human_review", END)
 
     return graph.compile(
         checkpointer=memory.get_checkpointer(),

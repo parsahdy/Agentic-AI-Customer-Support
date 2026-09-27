@@ -44,7 +44,9 @@ class LLMRouter(BaseRouter):
 
     def __init__(self):
         self.llm = create_llm().with_structured_output(
-            RouteDecision
+            RouteDecision,
+            method="json_schema",
+            strict=True,
         )
 
 
