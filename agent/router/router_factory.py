@@ -2,6 +2,7 @@ from .router import (
     BaseRouter,
     KeywordRouter,
     LLMRouter,
+    JevRouter,
 )
 
 
@@ -10,6 +11,7 @@ class RouterFactory:
     _routers: dict[str, type[BaseRouter]] = {
         "keyword": KeywordRouter,
         "llm": LLMRouter,
+        "jev": JevRouter,
     }
 
     @classmethod
