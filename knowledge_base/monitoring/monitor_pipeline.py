@@ -3,11 +3,13 @@ from collections.abc import Callable
 from .monitor import KnowledgeBaseMonitor
 
 
-def monitor_pipeline(monitor: KnowledgeBaseMonitor,
-                     stage: str,
-                     function: Callable,
-                     *args,
-                     **kwargs):
+def monitor_pipeline(
+    monitor: KnowledgeBaseMonitor,
+    stage: str,
+    function: Callable,
+    *args,
+    **kwargs
+):
 
     monitor.start(stage)
 

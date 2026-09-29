@@ -6,10 +6,10 @@ from .embedding_service import BaseEmbedding
 class EmbeddingPipeline:
 
     def __init__(
-            self, 
-            embedding_type: str,
-            model_name: str
-        ) -> None:
+        self, 
+        embedding_type: str,
+        model_name: str
+    ) -> None:
 
         self.embedder: BaseEmbedding = EmbeddingFactory.create(
             embedding_type=embedding_type,
@@ -28,8 +28,8 @@ class EmbeddingPipeline:
 
 
     def query_embedding(
-            self, 
-            query: str,
+        self, 
+        query: str,
     ):
 
         query_embedding = self.embedder.embed_query(query)

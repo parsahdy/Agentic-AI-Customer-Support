@@ -19,7 +19,7 @@ EMBEDDING_TYPE="sentence"
 VECTOR_STORE_TYPE="faiss"
 
 ## retriever
-K = 5
+K = 3
 SCORE = int
 THRESHOLD = int
 RETRIEVER_TYPE="vector"

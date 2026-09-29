@@ -63,8 +63,6 @@ class KnowledgeBaseService:
             stage="embedding",
             function=self.embedding_pipeline.documents_embedding,
             documents=chunked_documents,
-            embedding_type=self.config.EMBEDDING_TYPE,
-            model_name=self.config.SENTENCE_EMBEDDING_MODEL
         )
 
         # Vector store

@@ -3,6 +3,7 @@
         "vector_id": 0,
         "document_id": "faq_1",
         "chunk_id": "faq_1_chunk_0",
+        "content": "Question: how can i create an account Answer: to create an account click on the sign up button on the top right corner of our website and follow the instructions to complete the registration process",
         "metadata": {
             "document_id": "faq_1",
             "source": "faq_clean.csv",
@@ -15,6 +16,7 @@
         "vector_id": 1,
         "document_id": "faq_2",
         "chunk_id": "faq_2_chunk_0",
+        "content": "Question: what payment methods do you accept Answer: we accept major credit cards debit cards and paypal as payment methods for online orders",
         "metadata": {
             "document_id": "faq_2",
             "source": "faq_clean.csv",
@@ -27,6 +29,7 @@
         "vector_id": 2,
         "document_id": "faq_3",
         "chunk_id": "faq_3_chunk_0",
+        "content": "Question: how can i track my order Answer: you can track your order by logging into your account and navigating to the order history section there you will find the tracking information for your shipment",
         "metadata": {
             "document_id": "faq_3",
             "source": "faq_clean.csv",
@@ -39,6 +42,7 @@
         "vector_id": 3,
         "document_id": "faq_4",
         "chunk_id": "faq_4_chunk_0",
+        "content": "Question: what is your return policy Answer: our return policy allows you to return products within 30 days of purchase for a full refund provided they are in their original condition and packaging please refer to our returns page for detailed instructions",
         "metadata": {
             "document_id": "faq_4",
             "source": "faq_clean.csv",
@@ -51,6 +55,7 @@
         "vector_id": 4,
         "document_id": "faq_5",
         "chunk_id": "faq_5_chunk_0",
+        "content": "Question: can i cancel my order Answer: you can cancel your order if it has not been shipped yet please contact our customer support team with your order details and we will assist you with the cancellation process",
         "metadata": {
             "document_id": "faq_5",
             "source": "faq_clean.csv",
@@ -63,6 +68,7 @@
         "vector_id": 5,
         "document_id": "faq_6",
         "chunk_id": "faq_6_chunk_0",
+        "content": "Question: how long does shipping take Answer: shipping times vary depending on the destination and the shipping method chosen standard shipping usually takes 3 5 business days while express shipping can take 1 2 business days",
         "metadata": {
             "document_id": "faq_6",
             "source": "faq_clean.csv",
@@ -75,6 +81,7 @@
         "vector_id": 6,
         "document_id": "faq_7",
         "chunk_id": "faq_7_chunk_0",
+        "content": "Question: do you offer international shipping Answer: yes we offer international shipping to select countries the availability and shipping costs will be calculated during the checkout process based on your location",
         "metadata": {
             "document_id": "faq_7",
             "source": "faq_clean.csv",
@@ -87,6 +94,7 @@
         "vector_id": 7,
         "document_id": "faq_8",
         "chunk_id": "faq_8_chunk_0",
+        "content": "Question: what should i do if my package is lost or damaged Answer: if your package is lost or damaged during transit please contact our customer support team immediately we will initiate an investigation and take the necessary steps to resolve the issue",
         "metadata": {
             "document_id": "faq_8",
             "source": "faq_clean.csv",
@@ -99,6 +107,7 @@
         "vector_id": 8,
         "document_id": "faq_9",
         "chunk_id": "faq_9_chunk_0",
+        "content": "Question: can i change my shipping address after placing an order Answer: if you need to change your shipping address please contact our customer support team as soon as possible we will do our best to update the address if the order has not been shipped yet",
         "metadata": {
             "document_id": "faq_9",
             "source": "faq_clean.csv",
@@ -111,6 +120,7 @@
         "vector_id": 9,
         "document_id": "faq_10",
         "chunk_id": "faq_10_chunk_0",
+        "content": "Question: how can i contact customer support Answer: you can contact our customer support team by phone at phone number or by email at email address our team is available working hours to assist you with any inquiries or issues you may have",
         "metadata": {
             "document_id": "faq_10",
             "source": "faq_clean.csv",
@@ -123,6 +133,7 @@
         "vector_id": 10,
         "document_id": "faq_11",
         "chunk_id": "faq_11_chunk_0",
+        "content": "Question: do you offer gift wrapping services Answer: yes we offer gift wrapping services for an additional fee during the checkout process you can select the option to add gift wrapping to your order",
         "metadata": {
             "document_id": "faq_11",
             "source": "faq_clean.csv",
@@ -135,6 +146,7 @@
         "vector_id": 11,
         "document_id": "faq_12",
         "chunk_id": "faq_12_chunk_0",
+        "content": "Question: what is your price matching policy Answer: we have a price matching policy where we will match the price of an identical product found on a competitor s website please contact our customer support team with the details of the product and the competitor s offer",
         "metadata": {
             "document_id": "faq_12",
             "source": "faq_clean.csv",
@@ -147,6 +159,7 @@
         "vector_id": 12,
         "document_id": "faq_13",
         "chunk_id": "faq_13_chunk_0",
+        "content": "Question: can i order by phone Answer: unfortunately we do not accept orders over the phone please place your order through our website for a smooth and secure transaction",
         "metadata": {
             "document_id": "faq_13",
             "source": "faq_clean.csv",
@@ -159,6 +172,7 @@
         "vector_id": 13,
         "document_id": "faq_14",
         "chunk_id": "faq_14_chunk_0",
+        "content": "Question: are my personal and payment details secure Answer: yes we take the security of your personal and payment details seriously we use industry standard encryption and follow strict security protocols to ensure your information is protected",
         "metadata": {
             "document_id": "faq_14",
             "source": "faq_clean.csv",
@@ -171,6 +185,7 @@
         "vector_id": 14,
         "document_id": "faq_15",
         "chunk_id": "faq_15_chunk_0",
+        "content": "Question: what is your price adjustment policy Answer: if a product you purchased goes on sale within 7 days of your purchase we offer a one time price adjustment please contact our customer support team with your order details to request the adjustment",
         "metadata": {
             "document_id": "faq_15",
             "source": "faq_clean.csv",
@@ -183,6 +198,7 @@
         "vector_id": 15,
         "document_id": "faq_16",
         "chunk_id": "faq_16_chunk_0",
+        "content": "Question: do you have a loyalty program Answer: yes we have a loyalty program where you can earn points for every purchase these points can be redeemed for discounts on future orders please visit our website to learn more and join the program",
         "metadata": {
             "document_id": "faq_16",
             "source": "faq_clean.csv",
@@ -195,6 +211,7 @@
         "vector_id": 16,
         "document_id": "faq_17",
         "chunk_id": "faq_17_chunk_0",
+        "content": "Question: can i order without creating an account Answer: yes you can place an order as a guest without creating an account however creating an account offers benefits such as order tracking and easier future purchases",
         "metadata": {
             "document_id": "faq_17",
             "source": "faq_clean.csv",
@@ -207,6 +224,7 @@
         "vector_id": 17,
         "document_id": "faq_18",
         "chunk_id": "faq_18_chunk_0",
+        "content": "Question: do you offer bulk or wholesale discounts Answer: yes we offer bulk or wholesale discounts for certain products please contact our customer support team or visit our wholesale page for more information and to discuss your specific requirements",
         "metadata": {
             "document_id": "faq_18",
             "source": "faq_clean.csv",
@@ -219,6 +237,7 @@
         "vector_id": 18,
         "document_id": "faq_19",
         "chunk_id": "faq_19_chunk_0",
+        "content": "Question: can i change or cancel an item in my order Answer: if you need to change or cancel an item in your order please contact our customer support team as soon as possible we will assist you with the necessary steps",
         "metadata": {
             "document_id": "faq_19",
             "source": "faq_clean.csv",
@@ -231,6 +250,7 @@
         "vector_id": 19,
         "document_id": "faq_20",
         "chunk_id": "faq_20_chunk_0",
+        "content": "Question: how can i leave a product review Answer: to leave a product review navigate to the product page on our website and click on the write a review button you can share your feedback and rating based on your experience with the product",
         "metadata": {
             "document_id": "faq_20",
             "source": "faq_clean.csv",
@@ -243,6 +263,7 @@
         "vector_id": 20,
         "document_id": "faq_21",
         "chunk_id": "faq_21_chunk_0",
+        "content": "Question: can i use multiple promo codes on a single order Answer: usually only one promo code can be applied per order during the checkout process enter the promo code in the designated field to apply the discount to your order",
         "metadata": {
             "document_id": "faq_21",
             "source": "faq_clean.csv",
@@ -255,6 +276,7 @@
         "vector_id": 21,
         "document_id": "faq_22",
         "chunk_id": "faq_22_chunk_0",
+        "content": "Question: what should i do if i receive the wrong item Answer: if you receive the wrong item in your order please contact our customer support team immediately we will arrange for the correct item to be shipped to you and assist with returning the wrong item",
         "metadata": {
             "document_id": "faq_22",
             "source": "faq_clean.csv",
@@ -267,6 +289,7 @@
         "vector_id": 22,
         "document_id": "faq_23",
         "chunk_id": "faq_23_chunk_0",
+        "content": "Question: do you offer expedited shipping Answer: yes we offer expedited shipping options for faster delivery during the checkout process you can select the desired expedited shipping method",
         "metadata": {
             "document_id": "faq_23",
             "source": "faq_clean.csv",
@@ -279,6 +302,7 @@
         "vector_id": 23,
         "document_id": "faq_24",
         "chunk_id": "faq_24_chunk_0",
+        "content": "Question: can i order a product that is out of stock Answer: if a product is currently out of stock you will usually see an option to sign up for product notifications this way you will be alerted when the product becomes available again",
         "metadata": {
             "document_id": "faq_24",
             "source": "faq_clean.csv",
@@ -291,6 +315,7 @@
         "vector_id": 24,
         "document_id": "faq_25",
         "chunk_id": "faq_25_chunk_0",
+        "content": "Question: what is your email newsletter about Answer: our email newsletter provides updates on new product releases exclusive offers and helpful tips related to our products you can subscribe to our newsletter on our website",
         "metadata": {
             "document_id": "faq_25",
             "source": "faq_clean.csv",
@@ -303,6 +328,7 @@
         "vector_id": 25,
         "document_id": "faq_26",
         "chunk_id": "faq_26_chunk_0",
+        "content": "Question: can i return a product if i changed my mind Answer: yes you can return a product if you changed your mind please ensure the product is in its original condition and packaging and refer to our return policy for instructions",
         "metadata": {
             "document_id": "faq_26",
             "source": "faq_clean.csv",
@@ -315,6 +341,7 @@
         "vector_id": 26,
         "document_id": "faq_27",
         "chunk_id": "faq_27_chunk_0",
+        "content": "Question: do you offer live chat support Answer: yes we offer live chat support on our website during our business hours look for the chat icon in the bottom right corner to initiate a chat with our customer support team",
         "metadata": {
             "document_id": "faq_27",
             "source": "faq_clean.csv",
@@ -327,6 +354,7 @@
         "vector_id": 27,
         "document_id": "faq_28",
         "chunk_id": "faq_28_chunk_0",
+        "content": "Question: can i order a product as a gift Answer: yes you can order a product as a gift and have it shipped directly to the recipient during the checkout process you can enter the recipient s shipping address",
         "metadata": {
             "document_id": "faq_28",
             "source": "faq_clean.csv",
@@ -339,6 +367,7 @@
         "vector_id": 28,
         "document_id": "faq_29",
         "chunk_id": "faq_29_chunk_0",
+        "content": "Question: what should i do if my discount code is not working Answer: if your discount code is not working please double check the terms and conditions associated with the code if the issue persists contact our customer support team for assistance",
         "metadata": {
             "document_id": "faq_29",
             "source": "faq_clean.csv",
@@ -351,6 +380,7 @@
         "vector_id": 29,
         "document_id": "faq_30",
         "chunk_id": "faq_30_chunk_0",
+        "content": "Question: can i return a product if it was a final sale item Answer: final sale items are usually non returnable and non refundable please review the product description or contact our customer support team to confirm the return eligibility for specific items",
         "metadata": {
             "document_id": "faq_30",
             "source": "faq_clean.csv",
@@ -363,6 +393,7 @@
         "vector_id": 30,
         "document_id": "faq_31",
         "chunk_id": "faq_31_chunk_0",
+        "content": "Question: do you offer installation services for your products Answer: installation services are available for select products please check the product description or contact our customer support team for more information and to request installation services",
         "metadata": {
             "document_id": "faq_31",
             "source": "faq_clean.csv",
@@ -375,6 +406,7 @@
         "vector_id": 31,
         "document_id": "faq_32",
         "chunk_id": "faq_32_chunk_0",
+        "content": "Question: can i order a product that is discontinued Answer: discontinued products are no longer available for purchase we recommend exploring alternative products on our website",
         "metadata": {
             "document_id": "faq_32",
             "source": "faq_clean.csv",
@@ -387,6 +419,7 @@
         "vector_id": 32,
         "document_id": "faq_33",
         "chunk_id": "faq_33_chunk_0",
+        "content": "Question: can i return a product without a receipt Answer: a receipt or proof of purchase is usually required for returns please refer to our return policy or contact our customer support team for assistance",
         "metadata": {
             "document_id": "faq_33",
             "source": "faq_clean.csv",
@@ -399,6 +432,7 @@
         "vector_id": 33,
         "document_id": "faq_34",
         "chunk_id": "faq_34_chunk_0",
+        "content": "Question: can i order a product for delivery to a different country Answer: yes we offer international shipping to select countries please review the available shipping destinations during checkout or contact our customer support for assistance",
         "metadata": {
             "document_id": "faq_34",
             "source": "faq_clean.csv",
@@ -411,6 +445,7 @@
         "vector_id": 34,
         "document_id": "faq_35",
         "chunk_id": "faq_35_chunk_0",
+        "content": "Question: can i add a gift message to my order Answer: yes you can add a gift message during the checkout process there is usually a section where you can enter your personalized message",
         "metadata": {
             "document_id": "faq_35",
             "source": "faq_clean.csv",
@@ -423,6 +458,7 @@
         "vector_id": 35,
         "document_id": "faq_36",
         "chunk_id": "faq_36_chunk_0",
+        "content": "Question: can i request a product demonstration before making a purchase Answer: we do not currently offer product demonstrations before purchase however you can find detailed product descriptions specifications and customer reviews on our website",
         "metadata": {
             "document_id": "faq_36",
             "source": "faq_clean.csv",
@@ -435,6 +471,7 @@
         "vector_id": 36,
         "document_id": "faq_37",
         "chunk_id": "faq_37_chunk_0",
+        "content": "Question: can i order a product that is listed as coming soon Answer: products listed as coming soon are not available for immediate purchase please sign up for notifications to be informed when the product becomes available",
         "metadata": {
             "document_id": "faq_37",
             "source": "faq_clean.csv",
@@ -447,6 +484,7 @@
         "vector_id": 37,
         "document_id": "faq_38",
         "chunk_id": "faq_38_chunk_0",
+        "content": "Question: can i request an invoice for my order Answer: yes an invoice is usually included with your order if you require a separate invoice please contact our customer support team with your order details",
         "metadata": {
             "document_id": "faq_38",
             "source": "faq_clean.csv",
@@ -459,6 +497,7 @@
         "vector_id": 38,
         "document_id": "faq_39",
         "chunk_id": "faq_39_chunk_0",
+        "content": "Question: can i order a product that is labeled as limited edition Answer: limited edition products may have restricted availability we recommend placing an order as soon as possible to secure your item",
         "metadata": {
             "document_id": "faq_39",
             "source": "faq_clean.csv",
@@ -471,6 +510,7 @@
         "vector_id": 39,
         "document_id": "faq_40",
         "chunk_id": "faq_40_chunk_0",
+        "content": "Question: can i return a product if i no longer have the original packaging Answer: while returning a product in its original packaging is preferred you can still initiate a return without it contact our customer support team for guidance in such cases",
         "metadata": {
             "document_id": "faq_40",
             "source": "faq_clean.csv",
@@ -483,6 +523,7 @@
         "vector_id": 40,
         "document_id": "faq_41",
         "chunk_id": "faq_41_chunk_0",
+        "content": "Question: can i request a product that is currently out of stock to be reserved for me Answer: we do not offer reservations for out of stock products however you can sign up for product notifications to be alerted when it becomes available again",
         "metadata": {
             "document_id": "faq_41",
             "source": "faq_clean.csv",
@@ -495,6 +536,7 @@
         "vector_id": 41,
         "document_id": "faq_42",
         "chunk_id": "faq_42_chunk_0",
+        "content": "Question: can i order a product that is listed as pre order with other in stock items Answer: yes you can place an order with a mix of pre order and in stock items however please note that the entire order will be shipped once all items are available",
         "metadata": {
             "document_id": "faq_42",
             "source": "faq_clean.csv",
@@ -507,6 +549,7 @@
         "vector_id": 42,
         "document_id": "faq_43",
         "chunk_id": "faq_43_chunk_0",
+        "content": "Question: can i return a product if it was damaged during shipping Answer: if your product was damaged during shipping please contact our customer support team immediately we will guide you through the return and replacement process",
         "metadata": {
             "document_id": "faq_43",
             "source": "faq_clean.csv",
@@ -519,6 +562,7 @@
         "vector_id": 43,
         "document_id": "faq_44",
         "chunk_id": "faq_44_chunk_0",
+        "content": "Question: can i request a product that is out of stock to be restocked Answer: we strive to restock popular products whenever possible please sign up for product notifications to be informed when the item becomes available again",
         "metadata": {
             "document_id": "faq_44",
             "source": "faq_clean.csv",
@@ -531,6 +575,7 @@
         "vector_id": 44,
         "document_id": "faq_45",
         "chunk_id": "faq_45_chunk_0",
+        "content": "Question: can i order a product if it is listed as backordered Answer: products listed as backordered are temporarily out of stock but can still be ordered your order will be fulfilled once the product is restocked",
         "metadata": {
             "document_id": "faq_45",
             "source": "faq_clean.csv",
@@ -543,6 +588,7 @@
         "vector_id": 45,
         "document_id": "faq_46",
         "chunk_id": "faq_46_chunk_0",
+        "content": "Question: can i return a product if it was purchased during a sale or with a discount Answer: yes you can return a product purchased during a sale or with a discount the refund will be processed based on the amount paid after the discount",
         "metadata": {
             "document_id": "faq_46",
             "source": "faq_clean.csv",
@@ -555,6 +601,7 @@
         "vector_id": 46,
         "document_id": "faq_47",
         "chunk_id": "faq_47_chunk_0",
+        "content": "Question: can i request a product repair or replacement if it is damaged Answer: if you receive a damaged product please contact our customer support team immediately we will assist you with the necessary steps for repair or replacement",
         "metadata": {
             "document_id": "faq_47",
             "source": "faq_clean.csv",
@@ -567,6 +614,7 @@
         "vector_id": 47,
         "document_id": "faq_48",
         "chunk_id": "faq_48_chunk_0",
+        "content": "Question: can i order a product if it is listed as out of stock but available for pre order Answer: if a product is available for pre order you can place an order to secure your item the product will be shipped once it becomes available",
         "metadata": {
             "document_id": "faq_48",
             "source": "faq_clean.csv",
@@ -579,6 +627,7 @@
         "vector_id": 48,
         "document_id": "faq_49",
         "chunk_id": "faq_49_chunk_0",
+        "content": "Question: can i return a product if it was purchased as a gift Answer: yes you can return a product purchased as a gift however refunds will typically be issued to the original payment method used for the purchase",
         "metadata": {
             "document_id": "faq_49",
             "source": "faq_clean.csv",
@@ -591,6 +640,7 @@
         "vector_id": 49,
         "document_id": "faq_50",
         "chunk_id": "faq_50_chunk_0",
+        "content": "Question: can i request a product if it is listed as discontinued Answer: unfortunately if a product is listed as discontinued it is no longer available for purchase we recommend exploring alternative products on our website",
         "metadata": {
             "document_id": "faq_50",
             "source": "faq_clean.csv",
@@ -603,6 +653,7 @@
         "vector_id": 50,
         "document_id": "faq_51",
         "chunk_id": "faq_51_chunk_0",
+        "content": "Question: can i order a product if it is listed as sold out Answer: if a product is listed as sold out it is currently unavailable for purchase please check back later or sign up for notifications when it becomes available again",
         "metadata": {
             "document_id": "faq_51",
             "source": "faq_clean.csv",
@@ -615,6 +666,7 @@
         "vector_id": 51,
         "document_id": "faq_52",
         "chunk_id": "faq_52_chunk_0",
+        "content": "Question: can i return a product if it was purchased with a gift card Answer: yes you can return a product purchased with a gift card the refund will be issued in the form of store credit or a new gift card",
         "metadata": {
             "document_id": "faq_52",
             "source": "faq_clean.csv",
@@ -627,6 +679,7 @@
         "vector_id": 52,
         "document_id": "faq_53",
         "chunk_id": "faq_53_chunk_0",
+        "content": "Question: can i request a product if it is not currently available in my size Answer: if a product is not available in your size it may be temporarily out of stock please check back later or sign up for size notifications",
         "metadata": {
             "document_id": "faq_53",
             "source": "faq_clean.csv",
@@ -639,6 +692,7 @@
         "vector_id": 53,
         "document_id": "faq_54",
         "chunk_id": "faq_54_chunk_0",
+        "content": "Question: can i order a product if it is listed as coming soon but available for pre order Answer: if a product is listed as coming soon and available for pre order you can place an order to secure your item before it becomes available",
         "metadata": {
             "document_id": "faq_54",
             "source": "faq_clean.csv",
@@ -651,6 +705,7 @@
         "vector_id": 54,
         "document_id": "faq_55",
         "chunk_id": "faq_55_chunk_0",
+        "content": "Question: can i return a product if it was purchased with a discount code Answer: yes you can return a product purchased with a discount code the refund will be processed based on the amount paid after the discount",
         "metadata": {
             "document_id": "faq_55",
             "source": "faq_clean.csv",
@@ -663,6 +718,7 @@
         "vector_id": 55,
         "document_id": "faq_56",
         "chunk_id": "faq_56_chunk_0",
+        "content": "Question: can i request a custom order or personalized product Answer: we do not currently offer custom orders or personalized products please explore the available products on our website",
         "metadata": {
             "document_id": "faq_56",
             "source": "faq_clean.csv",
@@ -675,6 +731,7 @@
         "vector_id": 56,
         "document_id": "faq_57",
         "chunk_id": "faq_57_chunk_0",
+        "content": "Question: can i order a product if it is listed as temporarily unavailable Answer: if a product is listed as temporarily unavailable it is out of stock but may be restocked in the future please check back later or sign up for notifications",
         "metadata": {
             "document_id": "faq_57",
             "source": "faq_clean.csv",
@@ -687,6 +744,7 @@
         "vector_id": 57,
         "document_id": "faq_58",
         "chunk_id": "faq_58_chunk_0",
+        "content": "Question: can i return a product if it was damaged due to improper use Answer: our return policy generally covers products that are defective or damaged upon arrival damage due to improper use may not be eligible for a return please contact our customer support team for assistance",
         "metadata": {
             "document_id": "faq_58",
             "source": "faq_clean.csv",
@@ -699,6 +757,7 @@
         "vector_id": 58,
         "document_id": "faq_59",
         "chunk_id": "faq_59_chunk_0",
+        "content": "Question: can i request a product if it is listed as coming soon but not available for pre order Answer: if a product is listed as coming soon but not available for pre order you will need to wait until it is officially released and becomes available for purchase",
         "metadata": {
             "document_id": "faq_59",
             "source": "faq_clean.csv",
@@ -711,6 +770,7 @@
         "vector_id": 59,
         "document_id": "faq_60",
         "chunk_id": "faq_60_chunk_0",
+        "content": "Question: can i order a product if it is listed as on hold Answer: if a product is listed as on hold it is temporarily unavailable for purchase please check back later or sign up for notifications when it becomes available",
         "metadata": {
             "document_id": "faq_60",
             "source": "faq_clean.csv",
@@ -723,6 +783,7 @@
         "vector_id": 60,
         "document_id": "faq_61",
         "chunk_id": "faq_61_chunk_0",
+        "content": "Question: can i return a product if i no longer have the original receipt Answer: while a receipt is preferred for returns we may be able to assist you without it please contact our customer support team for further guidance",
         "metadata": {
             "document_id": "faq_61",
             "source": "faq_clean.csv",
@@ -735,6 +796,7 @@
         "vector_id": 61,
         "document_id": "faq_62",
         "chunk_id": "faq_62_chunk_0",
+        "content": "Question: can i request a product that is listed as limited edition to be restocked Answer: once a limited edition product is sold out it may not be restocked limited edition items are available for a limited time only so we recommend purchasing them while they are available",
         "metadata": {
             "document_id": "faq_62",
             "source": "faq_clean.csv",
@@ -747,6 +809,7 @@
         "vector_id": 62,
         "document_id": "faq_63",
         "chunk_id": "faq_63_chunk_0",
+        "content": "Question: can i order a product if it is listed as discontinued but still visible on the website Answer: if a product is listed as discontinued but still visible on the website it may be an error please contact our customer support team for clarification",
         "metadata": {
             "document_id": "faq_63",
             "source": "faq_clean.csv",
@@ -759,6 +822,7 @@
         "vector_id": 63,
         "document_id": "faq_64",
         "chunk_id": "faq_64_chunk_0",
+        "content": "Question: can i return a product if it was a clearance or final sale item Answer: clearance or final sale items are typically non returnable and non refundable please review the product description or contact our customer support team for more information",
         "metadata": {
             "document_id": "faq_64",
             "source": "faq_clean.csv",
@@ -771,6 +835,7 @@
         "vector_id": 64,
         "document_id": "faq_65",
         "chunk_id": "faq_65_chunk_0",
+        "content": "Question: can i request a product if it is not listed on your website Answer: if a product is not listed on our website it may not be available for purchase we recommend exploring the available products or contacting our customer support team for further assistance",
         "metadata": {
             "document_id": "faq_65",
             "source": "faq_clean.csv",
@@ -783,6 +848,7 @@
         "vector_id": 65,
         "document_id": "faq_66",
         "chunk_id": "faq_66_chunk_0",
+        "content": "Question: can i order a product if it is listed as out of stock but available for backorder Answer: if a product is listed as out of stock but available for backorder you can place an order to secure your item the product will be shipped once it becomes available",
         "metadata": {
             "document_id": "faq_66",
             "source": "faq_clean.csv",
@@ -795,6 +861,7 @@
         "vector_id": 66,
         "document_id": "faq_67",
         "chunk_id": "faq_67_chunk_0",
+        "content": "Question: can i return a product if it was purchased as part of a bundle or set Answer: if a product was purchased as part of a bundle or set the return policy may vary please refer to the specific terms and conditions or contact our customer support team for further guidance",
         "metadata": {
             "document_id": "faq_67",
             "source": "faq_clean.csv",
@@ -807,6 +874,7 @@
         "vector_id": 67,
         "document_id": "faq_68",
         "chunk_id": "faq_68_chunk_0",
+        "content": "Question: can i request a product that is listed as out of stock to be restocked Answer: we aim to restock popular products whenever possible please sign up for product notifications to be alerted when the item becomes available again",
         "metadata": {
             "document_id": "faq_68",
             "source": "faq_clean.csv",
@@ -819,6 +887,7 @@
         "vector_id": 68,
         "document_id": "faq_69",
         "chunk_id": "faq_69_chunk_0",
+        "content": "Question: can i order a product if it is listed as coming soon and available for pre order Answer: if a product is listed as coming soon and available for pre order you can place an order to secure your item before it becomes available",
         "metadata": {
             "document_id": "faq_69",
             "source": "faq_clean.csv",
@@ -831,6 +900,7 @@
         "vector_id": 69,
         "document_id": "faq_70",
         "chunk_id": "faq_70_chunk_0",
+        "content": "Question: can i return a product if it was damaged due to mishandling during shipping Answer: if your product was damaged due to mishandling during shipping please contact our customer support team immediately we will assist you with the necessary steps for return and replacement",
         "metadata": {
             "document_id": "faq_70",
             "source": "faq_clean.csv",
@@ -843,6 +913,7 @@
         "vector_id": 70,
         "document_id": "faq_71",
         "chunk_id": "faq_71_chunk_0",
+        "content": "Question: can i request a product that is listed as out of stock to be reserved for me Answer: we do not offer reservations for out of stock products however you can sign up for product notifications to be alerted when the item becomes available again",
         "metadata": {
             "document_id": "faq_71",
             "source": "faq_clean.csv",
@@ -855,6 +926,7 @@
         "vector_id": 71,
         "document_id": "faq_72",
         "chunk_id": "faq_72_chunk_0",
+        "content": "Question: can i order a product if it is listed as pre order but available for backorder Answer: if a product is listed as pre order and available for backorder you can place an order to secure your item the product will be shipped once it becomes available",
         "metadata": {
             "document_id": "faq_72",
             "source": "faq_clean.csv",
@@ -867,6 +939,7 @@
         "vector_id": 72,
         "document_id": "faq_73",
         "chunk_id": "faq_73_chunk_0",
+        "content": "Question: can i return a product if it was purchased with store credit Answer: yes you can return a product purchased with store credit the refund will be issued in the form of store credit which you can use for future purchases",
         "metadata": {
             "document_id": "faq_73",
             "source": "faq_clean.csv",
@@ -879,6 +952,7 @@
         "vector_id": 73,
         "document_id": "faq_74",
         "chunk_id": "faq_74_chunk_0",
+        "content": "Question: can i request a product that is currently out of stock to be restocked Answer: we strive to restock popular products whenever possible please sign up for product notifications to be informed when the item becomes available again",
         "metadata": {
             "document_id": "faq_74",
             "source": "faq_clean.csv",
@@ -891,6 +965,7 @@
         "vector_id": 74,
         "document_id": "faq_75",
         "chunk_id": "faq_75_chunk_0",
+        "content": "Question: can i order a product if it is listed as sold out but available for pre order Answer: if a product is listed as sold out but available for pre order you can place an order to secure your item the product will be shipped once it becomes available",
         "metadata": {
             "document_id": "faq_75",
             "source": "faq_clean.csv",
@@ -903,6 +978,7 @@
         "vector_id": 75,
         "document_id": "faq_76",
         "chunk_id": "faq_76_chunk_0",
+        "content": "Question: can i return a product if it was purchased with a promotional gift card Answer: yes you can return a product purchased with a promotional gift card the refund will be issued in the form of store credit or a new gift card",
         "metadata": {
             "document_id": "faq_76",
             "source": "faq_clean.csv",
@@ -915,6 +991,7 @@
         "vector_id": 76,
         "document_id": "faq_77",
         "chunk_id": "faq_77_chunk_0",
+        "content": "Question: can i request a product if it is not currently available in my preferred color Answer: if a product is not available in your preferred color it may be temporarily out of stock please check back later or sign up for color notifications",
         "metadata": {
             "document_id": "faq_77",
             "source": "faq_clean.csv",
@@ -927,6 +1004,7 @@
         "vector_id": 77,
         "document_id": "faq_78",
         "chunk_id": "faq_78_chunk_0",
+        "content": "Question: can i order a product if it is listed as coming soon and not available for pre order Answer: if a product is listed as coming soon but not available for pre order you will need to wait until it is officially released and becomes available for purchase",
         "metadata": {
             "document_id": "faq_78",
             "source": "faq_clean.csv",
@@ -939,6 +1017,7 @@
         "vector_id": 78,
         "document_id": "faq_79",
         "chunk_id": "faq_79_chunk_0",
+        "content": "Question: can i return a product if it was purchased during a promotional event Answer: yes you can return a product purchased during a promotional event the refund will be processed based on the amount paid after any applicable discounts",
         "metadata": {
             "document_id": "faq_79",
             "source": "faq_clean.csv",

@@ -23,7 +23,6 @@ class BaseEmbedding(ABC):
         pass
 
 
-
 class SentenceTransformerEmbedding(BaseEmbedding):
 
     def __init__(self, model_name: str):

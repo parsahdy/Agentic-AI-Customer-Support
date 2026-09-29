@@ -13,11 +13,13 @@ from ..document_mapping.document_mapping import DocumentMapping
 class BaseRetriever(ABC):
 
     @abstractmethod
-    def retrive(self, 
-                query: str | None=None,
-                query_embedding: np.ndarray | None=None,
-                documents: list[dict] | None=None,
-                k: int = K) -> list[dict]:
+    def retrive(
+        self, 
+        query: str | None=None,
+        query_embedding: np.ndarray | None=None,
+        documents: list[dict] | None=None,
+        k: int = K
+    ) -> list[dict]:
         """
         Retrive top-k relevent documents.
         """

@@ -1,7 +1,4 @@
 from abc import ABC, abstractmethod
-from pathlib import Path
-
-from ..config import K
 
 import faiss
 import numpy as np
@@ -44,7 +41,6 @@ class QdrantVectorStore(BaseVectorStore):
         raise NotImplementedError(
             "QdrantVectorStore is not implemented yet."
         )
-
 
 
 class ChromaVectorStore(BaseVectorStore):

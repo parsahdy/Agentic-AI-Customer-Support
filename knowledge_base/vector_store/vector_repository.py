@@ -7,8 +7,11 @@ import json
 
 class VectorStoreRepository:
 
-    def __init__(self, index_path: Path | None=None, 
-                 metadata_path: Path | None=None):
+    def __init__(
+        self, 
+        index_path: Path | None=None, 
+        metadata_path: Path | None=None
+    ):
 
         self.index_path = index_path
         self.metadata_path = metadata_path
