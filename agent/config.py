@@ -1,15 +1,19 @@
 
 # LLM
-LLM_MODEL="qwen/qwen3.8-27b:free",
-#"openrouter/free"
-BASE_URL="https://openrouter.ai/api/v1"
+#LLM_MODEL="openrouter/free"
+#BASE_URL="https://openrouter.ai/api/v1"
+#TEMPERATURE=0.3
+
+# Groq Console
+LLM_MODEL="qwen/qwen3.8-27b"
+BASE_URL="https://api.groq.com/openai/v1"
 TEMPERATURE=0.3
 
 # JEV
 JEV_MODEL="typesafe/jev-router"
 
 # Router
-ROUTER_TYPE="jev"
+ROUTER_TYPE="llm"
 
 # Loop
 MAX_ITERATIONS = 5

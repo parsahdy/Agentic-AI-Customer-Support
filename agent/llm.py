@@ -15,11 +15,11 @@ def create_llm() -> ChatOpenAI:
     Create and configure the LLM client.
     """
 
-    api_key = os.getenv("OPENROUTER_API_KEY")
+    api_key = os.getenv("GROQ_API_KEY")
 
     if not api_key:
         raise ValueError(
-            "OPENROUTER_API_KEY is not set."
+            "API_KEY is not set."
         )
 
     return ChatOpenAI(
