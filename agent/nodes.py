@@ -354,6 +354,52 @@ def create_tool_call_node(registry: ToolRegistry):
     return tool_call_node
 
 
+def create_tool_node(executor: ToolExecutor):
+    """
+    Create a tool node with its executor dependency injected.
+    """
+
+    def tool_node(state: AgentState) -> dict:
+        """
+        Execute the tools requested by the LLM.
+        """
+
+        tool_messages = []
+        tool_results = []
+
+        for tool_call in state["tool_calls"]:
+
+            tool_name = tool_call["name"]
+            arguments = tool_call.get("args", {})
+
+            result = executor.execute(
+                tool_name=tool_name,
+                arguments=arguments,
+            )
+
+            tool_results.append({
+                "tool_name": tool_name,
+                "result": result.model_dump(),
+            })
+
+            tool_messages.append(
+                ToolMessage(
+                    content=json.dumps(
+                        result.model_dump(),
+                        ensure_ascii=False,
+                    ),
+                    tool_call_id=tool_call["id"],
+                )
+            )
+
+        return {
+            "messages": tool_messages,
+            "tool_results": tool_results,
+        }
+
+    return tool_node
+
+
 def create_rag_node(
         kb: KnowledgeBaseService,
         retrieval_evaluator: RetrievalEvaluator,
@@ -477,49 +523,3 @@ def human_review_node(state: AgentState) -> dict:
     return {
         "human_decision": decision.model_dump()
     }
-
-
-def create_tool_node(executor: ToolExecutor):
-    """
-    Create a tool node with its executor dependency injected.
-    """
-
-    def tool_node(state: AgentState) -> dict:
-        """
-        Execute the tools requested by the LLM.
-        """
-
-        tool_messages = []
-        tool_results = []
-
-        for tool_call in state["tool_calls"]:
-
-            tool_name = tool_call["name"]
-            arguments = tool_call.get("args", {})
-
-            result = executor.execute(
-                tool_name=tool_name,
-                arguments=arguments,
-            )
-
-            tool_results.append({
-                "tool_name": tool_name,
-                "result": result.model_dump(),
-            })
-
-            tool_messages.append(
-                ToolMessage(
-                    content=json.dumps(
-                        result.model_dump(),
-                        ensure_ascii=False,
-                    ),
-                    tool_call_id=tool_call["id"],
-                )
-            )
-
-        return {
-            "messages": tool_messages,
-            "tool_results": tool_results,
-        }
-
-    return tool_node

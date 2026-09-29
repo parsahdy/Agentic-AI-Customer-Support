@@ -47,7 +47,7 @@ class KeywordRouter(BaseRouter):
 class LLMRouter(BaseRouter):
 
     def __init__(self):
-        self.llm = create_llm().with_structured_output(
+        self.llm = create_llm(max_tokens=64).with_structured_output(
             RouteDecision,
             method="json_schema",
             strict=True,

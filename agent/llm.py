@@ -27,11 +27,15 @@ def create_llm() -> ChatOpenAI:
         api_key=api_key,
         base_url=config.BASE_URL,
         temperature=config.TEMPERATURE,
+        max_tokens=config.MAX_TOKENS,
+        model_kwargs={
+            "reasoning_effort": "none",
+        },
     )
 
 
 def create_tool_llm(registry: ToolRegistry | None = None) -> ChatOpenAI:
 
-    llm = create_llm()
+    llm = create_llm(max_tokens=100)
 
     return llm.bind_tools(registry.get_tools())

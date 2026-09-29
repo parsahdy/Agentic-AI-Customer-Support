@@ -8,6 +8,7 @@
 LLM_MODEL="qwen/qwen3.8-27b"
 BASE_URL="https://api.groq.com/openai/v1"
 TEMPERATURE=0.3
+MAX_TOKENS=512
 
 # JEV
 JEV_MODEL="typesafe/jev-router"
