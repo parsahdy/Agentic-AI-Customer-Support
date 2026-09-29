@@ -101,6 +101,11 @@ def route_after_llm(state: AgentState) -> str:
     route = state.get("route")
 
     if route == "rag":
+        print(
+            "[DEBUG] After LLM | "
+            f"route={state.get('route')!r} | "
+            f"final_answer={state.get('final_answer')!r}"
+        )
         return "evaluation"
 
     if route == "direct":

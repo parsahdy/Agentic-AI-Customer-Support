@@ -8,6 +8,7 @@ from langchain_core.messages import (
     ToolMessage,
     HumanMessage,
     SystemMessage,
+    BaseMessage,
 )
 
 from . import config
@@ -261,18 +262,36 @@ def router_node(state: AgentState) -> dict:
 
 def llm_node(state: AgentState) -> dict:
     """
-    Generate a direct answer using the LLM.
+    Generate an answer using the current conversation,
+    memory, retrieved documents, and tool results.
     """
 
     llm = create_llm()
 
-    messages = list(state["messages"])
+    query = state.get("query")
+
+    conversation_history = list(
+        state.get("messages", [])
+    )
 
     memory_context = state.get(
         "memory_context",
         [],
     )
 
+    retrieved_documents = state.get(
+        "retrieved_documents",
+        [],
+    )
+
+    tool_results = state.get(
+        "tool_results",
+        [],
+    )
+
+    context_parts: list[str] = []
+
+    # Long-term memory
     if memory_context:
 
         memory_lines = []
@@ -292,26 +311,92 @@ def llm_node(state: AgentState) -> dict:
                 f"- {content}"
             )
 
-        memory_message = SystemMessage(
+        context_parts.append(
+            "Relevant long-term memories about the user:\n"
+            + "\n".join(memory_lines)
+        )
+
+
+    # RAG context
+    if retrieved_documents:
+        document_lines = []
+
+        for document in retrieved_documents:
+
+            content = document.get("content", "")
+
+            if content:
+                document_lines.append(
+                    content
+                )
+
+        if document_lines:
+            context_parts.append(
+                "Retrieved knowledge base context:\n"
+                + "\n\n".join(document_lines)
+            )
+
+    # Tool results
+    if tool_results:
+
+        tool_lines = []
+
+        for result in tool_results:
+            tool_lines.append(
+                str(result)
+            )
+
+        context_parts.append(
+            "Results returned by tools:\n"
+            + "\n".join(tool_lines)
+        )
+
+    context_message = None
+
+    if context_parts:
+        context_message = SystemMessage(
             content=(
-                "Relevent long-term memories about the user:\n"
-                + "\n".join(memory_lines)
-                + "\n\n"
-                "use these memories only when they are relevent"
-                "to the current request."
+                "Use the following information when answering "
+                "the user's current request.\n\n"
+                + "\n\n".join(context_parts)
             )
         )
 
-        messages.insert(
-            0,
-            memory_message
+    messages: list[BaseMessage] = []
+
+    if context_message:
+        messages.append(context_message)
+
+    messages.extend(conversation_history)
+
+    if not conversation_history:
+        messages.append(
+            HumanMessage(content=query)
         )
 
+    elif not any(
+        isinstance(message, HumanMessage)
+        and message.content == query
+        for message in conversation_history
+    ):
+        messages.append(
+            HumanMessage(content=query)
+        )
 
-    response = llm.invoke(messages)
+    print("[DEBUG] LLM input messages:", messages)
+
+    response = llm.invoke(
+        messages
+    )
+
+    print("[DEBUG] LLM response:", response)
+    print(
+        "[DEBUG] LLM response content:",
+        response.content,
+    )
 
     return {
-        "messages": [response],
+        "messages": conversation_history + [response],
         "final_answer": response.content,
     }
 
