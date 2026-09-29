@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def create_llm() -> ChatOpenAI:
+def create_llm(max_tokens: int | None=None) -> ChatOpenAI:
     """
     Create and configure the LLM client.
     """
@@ -27,7 +27,7 @@ def create_llm() -> ChatOpenAI:
         api_key=api_key,
         base_url=config.BASE_URL,
         temperature=config.TEMPERATURE,
-        max_tokens=config.MAX_TOKENS,
+        max_tokens=max_tokens if max_tokens else config.MAX_TOKENS,
         model_kwargs={
             "reasoning_effort": "none",
         },
