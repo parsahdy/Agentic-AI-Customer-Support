@@ -48,6 +48,7 @@ class SearchKBInput(BaseModel):
 
 
 class ToolResult(BaseModel):
+    tool_name: str | None = None
     success: bool
     result: dict | None = None
     error: str | None = None
