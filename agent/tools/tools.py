@@ -5,7 +5,6 @@ from .schemas import (
     CancelOrderInput,
     CreateTicketInput,
     CustomerInfoInput,
-    ToolResult,
 )
 
 
@@ -19,10 +18,7 @@ def get_order(order_id: int) -> dict:
         "status": "processing",
     }
 
-    return ToolResult(
-        success=True,
-        result=order,
-    ).model_dump()
+    return order
 
 
 def cancel_order(order_id: int) -> dict:
@@ -30,13 +26,10 @@ def cancel_order(order_id: int) -> dict:
     Cancel an existing order using an order ID.
     """
 
-    return ToolResult(
-        success=True,
-        result={
-            "order_id": order_id,
-            "status": "cancelled",
-        },
-    ).model_dump()
+    return {
+        "order_id": order_id,
+        "status": "cancelled",
+    }
 
 
 def create_ticket(
@@ -49,22 +42,19 @@ def create_ticket(
     """
 
     if not subject.strip():
-        return ToolResult(
-            success=False,
-            error="Ticket subject cannot be empty.",
-        ).model_dump()
+        return {
+            "error": "Ticket subject cannot be empty.",
+        }
 
     if not message.strip():
-        return ToolResult(
-            success=False,
-            error="Ticket message cannot be empty.",
-        ).model_dump()
+        return {
+            "error": "Ticket message cannot be empty.",
+        }
 
     if not priority.strip():
-        return ToolResult(
-            success=False,
-            error="Ticket priority cannot be empty.",
-        ).model_dump()
+        return {
+            "error": "Ticket priority cannot be empty.",
+        }
 
     ticket = {
         "subject": subject.strip(),
@@ -72,10 +62,7 @@ def create_ticket(
         "priority": priority.lower().strip(),
     }
 
-    return ToolResult(
-        success=True,
-        result=ticket,
-    ).model_dump()
+    return ticket
 
 
 def get_customer_info(customer_id: str) -> dict:
@@ -88,10 +75,7 @@ def get_customer_info(customer_id: str) -> dict:
         "name": "Mock Customer",
     }
 
-    return ToolResult(
-        success=True,
-        result=customer,
-    ).model_dump()
+    return customer
 
 
 get_order_tool = StructuredTool.from_function(
