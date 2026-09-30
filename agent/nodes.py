@@ -383,8 +383,6 @@ def llm_node(state: AgentState) -> dict:
             HumanMessage(content=query)
         )
 
-    print("[DEBUG] LLM input messages:", messages)
-
     response = llm.invoke(
         messages
     )
@@ -414,10 +412,7 @@ def create_tool_call_node(registry: ToolRegistry):
         """
 
         messages = list(state["messages"])
-        response = llm.invoke(messages)
-
-        print("[DEBUG] Tool-call LLM response:", response)
-        print("[DEBUG] Tool calls:", getattr(response, "tool_calls", []))   
+        response = llm.invoke(messages)   
 
         tool_calls = getattr(response, "tool_calls", [])
 
@@ -462,15 +457,14 @@ def create_tool_node(executor: ToolExecutor):
                 arguments=arguments,
             )
 
-            tool_results.append({
-                "tool_name": tool_name,
-                "result": result.model_dump(),
-            })
+            tool_results.append(
+                result.model_dump()
+            )
 
             tool_messages.append(
                 ToolMessage(
                     content=json.dumps(
-                        result.model_dump(),
+                        tool_results[-1]["result"],
                         ensure_ascii=False,
                     ),
                     tool_call_id=tool_call["id"],
@@ -492,8 +486,6 @@ def create_rag_node(
     def rag_node(
             state: AgentState,
     ) -> dict:
-        
-        print("[DEBUG] >>> RAG NODE ENTERED")
 
         query = state["query"]
 
@@ -537,8 +529,6 @@ def create_evaluation_node(
             retrieved_contexts=retrieved_documents,
         )
 
-        print("[DEBUG] faithfulness_score:", faithfulness_score)
-
         confidence_score = confidence_evaluator.calculate(
             top1_score=top1_score,
             mean_topk_score=mean_topk_score,
@@ -555,9 +545,12 @@ def create_evaluation_node(
 
 def human_policy_node(state: AgentState) -> dict:
 
-    confidence_score = state.get(
-        "confidence_score"
-    )
+    if state.get("route") == "rag":
+        confidence_score = state.get(
+            "confidence_score"
+        )
+    else:
+        confidence_score = None
 
     operation = None
 
