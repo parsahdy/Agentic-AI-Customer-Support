@@ -37,6 +37,7 @@ class ToolExecutor:
                 result = tool.invoke(arguments)
 
                 return ToolResult(
+                    tool_name=tool_name,
                     success=True,
                     result=result,
                     retry_count=retry_count,
@@ -56,6 +57,7 @@ class ToolExecutor:
                 error_type = ErrorClassifier.classify(exc)
 
                 return ToolResult(
+                    tool_name=tool_name,
                     success=False,
                     error=str(exc),
                     error_type=error_type.value,
