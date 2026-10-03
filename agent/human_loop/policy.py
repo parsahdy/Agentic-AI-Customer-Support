@@ -15,7 +15,10 @@ class HumanPolicy(ABC):
     """
 
     @abstractmethod
-    def should_intervene(self, request: object) -> bool:
+    def should_intervene(
+        self, 
+        request: object
+    ) -> bool:
         """
         Determine whether human intervention is required.
         """
@@ -29,7 +32,10 @@ class LowConfidencePolicy(HumanPolicy):
     the configured threshold.
     """
 
-    def __init__(self, review_threshold: float = 0.6) -> None:
+    def __init__(
+        self,
+        review_threshold: float = 0.6
+    )-> None:
 
         if not 0.0 <= review_threshold <= 1.0:
             raise ValueError(
@@ -39,7 +45,10 @@ class LowConfidencePolicy(HumanPolicy):
         self.review_threshold = review_threshold
 
 
-    def should_intervene(self, request: RAGHumanReviewRequest) -> bool:
+    def should_intervene(
+        self,
+        request: RAGHumanReviewRequest
+    ) -> bool:
 
         if request.confidence_score is None:
             return False
