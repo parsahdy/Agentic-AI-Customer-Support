@@ -4,6 +4,9 @@ import re
 from abc import ABC, abstractmethod
 
 from .models import HumanReviewRequest
+from agent.tools import (
+    cancel_order,
+)
 
 
 
@@ -60,14 +63,30 @@ class SensitiveOperationPolicy(HumanPolicy):
         r"\bchange\b.*\bpayment\b",
     )
 
-    def __init__(self, patterns: tuple[str, ...] | None = None) -> None:
+    SENSITIVE_OPERATIONS = { 
+        "cancel_order", 
+        }
+
+    def __init__(
+        self, 
+        patterns: tuple[str, ...] | None = None,
+        operations: set[str] | None = None,
+    ) -> None:
 
         self.patterns = patterns or self.DEFAULT_PATTERNS
+        self.operations = operations or self.SENSITIVE_OPERATIONS
 
 
-    def should_intervene(self, request: HumanReviewRequest) -> bool:
+    def should_intervene(
+        self, 
+        request: HumanReviewRequest
+    ) -> bool:
 
         content = request.request
+        operation = request.operation
+
+        if operation in self.operations:
+            return True
 
         return any(
             re.search(pattern, content, re.IGNORECASE)
