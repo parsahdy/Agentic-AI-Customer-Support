@@ -82,7 +82,34 @@ def route_after_human_policy(state: AgentState) -> str:
         if state.get("route") == "tool":
             return "tool"
         return "save_memory"
-        
+
+
+def route_after_human_review(state: AgentState) -> str:
+    """
+    Determine the next step after human review.
+    """
+
+    decision = state.get("human_decision")
+
+    if not decision:
+        raise ValueError(
+            "Human decision is required after human review."
+        )
+
+    decision_type = decision.get("decision")
+
+    if decision_type == "approve":
+        if state.get("route") == "tool":
+            return "tool"
+
+        return "save_memory"
+
+    if decision_type in {"reject", "escalate"}:
+        return "save_memory"
+
+    raise ValueError(
+        f"Unsupported human decision: {decision_type!r}"
+    )
 
 
 def build_graph(
@@ -239,9 +266,16 @@ def build_graph(
         },
     )
 
+    graph.add_conditional_edges(
+        "human_review",
+        route_after_human_review,
+        {
+            "tool": "tool",
+            "save_memory": "save_memory",
+        },
+    )
 
     graph.add_edge("save_memory", END)
-    graph.add_edge("human_review", END)
 
     return graph.compile(
         checkpointer=memory.get_checkpointer(),
