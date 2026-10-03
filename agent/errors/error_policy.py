@@ -16,7 +16,6 @@ class ErrorPolicy:
     """
 	
 	def __init__(self) -> None:
-
 		self.error_handler = AgentErrorHandler()
 
 	def policy(

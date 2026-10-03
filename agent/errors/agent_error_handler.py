@@ -9,10 +9,10 @@ class AgentErrorHandler:
     """
 
     def handle(
-            self, 
-            error: Exception,
-            state: AgentState,
-        ) -> dict:
+        self, 
+        error: Exception,
+        state: AgentState,
+    ) -> dict:
         """
         Handle an exception and return a structured agent error.
         """
