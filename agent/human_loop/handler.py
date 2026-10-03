@@ -4,7 +4,11 @@ from typing import Any
 
 from langgraph.types import interrupt
 
-from .models import HumanReviewRequest, HumanDecision
+from .models import (
+    ToolHumanReviewRequest,
+    RAGHumanReviewRequest,
+    HumanDecision,
+)
 
 
 class HumanLoopHandler:
@@ -20,7 +24,10 @@ class HumanLoopHandler:
     - validating the human decision
     """
 
-    def request_human_decision(self, request: HumanReviewRequest) -> HumanDecision:
+    def request_human_decision(
+        self, 
+        request: ToolHumanReviewRequest | RAGHumanReviewRequest,
+    ) -> HumanDecision:
 
         payload = {
             "type": "human_review",
@@ -40,7 +47,7 @@ class HumanLoopHandler:
 
         if not isinstance(decision, dict):
             raise ValueError(
-                "Human Decison must be a dictionary."
+                "Human Decision must be a dictionary."
             )
 
         return HumanDecision.model_validate(decision)
