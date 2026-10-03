@@ -6,6 +6,7 @@ from agent import AgentService
 from agent.errors import ErrorPolicy, RetryPolicy
 from agent.memory import MemoryService
 from agent.tools import ToolRegistry
+from agent.human_loop import HumanDecision
 
 from knowledge_base.kb_service import KnowledgeBaseService
 from evaluation import RetrievalEvaluator, ConfidenceEvaluator
@@ -116,7 +117,7 @@ class AgentWorkflowTest(unittest.TestCase):
         
 
 
-    def test_human_review_workflow(self):
+    def test_human_review_reject_workflow(self):
 
         # Arrange
         agent = AgentService(
@@ -125,22 +126,101 @@ class AgentWorkflowTest(unittest.TestCase):
             retry_policy=self.retry_policy,
         )
 
-        # Act
-        result = agent.run(
+        # Act - start workflow
+        result_run = agent.run(
             query="I want my order with id 1234 to be canceled.",
             user_id="user-6",
             session_id="session-6",
         )
 
+        decision = { 
+            "decision": "reject", 
+            "comment": "Cancellation was rejected by the human operator.",
+        }
+
+        # Act - resume workflow
+        result = agent.resume(
+            decision=decision,
+            user_id="user-6",
+            session_id="session-6",
+        )
+
         # Assert
-        self.assertEqual(result["route"], "tool")
-        self.assertTrue(result["human_review_required"])
-        self.assertIsNotNone(result["human_review_request"])
-        self.assertIsNotNone(result["human_decision"])
+        self.assertEqual(result_run["route"], "tool")
+        self.assertTrue(result_run["human_review_required"])
+        self.assertIsNotNone(result_run["human_review_request"])
+        self.assertEqual(result["human_decision"], "reject")
+        self.assertEqual( 
+            result["human_decision"]["decision"], 
+            "reject", 
+        )
         self.assertEqual(
             result["human_review_request"]["operation"],
             "cancel_order",
         )
+        self.assertFalse(result["tool_results"])
+
+
+    def test_human_review_approve_workflow(self):
+    
+            # Arrange
+            agent = AgentService(
+                memory=self.memory,
+                error_policy=self.error_policy,
+                retry_policy=self.retry_policy,
+            )
+    
+            # Act - start workflow
+            result_run = agent.run(
+                query="I want my order with id 1234 to be canceled.",
+                user_id="user-6",
+                session_id="session-6",
+            )
+
+            decision = { 
+                "decision": "approve",
+                "comment": "Cancellation approved by the human operator.",
+            }
+
+            # Act - resume workflow 
+            result = agent.resume(
+                decision=decision,
+                user_id="user-6",
+                session_id="session-6",
+            )
+
+
+            # Assert
+            self.assertEqual(result_run["route"], "tool")
+            self.assertTrue(result_run["human_review_required"])
+            self.assertIsNotNone(result_run["human_review_request"])
+            self.assertEqual(result["human_decision"], "approve")
+            self.assertEqual(
+                result["human_decision"]["decision"],
+                "approve",
+            )
+            self.assertEqual(
+                result["human_review_request"]["operation"],
+                "cancel_order",
+            )
+            self.assertEqual(
+                result["tool_calls"][0]["name"],
+                "cancel_order",
+            ) 
+            self.assertTrue(result["tool_results"]) 
+
+            tool_result = result["tool_results"][0] 
+            
+            self.assertTrue(tool_result["success"]) 
+            self.assertEqual( 
+                tool_result["result"]["order_id"],
+                1234,
+            ) 
+            self.assertEqual( 
+                tool_result["result"]["status"],
+                "processing",
+            ) 
+            self.assertTrue(result["final_answer"])
 
 
 if __name__ == "__main__":

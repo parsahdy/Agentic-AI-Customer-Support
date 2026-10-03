@@ -41,9 +41,7 @@ from evaluation import (
 
 router = RouterFactory.create(config.ROUTER_TYPE)
 
-rag_human_policy = LowConfidencePolicy(
-    review_threshold=config.RAG_REVIEW_THRESHOLD
-)
+rag_human_policy = LowConfidencePolicy()
 tool_human_policy = SensitiveOperationPolicy()
 human_loop_handler = HumanLoopHandler()
 confidence_evaluator = ConfidenceEvaluator()
