@@ -9,7 +9,7 @@ class GetOrderInput(BaseModel):
 
 
 class CancelOrderInput(BaseModel):
-    oredr_id: int = Field(
+    order_id: int = Field(
         ...,
         description="The ID of the order to cancel."
     )

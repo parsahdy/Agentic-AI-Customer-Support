@@ -60,7 +60,7 @@ class ToolExecutor:
                     tool_name=tool_name,
                     success=False,
                     error=str(exc),
-                    error_type=error_type.value,
+                    error_type=error_type["error_type"].value,
                     retry_count=retry_count,
                 )
 
