@@ -12,6 +12,8 @@ from evaluation import (
     ConfidenceEvaluator,
 )
 
+from langgraph.types import Command
+
 from openai import OpenAI
 from dotenv import load_dotenv
 from agent import config
@@ -164,6 +166,42 @@ class AgentService:
             initial_state,
             config=config,
         )
+
+
+    def resume(
+        self,
+        decision: dict,
+        user_id: str,
+        session_id: str,
+    ):
+        """
+        Resume a paused workflow with a human decision.
+        """
+
+        if decision is None:
+            raise ValueError(
+                "Decision is required for resuming agent workflow."
+            )
+
+        if not user_id:
+            raise ValueError("user_d is required.")
+
+        if not session_id:
+            raise ValueError("session_id is required.")
+
+        thread_id = f"{user_id}:{session_id}"
+
+        config = {
+            "configurable": {
+                "thread_id": thread_id,
+            }
+        }
+
+        return self.graph.invoke(
+            Command(resume=decision),
+            config=config,
+        )
+
 
     def close(self) -> None:
 
