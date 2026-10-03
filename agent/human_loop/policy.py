@@ -3,11 +3,10 @@ from __future__ import annotations
 import re
 from abc import ABC, abstractmethod
 
-from .models import HumanReviewRequest
-from agent.tools import (
-    cancel_order,
+from .models import (
+    ToolHumanReviewRequest,
+    RAGHumanReviewRequest,
 )
-
 
 
 class HumanPolicy(ABC):
@@ -16,9 +15,9 @@ class HumanPolicy(ABC):
     """
 
     @abstractmethod
-    def should_intervene(self, request: HumanReviewRequest) -> bool:
+    def should_intervene(self, request: object) -> bool:
         """
-        Base strategy for deciding whether human intervention is required.
+        Determine whether human intervention is required.
         """
 
         raise NotImplementedError
@@ -30,7 +29,7 @@ class LowConfidencePolicy(HumanPolicy):
     the configured threshold.
     """
 
-    def __init__(self, review_threshold = 0.6) -> None:
+    def __init__(self, review_threshold: float = 0.6) -> None:
 
         if not 0.0 <= review_threshold <= 1.0:
             raise ValueError(
@@ -40,18 +39,17 @@ class LowConfidencePolicy(HumanPolicy):
         self.review_threshold = review_threshold
 
 
-    def should_intervene(self, request: HumanReviewRequest) -> bool:
+    def should_intervene(self, request: RAGHumanReviewRequest) -> bool:
 
         if request.confidence_score is None:
-            return 
+            return False
 
         return request.confidence_score < self.review_threshold
 
 
 class SensitiveOperationPolicy(HumanPolicy):
     """
-    Requests human intervention when confidence is below
-    the configured threshold.
+    Requests human intervention for sensitive tool operations.
     """
  
     DEFAULT_PATTERNS = (
@@ -73,13 +71,21 @@ class SensitiveOperationPolicy(HumanPolicy):
         operations: set[str] | None = None,
     ) -> None:
 
-        self.patterns = patterns or self.DEFAULT_PATTERNS
-        self.operations = operations or self.SENSITIVE_OPERATIONS
+        self.patterns = (
+            patterns
+            if patterns is not None
+            else self.DEFAULT_PATTERNS
+        )
+        self.operations = (
+            operations
+            if operations is not None
+            else self.SENSITIVE_OPERATIONS
+        )
 
 
     def should_intervene(
         self, 
-        request: HumanReviewRequest
+        request: ToolHumanReviewRequest
     ) -> bool:
 
         content = request.request
@@ -92,27 +98,3 @@ class SensitiveOperationPolicy(HumanPolicy):
             re.search(pattern, content, re.IGNORECASE)
             for pattern in self.patterns
         )
-
-
-class CompositeHumanPolicy(HumanPolicy):
-    """
-    Requests human intervention for sensitive operations.
-    """
-
-    def __init__(self, policies: list[HumanPolicy]) -> None:
-
-        if not policies:
-            raise ValueError(
-                "At least one human policy is required."
-            )
-
-        self.policies = policies
-
-
-    def should_intervene(self, request: HumanReviewRequest) -> bool:
-
-        return any(
-            policy.should_intervene(request)
-            for policy in self.policies
-        )
-        
