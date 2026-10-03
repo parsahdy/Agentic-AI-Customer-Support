@@ -22,9 +22,11 @@ from .errors.retry_policy import RetryPolicy
 from .errors.error_policy import ErrorPolicy, RecoveryAction
 
 from .human_loop.handler import HumanLoopHandler
-from .human_loop.models import HumanReviewRequest
+from .human_loop.models import (
+    ToolHumanReviewRequest,
+    RAGHumanReviewRequest,
+)
 from .human_loop.policy import (
-    CompositeHumanPolicy,
     LowConfidencePolicy,
     SensitiveOperationPolicy,
 )
@@ -36,18 +38,13 @@ from evaluation import (
     ConfidenceEvaluator,
 )
 
-from langgraph.errors import GraphInterrupt
-
 
 router = RouterFactory.create(config.ROUTER_TYPE)
 
-human_policy = CompositeHumanPolicy(
-    policies = [
-        LowConfidencePolicy(),
-        SensitiveOperationPolicy(),
-    ]
+rag_human_policy = LowConfidencePolicy(
+    review_threshold=config.RAG_REVIEW_THRESHOLD
 )
-
+tool_human_policy = SensitiveOperationPolicy()
 human_loop_handler = HumanLoopHandler()
 confidence_evaluator = ConfidenceEvaluator()
 
@@ -541,19 +538,26 @@ def human_policy_node(state: AgentState) -> dict:
     route = state.get("route")
 
     if route == "rag":
-        request = HumanReviewRequest(
+        request = RAGHumanReviewRequest(
             request=state["query"],
             reason=(
-                "Human intervention evaluation - "
-                "Low confidence score."
+                "Human intervention required because "
+                "the RAG confidence score is below the "
+                "configured threshold."
             ),
             confidence_score=state.get(
                 "confidence_score"
             ),
-            operation=None,
+            retrieved_documents=state.get(
+                "retrieved_documents",
+                [],
+            ),
+            generated_answer=state.get(
+                "final_answer"
+            ),  
         )
 
-        should_intervene = human_policy.should_intervene(
+        should_intervene = rag_human_policy.should_intervene(
             request
         )
 
@@ -576,19 +580,20 @@ def human_policy_node(state: AgentState) -> dict:
         for tool_call in tool_calls:
 
             operation = tool_call.get("name")
+            arguments = tool_call.get("args", {})
 
-            request = HumanReviewRequest(
+            request = ToolHumanReviewRequest(
                 request=state["query"],
                 reason=(
-                    "Human intervention evaluation - "
-                    "Sensitive operation."
+                    "Human intervention required because "
+                    "the requested tool operation is sensitive."
                 ),
-                confidence_score=None,
                 operation=operation,
+                arguments=arguments,
             )
 
             should_intervene = (
-                human_policy.should_intervene(
+                tool_human_policy.should_intervene(
                     request
                 )
             )
@@ -613,6 +618,12 @@ def human_policy_node(state: AgentState) -> dict:
 
 
 def human_review_node(state: AgentState) -> dict:
+    """
+    Interrupt the workflow and request human intervention.
+
+    When the workflow is resumed through LangGraph,
+    the interrupt call returns the human decision.
+    """
 
     if not state.get("human_review_required"):
         return {}
@@ -624,9 +635,22 @@ def human_review_node(state: AgentState) -> dict:
             "Human review request is required."
         )
 
-    request = HumanReviewRequest.model_validate(
-        review_data
-    )
+    route = state.get("route")
+
+    if route == "rag":
+        request = RAGHumanReviewRequest.model_validate(
+            review_data
+        )
+
+    elif route == "tool":
+        request = ToolHumanReviewRequest.model_validate(
+            review_data
+        )
+
+    else:
+        raise ValueError(
+            f"Unsupported route for human review: {route!r}"
+        )
 
     decision = human_loop_handler.request_human_decision(
         request
