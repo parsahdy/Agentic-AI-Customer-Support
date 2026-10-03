@@ -25,43 +25,7 @@ The agent can:
 
 The current workflow is based on LangGraph:
 
-```text
-                    ┌─────────────┐
-                    │    START    │
-                    └──────┬──────┘
-                           │
-                    ┌──────▼──────┐
-                    │ Load Memory │
-                    └──────┬──────┘
-                           │
-                    ┌──────▼──────┐
-                    │    Router   │
-                    └──────┬──────┘
-                           │
-          ┌────────────────┼────────────────┐
-          │                │                │
-        direct            rag              tool
-          │                │                │
-          ▼                ▼                ▼
-         LLM              RAG          Tool Call
-          │                │                │
-          │                ▼                ▼
-          │               LLM        Human Policy
-          │                │          │         │
-          │                ▼        review      tool
-          │           Evaluation      │         │
-          │                │          │         ▼
-          │                ▼          │        LLM
-          │         Human Policy      │         │
-          │                │          │         │
-          └────────────────┴──────────┴─────────┘
-                           │
-                    ┌──────▼──────┐
-                    │ Save Memory │
-                    └──────┬──────┘
-                           │
-                          END
-```
+![Agentic AI Customer Support Architecture](docs/Untitled - Visual 1.svg)
 
 ### Routes
 
