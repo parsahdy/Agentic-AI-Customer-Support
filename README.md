@@ -25,7 +25,7 @@ The agent can:
 
 The current workflow is based on LangGraph:
 
-![Agentic AI Customer Support Architecture](docs/Untitled - Visual 1.svg)
+![Agentic AI Customer Support Architecture](docs/images/agent-architecture.svg)
 
 ### Routes
 
