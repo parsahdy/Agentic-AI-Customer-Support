@@ -32,25 +32,7 @@ from evaluation import (
 def route_after_router(state: AgentState) -> str:
     """
     Determine the next step after the router node.
-
-    Normal execution is routed according to the route selected
-    by the router.
-
-    Failed execution is routed through the failure policy
-    instead of requiring a route.
     """
-
-    error = state.get("error")
-
-    if error is not None:
-        recovery_action = error.get(
-            "recovery_action"
-        )
-
-        if recovery_action == "human_review":
-            return "human_review"
-
-        return "save_memory"
 
     route = state.get("route")
 
@@ -70,48 +52,22 @@ def route_after_router(state: AgentState) -> str:
     return route
 
 
-def route_after_tool_call(state: AgentState) -> str:
-    """
-    Determine the next step after the tool call node.
-    """
-
-    if state.get("human_review_required"):
-        return "human_review"
-
-    return "tool"
-
-
 def route_after_llm(state: AgentState) -> str:
     """
     Determine the next step after the LLM node.
     """
 
-    error = state.get("error")
-
-    if error is not None:
-        recovery_action = error.get(
-            "recovery_action"
-        )
-
-        if recovery_action == "human_review":
-            return "human_review"
-
-        return "save_memory"
-
     route = state.get("route")
 
     if route == "rag":
-        print(
-            "[DEBUG] After LLM | "
-            f"route={state.get('route')!r} | "
-            f"final_answer={state.get('final_answer')!r}"
-        )
         return "evaluation"
 
-    if route == "direct":
+    if route in {"direct", "tool"}:
         return "save_memory"
 
-    return "human_policy"
+    raise ValueError(
+        f"Unsupported route after LLM: {route!r}"
+    )
 
 
 def route_after_human_policy(state: AgentState) -> str:
@@ -119,22 +75,14 @@ def route_after_human_policy(state: AgentState) -> str:
     Determine whether human review is required.
     """
 
-    error = state.get("error")
-    
-    if error is not None:
-        recovery_action = error.get(
-            "recovery_action"
-        )
-
-        if recovery_action == "human_review":
-            return "human_review"
-
-        return "save_memory"
-
     if state.get("human_review_required"):
         return "human_review"
 
-    return "save_memory"
+    else:
+        if state.get("route") == "tool":
+            return "tool"
+        return "save_memory"
+        
 
 
 def build_graph(
@@ -263,21 +211,21 @@ def build_graph(
             "direct": "llm",
             "rag": "rag",
             "tool": "tool_call",
-            "human_review": "human_review",
-            "save_memory": "save_memory",
         },
     )
 
     graph.add_edge("rag", "llm")
-    graph.add_edge("evaluation", 'save_memory')
+    graph.add_edge("evaluation", "human_policy")
+    graph.add_edge("tool_call", "human_policy")
 
     graph.add_conditional_edges(
-        "tool_call",
-        route_after_tool_call,
+        "human_policy",
+        route_after_human_policy,
         {
-            "tool": "tool",
             "human_review": "human_review",
-        }
+            "tool": "tool",
+            "save_memory": "save_memory",
+        },
     )
     
     graph.add_edge("tool", "llm")
@@ -288,19 +236,9 @@ def build_graph(
         {
             "evaluation": "evaluation",
             "save_memory": "save_memory",
-            "human_review": "human_review",
-            "human_policy": "human_policy",
         },
     )
 
-    graph.add_conditional_edges(
-        "human_policy",
-        route_after_human_policy,
-        {
-            "human_review": "human_review",
-            "save_memory": "save_memory",
-        },
-    )
 
     graph.add_edge("save_memory", END)
     graph.add_edge("human_review", END)

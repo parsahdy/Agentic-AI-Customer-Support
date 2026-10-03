@@ -69,11 +69,6 @@ def wrap_node(
         while True:
             try:
                 return node(state)
-
-            except GraphInterrupt:
-                raise InterruptedError(
-                    "Agent workflow Interrupted."
-                )
             
             except Exception as exc:
                 print(
@@ -387,12 +382,6 @@ def llm_node(state: AgentState) -> dict:
         messages
     )
 
-    print("[DEBUG] LLM response:", response)
-    print(
-        "[DEBUG] LLM response content:",
-        response.content,
-    )
-
     return {
         "messages": conversation_history + [response],
         "final_answer": response.content,
@@ -412,23 +401,25 @@ def create_tool_call_node(registry: ToolRegistry):
         """
 
         messages = list(state["messages"])
-        response = llm.invoke(messages)   
+        response = llm.invoke(messages) 
 
         tool_calls = getattr(response, "tool_calls", [])
+
+        print("[DEBUG] Tool Calls:", tool_calls)
 
         if not tool_calls:
             return {
                 "messages": [response],
                 "tool_calls": [],
-                "human_review_required": True,
-                "human_review_request": {
-                    "reason": "no proper tool found"
-                }
+                "final_answer": (
+                    "Sorry, I cannot complete this request right now."
+                ),  
             }
 
         return {
             "messages": [response],
             "tool_calls": tool_calls,
+            "final_answer": response.content,
         }
 
     return tool_call_node
@@ -491,8 +482,6 @@ def create_rag_node(
 
         retrieveds = kb.search(query)
 
-        print("[DEBUG] retrieveds:", retrieveds)
-
         top1_score = retrieveds["top1_score"]
         mean_topk_score = retrieveds["mean_topk_score"]
         retrieval_score = retrieval_evaluator.evaluate(
@@ -544,37 +533,82 @@ def create_evaluation_node(
 
 
 def human_policy_node(state: AgentState) -> dict:
+    """
+    Decide whether human intervention is required
+    based on current workflow route.
+    """
 
-    if state.get("route") == "rag":
-        confidence_score = state.get(
-            "confidence_score"
+    route = state.get("route")
+
+    if route == "rag":
+        request = HumanReviewRequest(
+            request=state["query"],
+            reason=(
+                "Human intervention evaluation - "
+                "Low confidence score."
+            ),
+            confidence_score=state.get(
+                "confidence_score"
+            ),
+            operation=None,
         )
-    else:
-        confidence_score = None
 
-    operation = None
+        should_intervene = human_policy.should_intervene(
+            request
+        )
 
-    if state.get("tool_calls"):
-        operation = state["tool_calls"][0].get("name")
+        return {
+            "human_review_required": should_intervene,
+            "human_review_request": (
+                request.model_dump()
+                if should_intervene
+                else None
+            ),
+        }
 
-    request = HumanReviewRequest(
-        request=state["query"],
-        reason="Human intervention evaluation.",
-        confidence_score=confidence_score,
-        operation=operation,
-    )
+    elif route == "tool":
 
-    should_intervene = human_policy.should_intervene(
-        request
-    )
+        tool_calls = state.get(
+            "tool_calls",
+            []
+        )
+
+        for tool_call in tool_calls:
+
+            operation = tool_call.get("name")
+
+            request = HumanReviewRequest(
+                request=state["query"],
+                reason=(
+                    "Human intervention evaluation - "
+                    "Sensitive operation."
+                ),
+                confidence_score=None,
+                operation=operation,
+            )
+
+            should_intervene = (
+                human_policy.should_intervene(
+                    request
+                )
+            )
+
+            if should_intervene:
+                return {
+                    "human_review_required": True,
+                    "human_review_request": (
+                        request.model_dump()
+                    ),
+                }
+
+        return {
+            "human_review_required": False,
+            "human_review_request": None,
+        }
 
     return {
-        "human_review_required": should_intervene,
-        "human_review_request": (
-            request.model_dump()
-            if should_intervene
-            else None
-        ),
+        "human_review_required": False,
+        "human_review_request": None,
     }
 
 
