@@ -228,6 +228,22 @@ agent/
    Human Review
 
 
+نابراین پیشنهاد من این است که برای Sprint 3.11 همین‌جا HITL infrastructure را ببندیم، ولی اتصال واقعی:
+
+RAG
+ ↓
+Retrieval Evaluation
+ ↓
+LLM
+ ↓
+Faithfulness
+ ↓
+Confidence
+ ↓
+Human Policy
+
+را در Sprint مربوط به RAG/Agent integration کامل کنیم
+
 
 ## Sprint 3.12 — Guardrails
 
@@ -305,32 +321,15 @@ Observability را صرفاً با print() انجام نمی‌دهیم. ابز�
 
 ## Architecture
 
-User Request
-      ↓
-Agent
-      ↓
-KB Search
-      ↓
-Documents + retrieval_score
-      ↓
-Retrieval Gate
-      │
-      ├── score پایین
-      │       ↓
-      │   Stop / No relevant documents
-      │
-      └── score مناسب
-              ↓
-             LLM
-              ↓
-           Answer
-              ↓
-      Groundedness / Faithfulness
-              ↓
-       confidence_score
-              ↓
-       Human Policy Node
-          ↙          ↘
-       False          True
-         ↓              ↓
-     Return Answer   Human Review
+router
+  │
+  ├── direct ──→ LLM ──→ save_memory ──→ END
+  │
+  ├── rag ──→ RAG ──→ LLM ──→ human_policy
+  │                                      │
+  │                                      ├── human_review ──→ END
+  │                                      │
+  │                                      └── save_memory ──→ END
+  │
+  └── tool ──→ tool_call ──→ tool ──→ LLM ──→ human_policy
+  
