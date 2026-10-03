@@ -1,7 +1,10 @@
 from .handler import HumanLoopHandler
-from .models import HumanDecision, HumanReviewRequest
+from .models import (
+    HumanDecision,
+    ToolHumanReviewRequest,
+    RAGHumanReviewRequest,
+)
 from .policy import (
-    CompositeHumanPolicy,
     HumanPolicy,
     LowConfidencePolicy,
     SensitiveOperationPolicy,
