@@ -14,7 +14,7 @@ from evaluation import (
 
 from langgraph.types import Command
 
-from openai import OpenAI
+from openai import AsyncOpenAI
 from dotenv import load_dotenv
 from agent import config
 
@@ -66,8 +66,8 @@ class AgentService:
             faithfulness_evaluator
             if faithfulness_evaluator is not None
             else FaithfulnessEvaluator(
-                client=OpenAI(
-                    api_key=os.getenv("OPENROUTER_API_KEY"),
+                client=AsyncOpenAI(
+                    api_key=os.getenv("GROQ_API_KEY"),
                     base_url=config.BASE_URL,
                 ),
                 model=config.LLM_MODEL,

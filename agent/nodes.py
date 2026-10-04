@@ -38,6 +38,8 @@ from evaluation import (
     ConfidenceEvaluator,
 )
 
+from langgraph.errors import GraphInterrupt
+
 
 router = RouterFactory.create(config.ROUTER_TYPE)
 
@@ -48,11 +50,11 @@ confidence_evaluator = ConfidenceEvaluator()
 
 
 def wrap_node(
-        node: Callable[[AgentState], dict],
-        node_name: str,
-        error_policy: ErrorPolicy,
-        retry_policy: RetryPolicy,
-        ) -> Callable[[AgentState], dict]:
+    node: Callable[[AgentState], dict],
+    node_name: str,
+    error_policy: ErrorPolicy,
+    retry_policy: RetryPolicy,
+) -> Callable[[AgentState], dict]:
     
     def wrapped(state: AgentState) -> dict:
 
@@ -64,6 +66,13 @@ def wrap_node(
         while True:
             try:
                 return node(state)
+
+            except GraphInterrupt as interrupt:
+                print(
+                    f"[INTERRUPT] Node '{node_name}' interrupted: "
+                    f"{type(interrupt).__name__}: {interrupt}"
+                )
+                raise
             
             except Exception as exc:
                 print(
@@ -466,9 +475,9 @@ def create_tool_node(executor: ToolExecutor):
 
 
 def create_rag_node(
-        kb: KnowledgeBaseService,
-        retrieval_evaluator: RetrievalEvaluator,
-    ):
+    kb: KnowledgeBaseService,
+    retrieval_evaluator: RetrievalEvaluator,
+):
     def rag_node(
             state: AgentState,
     ) -> dict:
@@ -507,10 +516,15 @@ def create_evaluation_node(
         top1_score = state.get("top1_score")
         mean_topk_score = state.get("mean_topk_score")
 
+        retrieved_contexts = [
+            document["content"]
+            for document in retrieved_documents
+        ]
+
         faithfulness_score = faithfulness_evaluator.evaluate(
             query=query,
             answer=final_answer,
-            retrieved_contexts=retrieved_documents,
+            retrieved_contexts=retrieved_contexts,
         )
 
         confidence_score = confidence_evaluator.calculate(

@@ -10,7 +10,11 @@ from ragas.llms import llm_factory
 
 class FaithfulnessEvaluator:
 
-    def __init__(self, client: Any, model: str) -> None:
+    def __init__(
+        self, 
+        client: Any, 
+        model: str
+    ) -> None:
         llm = llm_factory(
             model=model,
             provider="openai",
@@ -27,7 +31,6 @@ class FaithfulnessEvaluator:
         retrieved_contexts: list[str]
     ) -> float:
 
-        
         result = asyncio.run(
             self.scorer.ascore(
                 user_input=query,
