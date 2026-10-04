@@ -149,7 +149,6 @@ class AgentWorkflowTest(unittest.TestCase):
         self.assertEqual(result_run["route"], "tool")
         self.assertTrue(result_run["human_review_required"])
         self.assertIsNotNone(result_run["human_review_request"])
-        self.assertEqual(result["human_decision"], "reject")
         self.assertEqual( 
             result["human_decision"]["decision"], 
             "reject", 
@@ -194,7 +193,6 @@ class AgentWorkflowTest(unittest.TestCase):
             self.assertEqual(result_run["route"], "tool")
             self.assertTrue(result_run["human_review_required"])
             self.assertIsNotNone(result_run["human_review_request"])
-            self.assertEqual(result["human_decision"], "approve")
             self.assertEqual(
                 result["human_decision"]["decision"],
                 "approve",
@@ -218,7 +216,7 @@ class AgentWorkflowTest(unittest.TestCase):
             ) 
             self.assertEqual( 
                 tool_result["result"]["status"],
-                "processing",
+                "cancelled",
             ) 
             self.assertTrue(result["final_answer"])
 

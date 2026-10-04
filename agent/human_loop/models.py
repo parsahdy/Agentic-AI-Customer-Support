@@ -60,7 +60,7 @@ class RAGHumanReviewRequest(BaseModel):
         description="Confidence score that triggered human review.",
     )
 
-    retrieved_documents: list[str] = Field(
+    retrieved_documents: list[dict] = Field(
         ...,
         min_length=1,
         description="List of documents retrieved for the request.",
