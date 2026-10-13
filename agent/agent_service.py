@@ -1,5 +1,10 @@
 import os
 
+from dotenv import load_dotenv
+from langgraph.types import Command
+from openai import AsyncOpenAI
+
+from . import config
 from .graph import build_graph
 from .memory.memory_service import MemoryService
 from .tools.registry import ToolRegistry
@@ -7,19 +12,33 @@ from .errors import RetryPolicy, ErrorPolicy
 
 from knowledge_base.kb_service import KnowledgeBaseService
 from evaluation import (
-    RetrievalEvaluator,
-    FaithfulnessEvaluator,
-    ConfidenceEvaluator,
+RetrievalEvaluator,
+FaithfulnessEvaluator,
+ConfidenceEvaluator,
 )
-
-from langgraph.types import Command
-
-from openai import AsyncOpenAI
-from dotenv import load_dotenv
-from agent import config
+from guardrails import (
+InputGuardrail,
+RequiredInputRule,
+MaxInputLengthRule,
+ControlCharacterRule,
+)
 
 load_dotenv()
 
+
+class InputGuardrailError(ValueError):
+    """
+    Raised when a user query fails input validation.
+    """
+
+    def __init__(self, result):
+        self.result = result
+        messages = "; ".join(
+            violation.message
+            for violation in result.violations
+        )
+        
+        super().__init__(messages or "Input validation failed.")
 
 
 class AgentService:
@@ -34,6 +53,7 @@ class AgentService:
         confidence_evaluator: ConfidenceEvaluator | None = None,
         retry_policy: RetryPolicy | None = None,
         error_policy: ErrorPolicy | None = None,
+        input_guardrail: InputGuardrail | None = None,
     ):
 
         self.memory = (
@@ -92,6 +112,18 @@ class AgentService:
             else ErrorPolicy()
         )
 
+        self.input_guardrail = (
+            input_guardrail
+            if input_guardrail is not None
+            else InputGuardrail(
+                rules=[
+                    RequiredInputRule(),
+                    MaxInputLengthRule(max_length=10_000),
+                    ControlCharacterRule(),
+                ]
+            )
+        )
+
         self.graph = build_graph(
             memory=self.memory,
             registry=self.registry,
@@ -103,6 +135,7 @@ class AgentService:
             error_policy=self.error_policy,
         )
 
+
     def run(
         self,
         query: str,
@@ -110,17 +143,19 @@ class AgentService:
         session_id: str,
     ):
         """
-        Run the agent with a user query.
+        Validate a query and run the agent workflow.
         """
 
-        if not query or not query.strip():
-            raise ValueError("Query cannot be empty.")
-
-        if not user_id:
+        if not isinstance(user_id, str) or not user_id.strip():
             raise ValueError("user_id is required.")
-
-        if not session_id:
+        
+        if not isinstance(session_id, str) or not session_id.strip():
             raise ValueError("session_id is required.")
+        
+        result = self.input_guardrail.validate(query)
+
+        if not result.allowed:
+            raise InputGuardrailError(result)
 
         initial_state = {
             "messages": [
