@@ -1,4 +1,4 @@
-from input_guardrail import (
+from .input_guardrail import (
     GuardrailDecision,
     GuardrailResult,
     GuardrailViolation,

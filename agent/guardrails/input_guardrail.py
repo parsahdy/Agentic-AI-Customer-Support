@@ -98,7 +98,7 @@ class InputGuardrail:
                 )
             )
 
-        violations = list[GuardrailViolation] = []
+        violations: list[GuardrailViolation] = []
 
         try:
             for rule in self.rules:
