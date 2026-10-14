@@ -1,4 +1,5 @@
 import re
+from dataclasses import dataclass
 from typing import Callable, Protocol
 
 from agent import config
