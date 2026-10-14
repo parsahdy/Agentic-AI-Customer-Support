@@ -93,7 +93,7 @@ class TestInputGuardrail(unittest.TestCase):
 
 
     def test_block_input_exceeding_max_length(self):
-        query = "a" * 10_001
+        query = "a" * 2300
 
         with self.assertRaises(InputGuardrailError):
             self.agent.run(
