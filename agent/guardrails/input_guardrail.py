@@ -49,8 +49,14 @@ class MaxInputLengthRule:
         self, 
         max_input_length: int = config.MAX_INPUT_LENGTH
     ) -> None:
-        if max_input_length <= 0:
-            raise ValueError("max_length must be greater than zero.")
+        if (
+            not isinstance(max_input_length, int)
+            or isinstance(max_input_length, bool)
+            or max_input_length <= 0
+        ):
+            raise ValueError(
+                "max_input_length must be a positive integer."
+            )
 
         self.max_length = max_input_length
 
