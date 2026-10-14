@@ -45,11 +45,14 @@ class RequiredInputRule:
 
 
 class MaxInputLengthRule:
-    def __init__(self, max_input_length: int) -> None:
+    def __init__(
+        self, 
+        max_input_length: int = config.MAX_INPUT_LENGTH
+    ) -> None:
         if max_input_length <= 0:
             raise ValueError("max_length must be greater than zero.")
 
-        self.max_length = config.MAX_INPUT_LENGTH
+        self.max_length = max_input_length
 
     def check(self, query: str) -> GuardrailViolation | None:
         if len(query) > self.max_length:
