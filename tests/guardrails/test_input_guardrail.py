@@ -13,6 +13,8 @@ from agent.errors.retry_policy import RetryPolicy
 from agent.errors.error_policy import ErrorPolicy
 from knowledge_base.kb_service import KnowledgeBaseService
 
+from agent.config import MAX_INPUT_LENGTH
+
 
 class TestInputGuardrail(unittest.TestCase):
 
@@ -93,7 +95,7 @@ class TestInputGuardrail(unittest.TestCase):
 
 
     def test_block_input_exceeding_max_length(self):
-        query = "a" * 2300
+        query = "a" * (MAX_INPUT_LENGTH + 1)
 
         with self.assertRaises(InputGuardrailError):
             self.agent.run(
