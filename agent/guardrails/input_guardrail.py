@@ -3,6 +3,8 @@ from enum import Enum
 from typing import Protocol
 import unicodedata
 
+from agent import config
+
 
 class GuardrailDecision(str, Enum):
     ALLOW = "allow"
@@ -43,11 +45,11 @@ class RequiredInputRule:
 
 
 class MaxInputLengthRule:
-    def __init__(self, max_length: int) -> None:
-        if max_length <= 0:
+    def __init__(self, max_input_length: int) -> None:
+        if max_input_length <= 0:
             raise ValueError("max_length must be greater than zero.")
 
-        self.max_length = max_length
+        self.max_length = config.MAX_INPUT_LENGTH
 
     def check(self, query: str) -> GuardrailViolation | None:
         if len(query) > self.max_length:
