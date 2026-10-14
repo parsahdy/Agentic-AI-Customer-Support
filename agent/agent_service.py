@@ -11,9 +11,13 @@ from .tools.registry import ToolRegistry
 from .errors import RetryPolicy, ErrorPolicy
 from .guardrails import (
     InputGuardrail,
+    OutputGuardrail,
     RequiredInputRule,
+    RequiredOutputRule,
     MaxInputLengthRule,
+    MaxOutputLengthRule,
     ControlCharacterRule,
+    SensitiveDataRule,
 )
 
 from knowledge_base.kb_service import KnowledgeBaseService
@@ -42,6 +46,21 @@ class InputGuardrailError(ValueError):
         super().__init__(messages or "Input validation failed.")
 
 
+class OutputGuardrailError(ValueError):
+    """
+    Raised when the agent output fails validation.
+    """
+
+    def __init__(self, result):
+        self.result = result
+        messages = "; ".join(
+            violation.message
+            for violation in result.violations
+        )
+
+        super().__init__(messages or "Output validation failed.")
+
+
 class AgentService:
 
     def __init__(
@@ -55,6 +74,7 @@ class AgentService:
         retry_policy: RetryPolicy | None = None,
         error_policy: ErrorPolicy | None = None,
         input_guardrail: InputGuardrail | None = None,
+        output_guardrail: OutputGuardrail | None = None,
     ):
 
         self.memory = (
@@ -119,8 +139,20 @@ class AgentService:
             else InputGuardrail(
                 rules=[
                     RequiredInputRule(),
-                    MaxInputLengthRule(max_length=10_000),
+                    MaxInputLengthRule(),
                     ControlCharacterRule(),
+                ]
+            )
+        )
+
+        self.output_guardrail = (
+            output_guardrail
+            if output_guardrail is not None
+            else OutputGuardrail(
+                rules=[
+                    RequiredOutputRule(),
+                    MaxOutputLengthRule(),
+                    SensitiveDataRule(),
                 ]
             )
         )
@@ -144,7 +176,7 @@ class AgentService:
         session_id: str,
     ):
         """
-        Validate a query and run the agent workflow.
+        Validate the input, run the agent, and validate its output.
         """
 
         if not isinstance(user_id, str) or not user_id.strip():
@@ -153,10 +185,15 @@ class AgentService:
         if not isinstance(session_id, str) or not session_id.strip():
             raise ValueError("session_id is required.")
         
-        result = self.input_guardrail.validate(query)
+        input_result = self.input_guardrail.validate(query)
 
-        if not result.allowed:
-            raise InputGuardrailError(result)
+        if input_result.decision.value == "error":
+            raise RuntimeError(
+                "Input validation could not be completed."
+            )
+
+        if not input_result.allowed:
+            raise InputGuardrailError(input_result)
 
         initial_state = {
             "messages": [
@@ -192,16 +229,35 @@ class AgentService:
 
         thread_id = f"{user_id}:{session_id}"
 
-        config = {
+        graph_config = {
             "configurable": {
                 "thread_id": thread_id,
             }
         }
 
-        return self.graph.invoke(
+        output = self.graph.invoke(
             initial_state,
             config=config,
         )
+
+        if not isinstance(output, dict):
+            raise OutputGuardrailError(
+                self.output_guardrail.validate(output)
+            )
+
+        output_result = self.output_guardrail.validate(
+            output.get("final_answer")
+        )
+
+        if output_result.decision.value == "error":
+            raise RuntimeError(
+                "Output validation could not be completed."
+            )
+
+        if not output_result.allowed:
+            raise OutputGuardrailError(output_result)
+
+        return output
 
 
     def resume(
@@ -219,10 +275,10 @@ class AgentService:
                 "Decision is required for resuming agent workflow."
             )
 
-        if not user_id:
-            raise ValueError("user_d is required.")
-
-        if not session_id:
+        if not isinstance(user_id, str) or not user_id.strip(): 
+            raise ValueError("user_id is required.") 
+        
+        if not isinstance(session_id, str) or not session_id.strip(): 
             raise ValueError("session_id is required.")
 
         thread_id = f"{user_id}:{session_id}"
@@ -233,10 +289,29 @@ class AgentService:
             }
         }
 
-        return self.graph.invoke(
+        output = self.graph.invoke(
             Command(resume=decision),
             config=config,
         )
+
+        if not isinstance(output, dict):
+            raise OutputGuardrailError(
+                self.output_guardrail.validate(output)
+            )
+
+        output_result = self.output_guardrail.validate(
+            output.get("final_answer")
+        )
+
+        if output_result.decision.value == "error":
+            raise RuntimeError(
+                "Output validation could not be completed."
+            )
+
+        if not output_result.allowed:
+            raise OutputGuardrailError(output_result)
+
+        return output
 
 
     def close(self) -> None:
