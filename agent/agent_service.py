@@ -27,7 +27,6 @@ FaithfulnessEvaluator,
 ConfidenceEvaluator,
 )
 
-
 load_dotenv()
 
 
@@ -229,7 +228,7 @@ class AgentService:
 
         thread_id = f"{user_id}:{session_id}"
 
-        graph_config = {
+        config = {
             "configurable": {
                 "thread_id": thread_id,
             }
