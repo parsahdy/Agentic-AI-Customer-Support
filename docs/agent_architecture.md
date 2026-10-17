@@ -254,33 +254,15 @@ Human Policy
     بعد از Agent
 
 
-## Sprint 3.13 — Agent Routing & Specialized Agents
 
-                     Triage Agent
-                      │
-        ┌─────────────┼─────────────┐
-        ▼             ▼             ▼
-   Support Agent  Order Agent   Billing Agent
-
-    Learning
-    -agent routing
-    -sub-agents
-    -delegation
-    -handoff
-    -supervisor pattern
+of
 
 
-## Sprint 3.14 — Agent Observability
-ینجا باید بفهمیم Agent دقیقاً چه کاری انجام داده.
-
-Observability را صرفاً با print() انجام نمی‌دهیم. ابزارهای مدرن Agent tracing می‌توانند model generation، tool calls، guardrails و lifecycle را trace کنند
-
-
-## Sprint 3.15 — Agent Evaluation
+## Sprint 3.14 — Agent Evaluation
 هم تست‌های deterministic برای orchestration خواهیم داشت و هم evaluationهای model-based؛ ابزارهای Agent مدرن هم برای workflowهای agentic ابزارهای testing/evaluation ارائه می‌کنند
 
 
-## Sprint 3.16 — Agent Security
+## Sprint 3.15 — Agent Security
 
     -Prompt Injection
     -Tool Injection
@@ -290,14 +272,14 @@ Observability را صرفاً با print() انجام نمی‌دهیم. ابز�
     -Sensitive Information
 
 
-## Sprint 3.17 — Structured Output
+## Sprint 3.16 — Structured Output
 
 
-## Sprint 3.18 — Streaming
+## Sprint 3.17 — Streaming
 و API بتواند eventهای Agent را stream کند.
 
 
-## Sprint 3.19 — Production Agent Service
+## Sprint 3.18 — Production Agent Service
 
     FastAPI
     │
