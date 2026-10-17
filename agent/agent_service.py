@@ -88,12 +88,6 @@ class AgentService:
             else ToolRegistry()
         )
 
-        #self.kb = (
-        #    kb
-        #    if kb is not None
-        #    else KnowledgeBaseService()
-        #)
-
         self.kb = kb
 
         self.retrieval_evaluator = (
