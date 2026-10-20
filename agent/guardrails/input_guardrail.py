@@ -1,7 +1,7 @@
 from typing import Protocol
 import unicodedata
 
-from agent import config
+from .. import config
 
 from .schemas import (
     GuardrailResult,

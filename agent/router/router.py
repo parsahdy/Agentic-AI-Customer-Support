@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from agent import config
+from .. import config
 from ..llm import create_llm
 from ..state import AgentState, Route
 from .intent_detector import RouteDecision

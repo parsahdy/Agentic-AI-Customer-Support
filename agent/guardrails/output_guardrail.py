@@ -2,7 +2,7 @@ import re
 from dataclasses import dataclass
 from typing import Callable, Protocol
 
-from agent import config
+from .. import config
 
 from .schemas import (
     GuardrailViolation,

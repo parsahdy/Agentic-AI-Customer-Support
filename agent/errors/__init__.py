@@ -6,6 +6,7 @@ from .exceptions import (
             AuthorizationError,
             AgentMemoryError,
             InvalidOrderIdError,
+            KnowledgeBaseError,
             PermanentError,
             PermanentToolError,
             PermanentAgentError,
@@ -35,7 +36,7 @@ __all__ = [
 "AgentError",
 "AuthenticationError",
 "AuthorizationError",
-"AgentErrorHandler"
+"AgentErrorHandler",
 "AgentMemoryError",
 "ErrorClassifier",
 "ErrorType",

@@ -34,6 +34,7 @@ __all__ = [
 "CreateTicketInput",
 "CustomerInfoInput",
 "SearchKBInput",
+"ToolRegistry",
 "get_order",
 "cancel_order",
 "create_ticket",
@@ -43,7 +44,6 @@ __all__ = [
 "create_ticket_tool",
 "customer_info_tool",
 "search_knowledge_base",
-"customer_info_tool",
 "SearchKBTool",
 "ToolExecutor",
 ]

@@ -13,9 +13,9 @@ from .policy import (
 __all__ = [
     "HumanLoopHandler",
     "HumanDecision",
-    "HumanReviewRequest",
+    "ToolHumanReviewRequest",
+    "RAGHumanReviewRequest",
     "HumanPolicy",
     "LowConfidencePolicy",
     "SensitiveOperationPolicy",
-    "CompositeHumanPolicy",
 ]
