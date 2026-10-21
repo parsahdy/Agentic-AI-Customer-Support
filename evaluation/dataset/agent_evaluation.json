@@ -1,0 +1,245 @@
+[
+  {
+    "id": "direct_001",
+    "category": "direct",
+    "input": {
+      "query": "What is the difference between a refund and a return?"
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_answer_question": true,
+      "must_not_invent_company_policy": true
+    }
+  },
+  {
+    "id": "direct_002",
+    "category": "direct",
+    "input": {
+      "query": "Rewrite this message politely: Where is my package?"
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_preserve_user_intent": true,
+      "must_not_call_unnecessary_tools": true
+    }
+  },
+  {
+    "id": "direct_003",
+    "category": "direct",
+    "input": {
+      "query": "I am frustrated because I have waited a long time."
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_acknowledge_concern": true,
+      "must_not_claim_action_completed": true
+    }
+  },
+  {
+    "id": "rag_001",
+    "category": "rag",
+    "input": {
+      "query": "What is the company's return policy?",
+      "simulation": {
+        "retrieval_fixture": "sufficient_return_policy",
+        "retrieval_scores": {
+          "top1_score": 0.95,
+          "mean_topk_score": 0.90
+        },
+        "faithfulness_score": 0.95,
+        "confidence_score": 0.90
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_answer_from_retrieved_context": true,
+      "must_not_invent_policy_details": true
+    }
+  },
+  {
+    "id": "rag_002",
+    "category": "rag",
+    "input": {
+      "query": "What is the return policy for a product not covered by the knowledge base?",
+      "simulation": {
+        "retrieval_fixture": "no_relevant_document",
+        "retrieval_scores": {
+          "top1_score": 0.10,
+          "mean_topk_score": 0.08
+        },
+        "faithfulness_score": 0.90,
+        "confidence_score": 0.30
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": true
+    },
+    "expected_outcome": {
+      "must_indicate_insufficient_evidence": true,
+      "must_not_invent_policy_details": true
+    }
+  },
+  {
+    "id": "rag_003",
+    "category": "rag",
+    "input": {
+      "query": "Two documents give different return windows. Which one is correct?",
+      "simulation": {
+        "retrieval_fixture": "conflicting_policy_documents",
+        "retrieval_scores": {
+          "top1_score": 0.90,
+          "mean_topk_score": 0.85
+        },
+        "faithfulness_score": 0.90,
+        "confidence_score": 0.40
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": true
+    },
+    "expected_outcome": {
+      "must_identify_conflicting_evidence": true,
+      "must_not_choose_without_basis": true
+    }
+  },
+  {
+    "id": "tool_001",
+    "category": "tool",
+    "input": {
+      "query": "Check the status of order 12345."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "get_order"
+      ],
+      "expected_executed_tools": [
+        "get_order"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_not_invent_order_status": true
+    }
+  },
+  {
+    "id": "tool_002",
+    "category": "tool",
+    "input": {
+      "query": "Create a support ticket because my device will not turn on."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "create_ticket"
+      ],
+      "expected_executed_tools": [
+        "create_ticket"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_not_claim_ticket_created_without_confirmation": true
+    }
+  },
+  {
+    "id": "tool_003",
+    "category": "tool",
+    "input": {
+      "query": "Find the current status of order 99887."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "get_order"
+      ],
+      "expected_executed_tools": [
+        "get_order"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_answer_from_order_result": true
+    }
+  },
+  {
+    "id": "human_review_001",
+    "category": "human_review",
+    "input": {
+      "query": "Cancel order 24680."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  },
+  {
+    "id": "human_review_002",
+    "category": "human_review",
+    "input": {
+      "query": "Please cancel order 77701."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  }
+]
