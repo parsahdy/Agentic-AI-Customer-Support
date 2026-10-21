@@ -138,12 +138,10 @@ class KnowledgeBaseService:
         return retrieveds
 
 
-
 def kb_pipeline() -> dict:
 
     kb = KnowledgeBaseService()
     return kb.build()
-
 
 
 if __name__ == "__main__":
