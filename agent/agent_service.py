@@ -210,14 +210,15 @@ class AgentService:
             "iteration": 0,
             "max_iteration": 5,
             "final_answer": "",
+            "status": "running",
             "error": None,
             "error_policy": "",
             "metadata": {},
             "route": None,
             "memory_context": [],
             "human_review_required": False,
-            "human_review_request": {},
-            "human_decision": {},
+            "human_review_request": None,
+            "human_decision": None,
         }
 
         thread_id = f"{user_id}:{session_id}"
@@ -233,13 +234,25 @@ class AgentService:
             config=config,
         )
 
+        snapshot = self.graph.get_state(config)
+
+        is_interrupted = any(
+            task.interrupts
+            for task in snapshot.tasks
+        )
+
+        if is_interrupted:
+            output["status"] = "human_review"
+            output["human_review_required"] = True
+            return output
+
         if not isinstance(output, dict):
             raise OutputGuardrailError(
                 self.output_guardrail.validate(output)
             )
 
         output_result = self.output_guardrail.validate(
-            output.get("final_answer")
+            output.get("final_answer", "")
         )
 
         if output_result.decision.value == "error":

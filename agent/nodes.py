@@ -479,7 +479,7 @@ def create_rag_node(
     retrieval_evaluator: RetrievalEvaluator,
 ):
     def rag_node(
-            state: AgentState,
+        state: AgentState,
     ) -> dict:
 
         query = state["query"]
