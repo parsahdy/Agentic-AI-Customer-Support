@@ -26,6 +26,7 @@ class AgentState(TypedDict):
     query: str
 
     retrieved_documents: list[dict]
+    retrieval_performed: bool
 
     retrieval_score: float | None
     top1_score: float | None

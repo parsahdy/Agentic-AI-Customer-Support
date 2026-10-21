@@ -200,6 +200,7 @@ class AgentService:
             "query": query,
             "current_node": "",
             "retrieved_documents": [],
+            "retrieval_performed": False,
             "retrieval_score": 0.0,
             "top1_score": 0.0,
             "mean_topk_score": 0.0,

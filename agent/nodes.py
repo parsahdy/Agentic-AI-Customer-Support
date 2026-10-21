@@ -494,6 +494,7 @@ def create_rag_node(
         )
 
         return {
+            "retrieval_performed": True,
             "retrieved_documents": retrieveds["retrieval_documents"],
             "top1_score": top1_score,
             "mean_topk_score": mean_topk_score,
