@@ -404,6 +404,19 @@ def create_tool_call_node(registry: ToolRegistry):
         Generate tool calls for the current user request.
         """
 
+        if state.get("route") != "tool":
+            return {
+                "tool_calls": [],
+                "status": "fail",
+                "error": {
+                    "type": "InvalidRouteError",
+                    "message": (
+                        "Tool call node was invoked without "
+                        "the 'tool' route."
+                    ),
+                },
+            }
+
         messages = list(state["messages"])
         response = llm.invoke(messages) 
 
@@ -415,15 +428,20 @@ def create_tool_call_node(registry: ToolRegistry):
             return {
                 "messages": [response],
                 "tool_calls": [],
-                "final_answer": (
-                    "Sorry, I cannot complete this request right now."
-                ),  
+                "status": "fail",
+                "error": {
+                    "type": "ToolCallGenerationError",
+                    "message": (
+                        "The LLM did not generate any tool calls."
+                    ),
+                },
             }
 
         return {
             "messages": [response],
             "tool_calls": tool_calls,
-            "final_answer": response.content,
+            "status": "running",
+            "error": None,
         }
 
     return tool_call_node
