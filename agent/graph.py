@@ -1,5 +1,5 @@
 from langgraph.graph import END, START, StateGraph
-
+ 
 from .memory.memory_service import MemoryService
 from .nodes import (
     wrap_node,
@@ -19,7 +19,7 @@ from .tools.executor import ToolExecutor
 from .tools.registry import ToolRegistry
 from .errors.retry_policy import RetryPolicy
 from .errors.error_policy import ErrorPolicy
-
+ 
 from knowledge_base.kb_service import KnowledgeBaseService
 from evaluation import (
     RetrievalEvaluator, 
@@ -29,26 +29,47 @@ from evaluation import (
 
 
 
+def has_failed(state: AgentState) -> bool:
+    """
+    True when a previous node stored an error (failure or an
+    error-recovery request for human review).
+    """
+
+    return (
+        state.get("error") is not None
+        and state.get("status") in {"fail", "human_review"}
+    )
+
+
+def continue_unless_failed(next_node: str):
+    """
+    Build a router for a plain edge: go to `next_node`, or straight to
+    `save_memory` when the previous node failed.
+    """
+ 
+    def route(state: AgentState) -> str:
+        return "save_memory" if has_failed(state) else next_node
+ 
+    return route
+
+
 def route_after_router(state: AgentState) -> str:
     """
     Determine the next step after the router node.
     """
-
+ 
+    if has_failed(state):
+        return "save_memory"
+ 
     route = state.get("route")
-
+ 
     print(f"[DEBUG] State route after router: {route!r}")
-
+ 
     if route is None:
         raise ValueError(
             "Route is required after router node."
         )
-
-    print(
-        f"[DEBUG] route_after_router | "
-        f"error={state.get('error')!r} | "
-        f"route={state.get('route')!r}"
-    )
-
+ 
     return route
 
 
@@ -56,15 +77,18 @@ def route_after_llm(state: AgentState) -> str:
     """
     Determine the next step after the LLM node.
     """
-
+ 
+    if has_failed(state):
+        return "save_memory"
+ 
     route = state.get("route")
-
+ 
     if route == "rag":
         return "evaluation"
-
+ 
     if route in {"direct", "tool"}:
         return "save_memory"
-
+ 
     raise ValueError(
         f"Unsupported route after LLM: {route!r}"
     )
@@ -74,10 +98,13 @@ def route_after_human_policy(state: AgentState) -> str:
     """
     Determine whether human review is required.
     """
-
+ 
+    if has_failed(state):
+        return "save_memory"
+ 
     if state.get("human_review_required"):
         return "human_review"
-
+ 
     else:
         if state.get("route") == "tool":
             return "tool"
@@ -88,25 +115,27 @@ def route_after_human_review(state: AgentState) -> str:
     """
     Determine the next step after human review.
     """
-
+ 
+    if has_failed(state):
+        return "save_memory"
+ 
     decision = state.get("human_decision")
-
+ 
     if not decision:
         raise ValueError(
             "Human decision is required after human review."
         )
-
+ 
     decision_type = decision.get("decision")
-
+ 
     if decision_type == "approve":
         if state.get("route") == "tool":
             return "tool"
-
         return "save_memory"
-
+ 
     if decision_type in {"reject", "escalate"}:
         return "save_memory"
-
+ 
     raise ValueError(
         f"Unsupported human decision: {decision_type!r}"
     )
@@ -131,15 +160,15 @@ def build_graph(
         kb=kb,
         retrieval_evaluator=retrieval_evaluator,
     )
-
+ 
     load_memory_node = Memory_loader(memory=memory)
     save_memory_node = Memory_saver(memory=memory)
-
+ 
     evaluation_node = create_evaluation_node(
         faithfulness_evaluator=faithfulness_evaluator,
         confidence_evaluator=confidence_evaluator,
     ) 
-
+ 
     graph = StateGraph(AgentState)
 
     graph.add_node(
@@ -189,7 +218,12 @@ def build_graph(
     )
     graph.add_node(
         "tool",
-        tool_node
+        wrap_node(
+            node = tool_node,
+            node_name = "tool",
+            error_policy = error_policy,
+            retry_policy = retry_policy,
+        ),
     )
     graph.add_node(
         "human_policy",
@@ -229,7 +263,15 @@ def build_graph(
     )
 
     graph.add_edge(START, "load_memory")
-    graph.add_edge("load_memory", "router")
+
+    graph.add_conditional_edges(
+        "load_memory",
+        continue_unless_failed("router"),
+        {
+            "router": "router",
+            "save_memory": "save_memory",
+        },
+    )
 
     graph.add_conditional_edges(
         "router",
@@ -238,12 +280,36 @@ def build_graph(
             "direct": "llm",
             "rag": "rag",
             "tool": "tool_call",
+            "save_memory": "save_memory",
         },
     )
 
-    graph.add_edge("rag", "llm")
-    graph.add_edge("evaluation", "human_policy")
-    graph.add_edge("tool_call", "human_policy")
+    graph.add_conditional_edges(
+        "rag",
+        continue_unless_failed("llm"),
+        {
+            "llm": "llm",
+            "save_memory": "save_memory",
+        },
+    )
+
+    graph.add_conditional_edges(
+        "evaluation",
+        continue_unless_failed("human_policy"),
+        {
+            "human_policy": "human_policy",
+            "save_memory": "save_memory",
+        },
+    )
+
+    graph.add_conditional_edges(
+        "tool_call",
+        continue_unless_failed("human_policy"),
+        {
+            "human_policy": "human_policy",
+            "save_memory": "save_memory",
+        },
+    )
 
     graph.add_conditional_edges(
         "human_policy",
@@ -254,8 +320,15 @@ def build_graph(
             "save_memory": "save_memory",
         },
     )
-    
-    graph.add_edge("tool", "llm")
+
+    graph.add_conditional_edges(
+        "tool",
+        continue_unless_failed("llm"),
+        {
+            "llm": "llm",
+            "save_memory": "save_memory",
+        },
+    )
 
     graph.add_conditional_edges(
         "llm",
@@ -276,7 +349,7 @@ def build_graph(
     )
 
     graph.add_edge("save_memory", END)
-
+ 
     return graph.compile(
         checkpointer=memory.get_checkpointer(),
         store=memory.get_store(),
