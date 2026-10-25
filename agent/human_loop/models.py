@@ -34,6 +34,14 @@ class ToolHumanReviewRequest(BaseModel):
         description="Arguments associated with the request.",
     )
 
+    sensitive_operations: list[dict] = Field(
+        default_factory=list,
+        description=(
+            "All sensitive tool calls found in the request, "
+            "each as {'name': ..., 'arguments': ...}."
+        ),
+    )
+
 
 class RAGHumanReviewRequest(BaseModel):
     """
@@ -56,13 +64,12 @@ class RAGHumanReviewRequest(BaseModel):
     confidence_score: float | None = Field(
         default=None,
         ge=0.0,
-        lt=1.0,
+        le=1.0,
         description="Confidence score that triggered human review.",
     )
 
     retrieved_documents: list[dict] = Field(
-        ...,
-        min_length=1,
+        default_factory=list,
         description="List of documents retrieved for the request.",
     )
 
