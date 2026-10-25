@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
-
+ 
 from .. import config
 from ..llm import create_llm
+from ..prompts import router_prompt
 from ..state import AgentState, Route
 from .intent_detector import RouteDecision
 from .intent_detector import KeywordIntentClassifier
-
+ 
 from typing import cast
 from typesafe_sdk import Choice, TypeSafeClient
 
@@ -58,20 +59,15 @@ class LLMRouter(BaseRouter):
 
         query = state["query"]
 
-        decision: RouteDecision = self.llm.invoke(
-            f"""
-            Classify the user's query into exactly one route.
-
-            Routes:
-            - rag: questions that can be answered using the knowledge base
-            - tool: requests that require an external tool or action
-            - direct: general conversation or questions that need neither RAG nor tools
-
-            User query:
-            {query}
-            """
+        decision: RouteDecision | None = self.llm.invoke(
+            router_prompt(query)
         )
-
+        
+        if decision is None:
+            raise ValueError(
+                "The router LLM returned no structured decision."
+            )
+ 
         return decision.route
 
 
@@ -79,13 +75,13 @@ class JevRouter(BaseRouter):
     """
     Route requests using JEV with an LLMRouter as fallback.
     """
-
+ 
     def __init__(
         self,
         confidence_threshold: float = 0.60,
         fallback_router: BaseRouter | None = None,
     ) -> None:
-
+ 
         self.client = TypeSafeClient(model=config.JEV_MODEL)
         self.confidence_threshold = confidence_threshold
         self.fall_back_router = (
@@ -93,12 +89,12 @@ class JevRouter(BaseRouter):
             if fallback_router is not None
             else LLMRouter()
         )
-
-
+ 
+ 
     def route(self, state: AgentState) -> Route:
-
+ 
         query = state["query"]
-
+ 
         result = self.client.system_one(
         state={
             "user_query": query,
@@ -111,7 +107,7 @@ class JevRouter(BaseRouter):
                 "get_order",
                 "cancel_order",
                 "create_ticket",
-                "customer_info",
+                "get_customer_info",
             ],
         },
         questions={
@@ -128,7 +124,7 @@ class JevRouter(BaseRouter):
                     "tool": (
                         "The request needs an external action or external/current "
                         "data through a tool, API, database, get_order, cancel_order, "
-                        "create_ticket, customer_info, or similar capability."
+                        "create_ticket, get_customer_info, or similar capability."
                     ),
                     "direct": (
                         "General conversation or a question that can be answered "
@@ -138,15 +134,15 @@ class JevRouter(BaseRouter):
             )
         },
     )
-
+ 
         answer = result.choices["route"]
-
+ 
         if answer.confidence < self.confidence_threshold:
-            return self.fallback_router.route(state)  
-
+            return self.fall_back_router.route(state)
+ 
         return cast(Route, answer.choice)
-
-
+ 
+ 
     def close(self) -> None:
         self.client.close()
     
