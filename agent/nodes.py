@@ -5,7 +5,7 @@ import time
 from typing import Callable
 
 from langchain_core.messages import (
-    ToolMessage,
+    AIMessage,
     HumanMessage,
     SystemMessage,
     BaseMessage,
@@ -14,12 +14,15 @@ from langchain_core.messages import (
 from . import config
 from .llm import create_llm, create_tool_llm
 from .state import AgentState
+from .prompts import build_system_prompt, tool_call_system_prompt
+from .output_formatter import clean_answer
 from .router.router_factory import RouterFactory
 from .tools.executor import ToolExecutor
 from .tools.registry import ToolRegistry
 from .memory.memory_service import MemoryService
 from .errors.retry_policy import RetryPolicy
 from .errors.error_policy import ErrorPolicy, RecoveryAction
+from .errors.error_classifier import ErrorClassifier, ErrorType
 
 from .human_loop.handler import HumanLoopHandler
 from .human_loop.models import (
@@ -42,6 +45,7 @@ from langgraph.errors import GraphInterrupt
 
 
 router = RouterFactory.create(config.ROUTER_TYPE)
+fallback_router = RouterFactory.create("keyword")
 
 rag_human_policy = LowConfidencePolicy()
 tool_human_policy = SensitiveOperationPolicy()
@@ -58,14 +62,17 @@ def wrap_node(
     
     def wrapped(state: AgentState) -> dict:
 
-        state["current_node"] = node_name
-        state["status"] = "running"
-
         retry_count = 0
 
         while True:
             try:
-                return node(state)
+                result = node(state) or {}
+
+                return {
+                    "current_node": node_name,
+                    "status": "running",
+                    **result,
+                }
 
             except GraphInterrupt as interrupt:
                 print(
@@ -85,12 +92,13 @@ def wrap_node(
                 )
 
                 if action == RecoveryAction.RETRY:
-                    if retry_count > retry_policy.max_retries:
+                    if retry_count >= retry_policy.max_retries:
                         print(
                             f"[ERROR] Node '{node_name}'"
                             f"reached maximum retry attempts."
                         )
                         return {
+                            "current_node": node_name,
                             "status": "fail",
                             "error": {
                                 "type": type(exc).__name__,
@@ -112,6 +120,7 @@ def wrap_node(
 
                 if action == RecoveryAction.HUMAN_REVIEW:
                     return {
+                        "current_node": node_name,
                         "status": "human_review",
                         "error": {
                             "type": type(exc).__name__,
@@ -125,6 +134,7 @@ def wrap_node(
                     }
 
                 return {
+                    "current_node": node_name,
                     "status": "fail",
                     "error": {
                         "type": type(exc).__name__,
@@ -186,14 +196,31 @@ def Memory_loader(memory: MemoryService):
     return load_memory_node
 
 
+def _final_status(state: AgentState) -> str:
+    """
+    Final status of a finished run.
+    """
+
+    status = state.get("status")
+
+    if status in {"fail", "human_review"} and state.get("error"):
+        return status
+
+    decision = state.get("human_decision") or {}
+
+    if decision.get("decision") == "escalate":
+        return "human_review"
+
+    return "success"
+
+
 def Memory_saver(memory: MemoryService):
     def save_memory_node(state: AgentState) -> dict:
 
+        final_status = _final_status(state)
+
         user_id = state["user_id"]
         messages = state.get("messages", [])
-
-        if not messages: 
-            return {}
 
         latest_user_message = None
 
@@ -203,7 +230,7 @@ def Memory_saver(memory: MemoryService):
                 break
 
         if latest_user_message is None:
-            return {}
+            return {"status": final_status}
 
         content = latest_user_message.content.strip()
 
@@ -220,15 +247,17 @@ def Memory_saver(memory: MemoryService):
         )
 
         if not should_save:
-            return {}
+            return {"status": final_status}
 
-        memory_text = re.sub(r"^\s*(remember that|remember|don't forget|keep in mind)\s*",
-                            "", 
-                            content, 
-                            flags=re.IGNORECASE, ).strip()
+        memory_text = re.sub(
+            r"^\s*(remember that|remember|don't forget|keep in mind)\s*",
+            "", 
+            content, 
+            flags=re.IGNORECASE,
+        ).strip()
 
         if not memory_text:
-            return {}
+            return {"status": final_status}
 
         key = "user_preference"
 
@@ -240,7 +269,7 @@ def Memory_saver(memory: MemoryService):
             }
         )
 
-        return {}
+        return {"status": final_status}
 
     return save_memory_node
 
@@ -248,15 +277,61 @@ def Memory_saver(memory: MemoryService):
 def router_node(state: AgentState) -> dict:
     """
     Determine the route for the current query.
+
+    Transient errors (rate limit, timeout...) are re-raised so that the
+    retry logic of wrap_node can handle them. For any other failure of the
+    main router (for example an invalid structured output) the keyword
+    router is used, so the graph never reaches the conditional edge
+    without a route.
     """
 
-    route = router.route(state)
+    try:
+        route = router.route(state)
+
+    except Exception as exc:
+        classified = ErrorClassifier.classify(exc)
+
+        if classified["error_type"] == ErrorType.TRANSIENT:
+            raise
+
+        print(
+            f"[WARNING] Main router failed "
+            f"({type(exc).__name__}: {exc}). "
+            f"Using the keyword router as fallback."
+        )
+
+        route = None
+
+    if route not in {"rag", "tool", "direct"}:
+        route = fallback_router.route(state)
 
     print(f"[DEBUG] Router returned: {route!r}")
 
     return {
         "route": route,
     }
+
+
+def _conversation_history(state: AgentState) -> list[BaseMessage]:
+    """
+    Plain user / assistant turns of the conversation.
+
+    Tool calls and tool results are NOT part of the history. They travel
+    through state["tool_calls"] / state["tool_results"] and are given to
+    the LLM as context, so the history never contains a dangling tool call
+    (e.g. after a human reviewer rejected the operation).
+    """
+
+    return [
+        message
+        for message in state.get("messages", [])
+        if isinstance(message, HumanMessage)
+        or (
+            isinstance(message, AIMessage)
+            and not message.tool_calls
+            and message.content
+        )
+    ]
 
 
 def llm_node(state: AgentState) -> dict:
@@ -268,10 +343,9 @@ def llm_node(state: AgentState) -> dict:
     llm = create_llm()
 
     query = state.get("query")
+    route = state.get("route")
 
-    conversation_history = list(
-        state.get("messages", [])
-    )
+    conversation_history = _conversation_history(state)
 
     memory_context = state.get(
         "memory_context",
@@ -317,63 +391,58 @@ def llm_node(state: AgentState) -> dict:
 
 
     # RAG context
-    if retrieved_documents:
-        document_lines = []
-
-        for document in retrieved_documents:
-
-            content = document.get("content", "")
-
-            if content:
-                document_lines.append(
-                    content
-                )
+    if route == "rag":
+        document_lines = [
+            document.get("content", "")
+            for document in retrieved_documents
+            if document.get("content")
+        ]
 
         if document_lines:
             context_parts.append(
                 "Retrieved knowledge base context:\n"
-                + "\n\n".join(document_lines)
+                + "\n\n".join(
+                    f"[Document {index}]\n{content}"
+                    for index, content in enumerate(
+                        document_lines, start=1
+                    )
+                )
+            )
+        else:
+            context_parts.append(
+                "Retrieved knowledge base context:\n"
+                "(no relevant documents were retrieved)"
             )
 
     # Tool results
     if tool_results:
 
-        tool_lines = []
-
-        for result in tool_results:
-            tool_lines.append(
-                str(result)
-            )
+        tool_lines = [
+            json.dumps(result, ensure_ascii=False, default=str)
+            for result in tool_results
+        ]
 
         context_parts.append(
             "Results returned by tools:\n"
             + "\n".join(tool_lines)
         )
 
-    context_message = None
+    system_prompt = build_system_prompt(route)
 
     if context_parts:
-        context_message = SystemMessage(
-            content=(
-                "Use the following information when answering "
-                "the user's current request.\n\n"
-                + "\n\n".join(context_parts)
-            )
+        system_prompt += (
+            "\n\nUse the following information when answering "
+            "the user's current request.\n\n"
+            + "\n\n".join(context_parts)
         )
 
-    messages: list[BaseMessage] = []
-
-    if context_message:
-        messages.append(context_message)
+    messages: list[BaseMessage] = [
+        SystemMessage(content=system_prompt)
+    ]
 
     messages.extend(conversation_history)
 
-    if not conversation_history:
-        messages.append(
-            HumanMessage(content=query)
-        )
-
-    elif not any(
+    if not any(
         isinstance(message, HumanMessage)
         and message.content == query
         for message in conversation_history
@@ -386,9 +455,15 @@ def llm_node(state: AgentState) -> dict:
         messages
     )
 
+    truncated = (
+        response.response_metadata.get("finish_reason") == "length"
+    )
+
+    answer = clean_answer(response.content, truncated=truncated)
+
     return {
-        "messages": conversation_history + [response],
-        "final_answer": response.content,
+        "messages": [AIMessage(content=answer)],
+        "final_answer": answer,
     }
 
 
@@ -417,8 +492,12 @@ def create_tool_call_node(registry: ToolRegistry):
                 },
             }
 
-        messages = list(state["messages"])
-        response = llm.invoke(messages) 
+        messages: list[BaseMessage] = [
+            SystemMessage(content=tool_call_system_prompt()),
+            *_conversation_history(state),
+        ]
+
+        response = llm.invoke(messages)
 
         tool_calls = getattr(response, "tool_calls", [])
 
@@ -426,8 +505,8 @@ def create_tool_call_node(registry: ToolRegistry):
 
         if not tool_calls:
             return {
-                "messages": [response],
                 "tool_calls": [],
+                "final_answer": response.content or "",
                 "status": "fail",
                 "error": {
                     "type": "ToolCallGenerationError",
@@ -438,7 +517,6 @@ def create_tool_call_node(registry: ToolRegistry):
             }
 
         return {
-            "messages": [response],
             "tool_calls": tool_calls,
             "status": "running",
             "error": None,
@@ -457,7 +535,6 @@ def create_tool_node(executor: ToolExecutor):
         Execute the tools requested by the LLM.
         """
 
-        tool_messages = []
         tool_results = []
 
         for tool_call in state["tool_calls"]:
@@ -474,18 +551,7 @@ def create_tool_node(executor: ToolExecutor):
                 result.model_dump()
             )
 
-            tool_messages.append(
-                ToolMessage(
-                    content=json.dumps(
-                        tool_results[-1]["result"],
-                        ensure_ascii=False,
-                    ),
-                    tool_call_id=tool_call["id"],
-                )
-            )
-
         return {
-            "messages": tool_messages,
             "tool_results": tool_results,
         }
 
@@ -504,8 +570,10 @@ def create_rag_node(
 
         retrieveds = kb.search(query)
 
-        top1_score = retrieveds["top1_score"]
-        mean_topk_score = retrieveds["mean_topk_score"]
+        top1_score = min(max(retrieveds["top1_score"], 0.0), 1.0)
+        mean_topk_score = min(
+            max(retrieveds["mean_topk_score"], 0.0), 1.0
+        )
         retrieval_score = retrieval_evaluator.evaluate(
             top1_score,
             mean_topk_score,
@@ -537,8 +605,15 @@ def create_evaluation_node(
 
         retrieved_contexts = [
             document["content"]
-            for document in retrieved_documents
+            for document in (retrieved_documents or [])
+            if document.get("content")
         ]
+
+        if not retrieved_contexts:
+            return {
+                "faithfulness_score": 0.0,
+                "confidence_score": 0.0,
+            }
 
         faithfulness_score = faithfulness_evaluator.evaluate(
             query=query,
@@ -608,34 +683,50 @@ def human_policy_node(state: AgentState) -> dict:
             []
         )
 
+        sensitive_operations: list[dict] = []
+
         for tool_call in tool_calls:
 
             operation = tool_call.get("name")
             arguments = tool_call.get("args", {})
 
-            request = ToolHumanReviewRequest(
+            single_request = ToolHumanReviewRequest(
                 request=state["query"],
-                reason=(
-                    "Human intervention required because "
-                    "the requested tool operation is sensitive."
-                ),
+                reason="Sensitive tool operation.",
                 operation=operation,
                 arguments=arguments,
             )
 
-            should_intervene = (
-                tool_human_policy.should_intervene(
-                    request
+            if tool_human_policy.should_intervene(single_request):
+                sensitive_operations.append(
+                    {
+                        "name": operation,
+                        "arguments": arguments,
+                    }
                 )
+
+        if sensitive_operations:
+
+            names = ", ".join(
+                item["name"] for item in sensitive_operations
             )
 
-            if should_intervene:
-                return {
-                    "human_review_required": True,
-                    "human_review_request": (
-                        request.model_dump()
-                    ),
-                }
+            request = ToolHumanReviewRequest(
+                request=state["query"],
+                reason=(
+                    "Human intervention required because "
+                    f"the requested tool operation(s) are sensitive: "
+                    f"{names}."
+                ),
+                operation=sensitive_operations[0]["name"],
+                arguments=sensitive_operations[0]["arguments"],
+                sensitive_operations=sensitive_operations,
+            )
+
+            return {
+                "human_review_required": True,
+                "human_review_request": request.model_dump(),
+            }
 
         return {
             "human_review_required": False,
@@ -687,6 +778,20 @@ def human_review_node(state: AgentState) -> dict:
         request
     )
 
-    return {
+    update = {
         "human_decision": decision.model_dump()
     }
+
+    if decision.decision == "reject":
+        update["final_answer"] = (
+            "Your request was reviewed by a human agent and could not "
+            "be approved, so no action was taken."
+        )
+
+    elif decision.decision == "escalate":
+        update["final_answer"] = (
+            "Your request has been escalated to a human agent, who will "
+            "follow up with you. No action has been taken yet."
+        )
+
+    return update
