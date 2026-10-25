@@ -1,6 +1,7 @@
 import os
 
 from dotenv import load_dotenv
+from langchain_core.messages import HumanMessage
 from langgraph.types import Command
 from openai import AsyncOpenAI
 
@@ -88,7 +89,11 @@ class AgentService:
             else ToolRegistry()
         )
 
-        self.kb = kb
+        self.kb = (
+            kb
+            if kb is not None
+            else KnowledgeBaseService()
+        )
 
         self.retrieval_evaluator = (
             retrieval_evaluator
@@ -190,10 +195,7 @@ class AgentService:
 
         initial_state = {
             "messages": [
-                {
-                    "role": "user",
-                    "content": query,
-                }
+                HumanMessage(content=query)
             ],
             "user_id": user_id,
             "session_id": session_id,
@@ -245,6 +247,22 @@ class AgentService:
         if is_interrupted:
             output["status"] = "human_review"
             output["human_review_required"] = True
+
+            if not output.get("final_answer"):
+                output["final_answer"] = (
+                    "Your request needs approval from a human agent. "
+                    "No action has been taken yet."
+                )
+
+            return output
+
+        # A node failed: return the state as is so the caller can inspect
+        # `status` / `error` instead of getting an empty-output exception.
+        if (
+            isinstance(output, dict)
+            and output.get("error") is not None
+            and output.get("status") in {"fail", "human_review"}
+        ):
             return output
 
         if not isinstance(output, dict):
@@ -306,8 +324,14 @@ class AgentService:
                 self.output_guardrail.validate(output)
             )
 
+        if (
+            output.get("error") is not None
+            and output.get("status") in {"fail", "human_review"}
+        ):
+            return output
+
         output_result = self.output_guardrail.validate(
-            output.get("final_answer")
+            output.get("final_answer", "")
         )
 
         if output_result.decision.value == "error":
