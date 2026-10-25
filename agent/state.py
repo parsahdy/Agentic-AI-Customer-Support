@@ -1,6 +1,7 @@
-from typing import TypedDict, Literal, Any
+from typing import TypedDict, Annotated, Literal, Any
 
 from langchain_core.messages import BaseMessage
+from langgraph.graph.message import add_messages
 
 Route = Literal["rag", "tool", "direct"]
 
@@ -17,7 +18,7 @@ class AgentState(TypedDict):
     Runtime state shared between agent nodes.
     """
 
-    messages: list[BaseMessage]
+    messages: Annotated[list[BaseMessage], add_messages]
 
     current_node: str
 
