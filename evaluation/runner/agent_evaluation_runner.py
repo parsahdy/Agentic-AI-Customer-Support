@@ -69,6 +69,15 @@ def _build_outcome(scenario, result):
     if human_review_required is None:
         human_review_required = status == "human_review"
 
+    retrieved_documents = [
+        {
+            "document_id": document.get("document_id"),
+            "content": document.get("content"),
+            "score": document.get("score"),
+        }
+        for document in result.get("retrieved_documents", [])
+    ]
+
     return {
         "id": scenario["id"],
         "category": scenario["category"],
@@ -84,6 +93,11 @@ def _build_outcome(scenario, result):
             "final_answer": result.get("final_answer"),
             "status": status,
             "error": result.get("error"),
+        },
+        "evidence": {
+            "retrieved_documents": retrieved_documents,
+            "tool_calls": tool_calls,
+            "tool_results": tool_results,
         },
     }
 
