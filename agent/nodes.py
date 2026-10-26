@@ -75,10 +75,6 @@ def wrap_node(
                 }
 
             except GraphInterrupt as interrupt:
-                print(
-                    f"[INTERRUPT] Node '{node_name}' interrupted: "
-                    f"{type(interrupt).__name__}: {interrupt}"
-                )
                 raise
             
             except Exception as exc:
