@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import re
  
 from .. import config
 from ..llm import create_llm
@@ -48,27 +49,18 @@ class KeywordRouter(BaseRouter):
 class LLMRouter(BaseRouter):
 
     def __init__(self):
-        self.llm = create_llm(max_tokens=64).with_structured_output(
-            RouteDecision,
-            method="json_schema",
-            strict=True,
-        )
+        self.llm = create_llm(max_tokens=16)
 
 
     def route(self, state: AgentState) -> str:
+        text = self.llm.invoke(router_prompt(state["query"])).content.strip().lower()
 
-        query = state["query"]
+        match = re.search(r"\b(rag|tool|direct)\b", text)
 
-        decision: RouteDecision | None = self.llm.invoke(
-            router_prompt(query)
-        )
-        
-        if decision is None:
-            raise ValueError(
-                "The router LLM returned no structured decision."
-            )
- 
-        return decision.route
+        if match is None:
+            raise ValueError(f"Router returned an unknown answer: {text!r}")
+
+        return match.group(1)
 
 
 class JevRouter(BaseRouter):
