@@ -3,19 +3,24 @@
         "id": "direct_001",
         "category": "direct",
         "input": {
-            "query": "What is the difference between a refund and a return?"
+            "query": "What is the difference between an AI agent and a chatbot?"
         },
         "actual_behavior": {
-            "route": "rag",
+            "route": "direct",
             "tool_calls": [],
             "executed_tools": [],
-            "retrieval_performed": true,
-            "human_review_required": true
+            "retrieval_performed": false,
+            "human_review_required": false
         },
         "actual_outcome": {
-            "final_answer": "I could not find this information in our knowledge base. A human agent can confirm the specific differences between a refund and a return for our services.",
-            "status": "human_review",
+            "final_answer": "A chatbot follows predefined rules or scripts to answer specific questions, while an AI agent can reason, plan, and use external tools to complete complex, multi-step tasks. Chatbots are generally reactive, whereas AI agents are proactive in achieving goals.",
+            "status": "success",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
         }
     },
     {
@@ -25,16 +30,21 @@
             "query": "Rewrite this message politely: Where is my package?"
         },
         "actual_behavior": {
-            "route": "rag",
+            "route": "direct",
             "tool_calls": [],
             "executed_tools": [],
-            "retrieval_performed": true,
-            "human_review_required": true
+            "retrieval_performed": false,
+            "human_review_required": false
         },
         "actual_outcome": {
-            "final_answer": "I could not find this information in our knowledge base. A human agent can confirm the status of your package.",
-            "status": "human_review",
+            "final_answer": "Could you please provide an update on the status of my package?",
+            "status": "success",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
         }
     },
     {
@@ -54,6 +64,203 @@
             "final_answer": "I understand your frustration with the wait. Please provide your order number so I can check the current status and offer specific next steps.",
             "status": "success",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "direct_004",
+        "category": "direct",
+        "input": {
+            "query": "Explain what an AI customer support agent does in simple terms."
+        },
+        "actual_behavior": {
+            "route": "direct",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "An AI customer support agent is a software program that interacts with customers to answer questions and resolve issues. It uses natural language processing to understand what you are asking and provides immediate responses based on available information. This allows for 24/7 availability and faster service without the need for a human representative.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "direct_005",
+        "category": "direct",
+        "input": {
+            "query": "Make this sentence more professional: I need help with my order."
+        },
+        "actual_behavior": {
+            "route": "direct",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "I would like to request assistance regarding my order.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "direct_006",
+        "category": "direct",
+        "input": {
+            "query": "Thank you for helping me with my problem."
+        },
+        "actual_behavior": {
+            "route": "direct",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "You are welcome. Please let me know if you need further assistance.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "direct_007",
+        "category": "direct",
+        "input": {
+            "query": "What information should I include when contacting customer support?"
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "I could not find this information in our knowledge base. A human agent can confirm the specific details you should include when contacting customer support.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "direct_008",
+        "category": "direct",
+        "input": {
+            "query": "Rewrite this message in a friendly tone: I have not received a response to my email."
+        },
+        "actual_behavior": {
+            "route": "direct",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Hi there, just checking in as I haven't heard back regarding my previous email.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "direct_009",
+        "category": "direct",
+        "input": {
+            "query": "I am disappointed with how long this has taken."
+        },
+        "actual_behavior": {
+            "route": "direct",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "I understand your frustration with the delay. Please provide your order number so I can investigate the specific status and offer concrete next steps.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "direct_010",
+        "category": "direct",
+        "input": {
+            "query": "Explain the difference between an AI assistant and a traditional FAQ page."
+        },
+        "actual_behavior": {
+            "route": "direct",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "An AI assistant provides dynamic, conversational responses tailored to your specific questions, while a traditional FAQ page offers static, pre-written answers to common issues. AI can understand context and handle complex or multi-part queries, whereas FAQs require you to search for exact keywords. We use AI to offer a more personalized and efficient support experience.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "direct_011",
+        "category": "direct",
+        "input": {
+            "query": "Please make this message more polite: Your service has been very slow."
+        },
+        "actual_behavior": {
+            "route": "direct",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "I apologize for the delay in our service. We are working to improve our response times and appreciate your patience.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
         }
     },
     {
@@ -82,6 +289,17 @@
             "final_answer": "Items can be returned within 30 days of delivery if they are unused and in the original packaging. Refunds are issued to the original payment method within 5-7 business days after we receive the returned item.",
             "status": "success",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [
+                {
+                    "document_id": "sim_return_policy",
+                    "content": "Return policy: items can be returned within 30 days of delivery if they are unused and in the original packaging. Refunds are issued to the original payment method within 5-7 business days after the returned item is received.",
+                    "score": null
+                }
+            ],
+            "tool_calls": [],
+            "tool_results": []
         }
     },
     {
@@ -107,9 +325,20 @@
             "human_review_required": true
         },
         "actual_outcome": {
-            "final_answer": "I could not find this information in our knowledge base. A human agent can confirm the specific return policy for your product.",
+            "final_answer": "I could not find information regarding the return policy for that specific product in our knowledge base. A human agent can confirm the applicable terms for you.",
             "status": "human_review",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [
+                {
+                    "document_id": "sim_unrelated",
+                    "content": "Our support team is available Monday to Friday, from 9:00 to 17:00.",
+                    "score": null
+                }
+            ],
+            "tool_calls": [],
+            "tool_results": []
         }
     },
     {
@@ -135,9 +364,335 @@
             "human_review_required": true
         },
         "actual_outcome": {
-            "final_answer": "Our knowledge base contains conflicting information regarding the return window. The 2023 handbook states items can be returned within 14 days of delivery, while the 2024 handbook indicates a 30-day window. We cannot determine which policy is currently active without further verification. A human agent can confirm the correct return period for your order.",
+            "final_answer": "Our knowledge base contains conflicting return policies. The 2023 handbook states a 14-day window, while the 2024 handbook specifies 30 days. We cannot determine which is currently valid without further clarification. Please contact a human agent to confirm the applicable policy.",
             "status": "human_review",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [
+                {
+                    "document_id": "sim_policy_old",
+                    "content": "Return policy (2023 handbook): items can be returned within 14 days of delivery.",
+                    "score": null
+                },
+                {
+                    "document_id": "sim_policy_new",
+                    "content": "Return policy (2024 handbook): items can be returned within 30 days of delivery.",
+                    "score": null
+                }
+            ],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "rag_004",
+        "category": "rag",
+        "input": {
+            "query": "How long do I have to return an unused product?",
+            "simulation": {
+                "retrieval_fixture": "sufficient_return_policy",
+                "retrieval_scores": {
+                    "top1_score": 0.92,
+                    "mean_topk_score": 0.88
+                },
+                "faithfulness_score": 0.94,
+                "confidence_score": 0.91
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "You have 30 days from the date of delivery to return an unused product, provided it is in its original packaging.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [
+                {
+                    "document_id": "sim_return_policy",
+                    "content": "Return policy: items can be returned within 30 days of delivery if they are unused and in the original packaging. Refunds are issued to the original payment method within 5-7 business days after the returned item is received.",
+                    "score": null
+                }
+            ],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "rag_005",
+        "category": "rag",
+        "input": {
+            "query": "Does the company offer a warranty for refurbished devices?",
+            "simulation": {
+                "retrieval_fixture": "no_relevant_document",
+                "retrieval_scores": {
+                    "top1_score": 0.18,
+                    "mean_topk_score": 0.12
+                },
+                "faithfulness_score": 0.88,
+                "confidence_score": 0.28
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "I could not find this information in our knowledge base. A human agent can confirm whether we offer a warranty for refurbished devices.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [
+                {
+                    "document_id": "sim_unrelated",
+                    "content": "Our support team is available Monday to Friday, from 9:00 to 17:00.",
+                    "score": null
+                }
+            ],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "rag_006",
+        "category": "rag",
+        "input": {
+            "query": "Can I return an item after opening its packaging?",
+            "simulation": {
+                "retrieval_fixture": "sufficient_return_policy",
+                "retrieval_scores": {
+                    "top1_score": 0.89,
+                    "mean_topk_score": 0.84
+                },
+                "faithfulness_score": 0.92,
+                "confidence_score": 0.86
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "No, items must be unused and in the original packaging to be returned within 30 days of delivery.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [
+                {
+                    "document_id": "sim_return_policy",
+                    "content": "Return policy: items can be returned within 30 days of delivery if they are unused and in the original packaging. Refunds are issued to the original payment method within 5-7 business days after the returned item is received.",
+                    "score": null
+                }
+            ],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "rag_007",
+        "category": "rag",
+        "input": {
+            "query": "The knowledge base contains two different warranty durations. Which duration applies?",
+            "simulation": {
+                "retrieval_fixture": "conflicting_policy_documents",
+                "retrieval_scores": {
+                    "top1_score": 0.93,
+                    "mean_topk_score": 0.87
+                },
+                "faithfulness_score": 0.91,
+                "confidence_score": 0.38
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Our knowledge base contains conflicting information regarding the return window. The 2023 handbook states 14 days, while the 2024 handbook states 30 days. We cannot determine which duration currently applies without further clarification. A human agent can confirm the correct policy for you.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [
+                {
+                    "document_id": "sim_policy_old",
+                    "content": "Return policy (2023 handbook): items can be returned within 14 days of delivery.",
+                    "score": null
+                },
+                {
+                    "document_id": "sim_policy_new",
+                    "content": "Return policy (2024 handbook): items can be returned within 30 days of delivery.",
+                    "score": null
+                }
+            ],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "rag_008",
+        "category": "rag",
+        "input": {
+            "query": "What documents are required to request a refund?",
+            "simulation": {
+                "retrieval_fixture": "sufficient_refund_requirements",
+                "retrieval_scores": {
+                    "top1_score": 0.91,
+                    "mean_topk_score": 0.86
+                },
+                "faithfulness_score": 0.93,
+                "confidence_score": 0.89
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "I could not find this information in our knowledge base. A human agent can confirm the specific documents required to request a refund.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "rag_009",
+        "category": "rag",
+        "input": {
+            "query": "Does the company ship replacement parts internationally?",
+            "simulation": {
+                "retrieval_fixture": "no_relevant_document",
+                "retrieval_scores": {
+                    "top1_score": 0.15,
+                    "mean_topk_score": 0.11
+                },
+                "faithfulness_score": 0.9,
+                "confidence_score": 0.25
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "I could not find this information in our knowledge base. A human agent can confirm whether we ship replacement parts internationally.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [
+                {
+                    "document_id": "sim_unrelated",
+                    "content": "Our support team is available Monday to Friday, from 9:00 to 17:00.",
+                    "score": null
+                }
+            ],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "rag_010",
+        "category": "rag",
+        "input": {
+            "query": "According to the support documentation, how can I troubleshoot a device that will not charge?",
+            "simulation": {
+                "retrieval_fixture": "sufficient_troubleshooting_guide",
+                "retrieval_scores": {
+                    "top1_score": 0.94,
+                    "mean_topk_score": 0.89
+                },
+                "faithfulness_score": 0.96,
+                "confidence_score": 0.92
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "I could not find this information in our knowledge base. A human agent can confirm the specific troubleshooting steps for a device that will not charge.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "rag_011",
+        "category": "rag",
+        "input": {
+            "query": "The retrieved policy documents disagree about whether sale items can be returned. Can you confirm the rule?",
+            "simulation": {
+                "retrieval_fixture": "conflicting_policy_documents",
+                "retrieval_scores": {
+                    "top1_score": 0.88,
+                    "mean_topk_score": 0.82
+                },
+                "faithfulness_score": 0.89,
+                "confidence_score": 0.35
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "The retrieved documents conflict regarding the return window. The 2023 handbook states items can be returned within 14 days of delivery, while the 2024 handbook states the window is 30 days. A human agent should confirm which policy currently applies.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [
+                {
+                    "document_id": "sim_policy_old",
+                    "content": "Return policy (2023 handbook): items can be returned within 14 days of delivery.",
+                    "score": null
+                },
+                {
+                    "document_id": "sim_policy_new",
+                    "content": "Return policy (2024 handbook): items can be returned within 30 days of delivery.",
+                    "score": null
+                }
+            ],
+            "tool_calls": [],
+            "tool_results": []
         }
     },
     {
@@ -161,6 +716,32 @@
             "final_answer": "Order 12345 is currently processing.",
             "status": "success",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "get_order",
+                    "args": {
+                        "order_id": 12345
+                    },
+                    "id": "f9afyj09m",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": [
+                {
+                    "tool_name": "get_order",
+                    "success": true,
+                    "result": {
+                        "order_id": 12345,
+                        "status": "processing"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                }
+            ]
         }
     },
     {
@@ -170,16 +751,49 @@
             "query": "Create a support ticket because my device will not turn on."
         },
         "actual_behavior": {
-            "route": "direct",
-            "tool_calls": [],
-            "executed_tools": [],
+            "route": "tool",
+            "tool_calls": [
+                "create_ticket"
+            ],
+            "executed_tools": [
+                "create_ticket"
+            ],
             "retrieval_performed": false,
             "human_review_required": false
         },
         "actual_outcome": {
-            "final_answer": "I cannot create a support ticket directly. Please contact a human agent to open a ticket for your device issue.",
+            "final_answer": "Your support ticket for \"Device will not turn on\" has been successfully created with medium priority.",
             "status": "success",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "create_ticket",
+                    "args": {
+                        "message": "My device will not turn on.",
+                        "priority": "medium",
+                        "subject": "Device will not turn on"
+                    },
+                    "id": "4a7vj4p7h",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": [
+                {
+                    "tool_name": "create_ticket",
+                    "success": true,
+                    "result": {
+                        "subject": "Device will not turn on",
+                        "message": "My device will not turn on.",
+                        "priority": "medium"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                }
+            ]
         }
     },
     {
@@ -203,6 +817,579 @@
             "final_answer": "Order 99887 is currently processing.",
             "status": "success",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "get_order",
+                    "args": {
+                        "order_id": 99887
+                    },
+                    "id": "kx6r4gdfa",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": [
+                {
+                    "tool_name": "get_order",
+                    "success": true,
+                    "result": {
+                        "order_id": 99887,
+                        "status": "processing"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "tool_004",
+        "category": "tool",
+        "input": {
+            "query": "Check order 54321 and create a support ticket reporting that its shipment has been delayed."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "get_order",
+                "cancel_order",
+                "get_customer_info",
+                "get_order",
+                "get_customer_info",
+                "cancel_order",
+                "get_order",
+                "get_customer_info"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "get_order",
+                    "args": {
+                        "order_id": 54321
+                    },
+                    "id": "j2e1j6zew",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 54321
+                    },
+                    "id": "m4s8h55h0",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "get_customer_info",
+                    "args": {
+                        "customer_id": "54321"
+                    },
+                    "id": "paecnk3fw",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "get_order",
+                    "args": {
+                        "order_id": 54321
+                    },
+                    "id": "4mv681be1",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "get_customer_info",
+                    "args": {
+                        "customer_id": "54321"
+                    },
+                    "id": "7409dbwe8",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 54321
+                    },
+                    "id": "7g5qxhy2w",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "get_order",
+                    "args": {
+                        "order_id": 54321
+                    },
+                    "id": "mrt5xe4wz",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "get_customer_info",
+                    "args": {
+                        "customer_id": "54321"
+                    },
+                    "id": "2m76smknt",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "tool_005",
+        "category": "tool",
+        "input": {
+            "query": "Open a support ticket for my laptop because it keeps shutting down unexpectedly."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "create_ticket"
+            ],
+            "executed_tools": [
+                "create_ticket"
+            ],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Your support ticket has been successfully created with the subject \"Laptop shutting down unexpectedly\".",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "create_ticket",
+                    "args": {
+                        "message": "My laptop keeps shutting down unexpectedly.",
+                        "priority": "medium",
+                        "subject": "Laptop shutting down unexpectedly"
+                    },
+                    "id": "26s94qfms",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": [
+                {
+                    "tool_name": "create_ticket",
+                    "success": true,
+                    "result": {
+                        "subject": "Laptop shutting down unexpectedly",
+                        "message": "My laptop keeps shutting down unexpectedly.",
+                        "priority": "medium"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "tool_006",
+        "category": "tool",
+        "input": {
+            "query": "Look up order 67219 and create a support ticket because the package has not arrived."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "get_order",
+                "create_ticket"
+            ],
+            "executed_tools": [
+                "get_order",
+                "create_ticket"
+            ],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Order 67219 is currently processing. We have created a support ticket regarding the missing package.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "get_order",
+                    "args": {
+                        "order_id": 67219
+                    },
+                    "id": "3ebqknwby",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "create_ticket",
+                    "args": {
+                        "message": "Customer reports that the package for order 67219 has not arrived.",
+                        "priority": "medium",
+                        "subject": "Package not arrived for order 67219"
+                    },
+                    "id": "aww349g1r",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": [
+                {
+                    "tool_name": "get_order",
+                    "success": true,
+                    "result": {
+                        "order_id": 67219,
+                        "status": "processing"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                },
+                {
+                    "tool_name": "create_ticket",
+                    "success": true,
+                    "result": {
+                        "subject": "Package not arrived for order 67219",
+                        "message": "Customer reports that the package for order 67219 has not arrived.",
+                        "priority": "medium"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "tool_007",
+        "category": "tool",
+        "input": {
+            "query": "Check the delivery status of order 86420, then register a support ticket about the missing delivery."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "get_order",
+                "create_ticket"
+            ],
+            "executed_tools": [
+                "get_order",
+                "create_ticket"
+            ],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Order 86420 is currently processing. I have successfully registered a support ticket regarding the missing delivery.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "get_order",
+                    "args": {
+                        "order_id": 86420
+                    },
+                    "id": "gy2msrn5n",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "create_ticket",
+                    "args": {
+                        "message": "Customer reports that the delivery for order 86420 is missing. Please investigate and resolve.",
+                        "priority": "medium",
+                        "subject": "Missing delivery for order 86420"
+                    },
+                    "id": "jb3wb7pvt",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": [
+                {
+                    "tool_name": "get_order",
+                    "success": true,
+                    "result": {
+                        "order_id": 86420,
+                        "status": "processing"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                },
+                {
+                    "tool_name": "create_ticket",
+                    "success": true,
+                    "result": {
+                        "subject": "Missing delivery for order 86420",
+                        "message": "Customer reports that the delivery for order 86420 is missing. Please investigate and resolve.",
+                        "priority": "medium"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "tool_008",
+        "category": "tool",
+        "input": {
+            "query": "Create a support ticket for my phone because it will not connect to Wi-Fi."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "create_ticket"
+            ],
+            "executed_tools": [
+                "create_ticket"
+            ],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "We have successfully created your support ticket for the Wi-Fi connection issue. Our team will review the details and contact you with next steps.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "create_ticket",
+                    "args": {
+                        "message": "My phone will not connect to Wi-Fi.",
+                        "priority": "medium",
+                        "subject": "Phone will not connect to Wi-Fi"
+                    },
+                    "id": "e2q945bfp",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": [
+                {
+                    "tool_name": "create_ticket",
+                    "success": true,
+                    "result": {
+                        "subject": "Phone will not connect to Wi-Fi",
+                        "message": "My phone will not connect to Wi-Fi.",
+                        "priority": "medium"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "tool_009",
+        "category": "tool",
+        "input": {
+            "query": "Retrieve order 31975 and open a support ticket about the damaged item I received."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "get_order",
+                "create_ticket"
+            ],
+            "executed_tools": [
+                "get_order",
+                "create_ticket"
+            ],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Order 31975 is currently processing. We have successfully opened a support ticket regarding the damaged item you received.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "get_order",
+                    "args": {
+                        "order_id": 31975
+                    },
+                    "id": "xq784r2yf",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "create_ticket",
+                    "args": {
+                        "message": "Customer reports receiving a damaged item in order 31975.",
+                        "priority": "medium",
+                        "subject": "Damaged item received"
+                    },
+                    "id": "d59rg3mst",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": [
+                {
+                    "tool_name": "get_order",
+                    "success": true,
+                    "result": {
+                        "order_id": 31975,
+                        "status": "processing"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                },
+                {
+                    "tool_name": "create_ticket",
+                    "success": true,
+                    "result": {
+                        "subject": "Damaged item received",
+                        "message": "Customer reports receiving a damaged item in order 31975.",
+                        "priority": "medium"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "tool_010",
+        "category": "tool",
+        "input": {
+            "query": "Check order 28514 and create a ticket asking support to investigate its late delivery."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "get_order",
+                "create_ticket"
+            ],
+            "executed_tools": [
+                "get_order",
+                "create_ticket"
+            ],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Order 28514 is currently processing. We have created a ticket to investigate the late delivery.",
+            "status": "success",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "get_order",
+                    "args": {
+                        "order_id": 28514
+                    },
+                    "id": "081jdyrz4",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "create_ticket",
+                    "args": {
+                        "message": "Please investigate the late delivery for order 28514.",
+                        "priority": "medium",
+                        "subject": "Late delivery - Order 28514"
+                    },
+                    "id": "a9ptv1775",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": [
+                {
+                    "tool_name": "get_order",
+                    "success": true,
+                    "result": {
+                        "order_id": 28514,
+                        "status": "processing"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                },
+                {
+                    "tool_name": "create_ticket",
+                    "success": true,
+                    "result": {
+                        "subject": "Late delivery - Order 28514",
+                        "message": "Please investigate the late delivery for order 28514.",
+                        "priority": "medium"
+                    },
+                    "error": null,
+                    "error_type": null,
+                    "retry_count": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "tool_011",
+        "category": "tool",
+        "input": {
+            "query": "Register a support ticket for my tablet because its screen keeps freezing."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order",
+                "get_order",
+                "get_customer_info"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 12345
+                    },
+                    "id": "kqj5ea22q",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "get_order",
+                    "args": {
+                        "order_id": 12345
+                    },
+                    "id": "vzjghamv9",
+                    "type": "tool_call"
+                },
+                {
+                    "name": "get_customer_info",
+                    "args": {
+                        "customer_id": "C-98765"
+                    },
+                    "id": "421cdrcjg",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
         }
     },
     {
@@ -224,6 +1411,20 @@
             "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
             "status": "human_review",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 24680
+                    },
+                    "id": "6hrpt9270",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
         }
     },
     {
@@ -245,6 +1446,335 @@
             "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
             "status": "human_review",
             "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 77701
+                    },
+                    "id": "bzmyh0evr",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "human_review_003",
+        "category": "human_review",
+        "input": {
+            "query": "I want to cancel order 58124 immediately."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 58124
+                    },
+                    "id": "wg7gref39",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "human_review_004",
+        "category": "human_review",
+        "input": {
+            "query": "Could you cancel my order, number 40219?"
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 40219
+                    },
+                    "id": "jwqywc1ev",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "human_review_005",
+        "category": "human_review",
+        "input": {
+            "query": "Please stop the shipment by cancelling order 63590."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 63590
+                    },
+                    "id": "921dfmzr2",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "human_review_006",
+        "category": "human_review",
+        "input": {
+            "query": "I changed my mind. Cancel order 91826, please."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 91826
+                    },
+                    "id": "1rvs81vgf",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "human_review_007",
+        "category": "human_review",
+        "input": {
+            "query": "Can you cancel order 30468? I no longer need the item."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 30468
+                    },
+                    "id": "vdebg8zhe",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "human_review_008",
+        "category": "human_review",
+        "input": {
+            "query": "Please cancel order 85271 before it is dispatched."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 85271
+                    },
+                    "id": "dcagmkb27",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "human_review_009",
+        "category": "human_review",
+        "input": {
+            "query": "I accidentally placed order 19463. Please cancel it."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 19463
+                    },
+                    "id": "fsh5awkh3",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "human_review_010",
+        "category": "human_review",
+        "input": {
+            "query": "Would you cancel order 72615 for me? I ordered the wrong model."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 72615
+                    },
+                    "id": "m8sjgtx70",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
+        }
+    },
+    {
+        "id": "human_review_011",
+        "category": "human_review",
+        "input": {
+            "query": "Please cancel order 46082. I no longer want it delivered."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        },
+        "evidence": {
+            "retrieved_documents": [],
+            "tool_calls": [
+                {
+                    "name": "cancel_order",
+                    "args": {
+                        "order_id": 46082
+                    },
+                    "id": "hvj1h96p6",
+                    "type": "tool_call"
+                }
+            ],
+            "tool_results": []
         }
     }
 ]
