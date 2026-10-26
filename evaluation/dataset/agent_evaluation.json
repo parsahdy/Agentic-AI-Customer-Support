@@ -3,7 +3,7 @@
     "id": "direct_001",
     "category": "direct",
     "input": {
-      "query": "What is the difference between a refund and a return?"
+      "query": "What is the difference between a agent and a chatbot?"
     },
     "expected_behavior": {
       "route": "direct",
