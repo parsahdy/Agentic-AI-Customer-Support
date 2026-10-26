@@ -1,0 +1,254 @@
+[
+    {
+        "id": "direct_001",
+        "category": "direct",
+        "input": {
+            "query": "What is the difference between a agent and a chatbot?"
+        },
+        "actual_behavior": {
+            "route": "direct",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "A chatbot is a rule-based or simple AI system that follows predefined scripts to answer specific questions. An AI agent is an advanced system that can reason, plan, and use tools to complete complex, multi-step tasks autonomously.",
+            "status": "success",
+            "error": null
+        }
+    },
+    {
+        "id": "direct_002",
+        "category": "direct",
+        "input": {
+            "query": "Rewrite this message politely: Where is my package?"
+        },
+        "actual_behavior": {
+            "route": "direct",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Could you please provide an update on the status of my package?",
+            "status": "success",
+            "error": null
+        }
+    },
+    {
+        "id": "direct_003",
+        "category": "direct",
+        "input": {
+            "query": "I am frustrated because I have waited a long time."
+        },
+        "actual_behavior": {
+            "route": "direct",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "I understand your frustration with the wait. Please provide your order number so I can check the current status.",
+            "status": "success",
+            "error": null
+        }
+    },
+    {
+        "id": "rag_001",
+        "category": "rag",
+        "input": {
+            "query": "What is the company's return policy?",
+            "simulation": {
+                "retrieval_fixture": "sufficient_return_policy",
+                "retrieval_scores": {
+                    "top1_score": 0.95,
+                    "mean_topk_score": 0.9
+                },
+                "faithfulness_score": 0.95,
+                "confidence_score": 0.9
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Our return policy allows you to return products within 30 days of purchase for a full refund, provided they are in their original condition and packaging. Please refer to our returns page for detailed instructions.",
+            "status": "success",
+            "error": null
+        }
+    },
+    {
+        "id": "rag_002",
+        "category": "rag",
+        "input": {
+            "query": "What is the return policy for a product not covered by the knowledge base?",
+            "simulation": {
+                "retrieval_fixture": "no_relevant_document",
+                "retrieval_scores": {
+                    "top1_score": 0.1,
+                    "mean_topk_score": 0.08
+                },
+                "faithfulness_score": 0.9,
+                "confidence_score": 0.3
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "I could not find this information in our knowledge base. A human agent can confirm the specific return policy for your product.",
+            "status": "human_review",
+            "error": null
+        }
+    },
+    {
+        "id": "rag_003",
+        "category": "rag",
+        "input": {
+            "query": "Two documents give different return windows. Which one is correct?",
+            "simulation": {
+                "retrieval_fixture": "conflicting_policy_documents",
+                "retrieval_scores": {
+                    "top1_score": 0.9,
+                    "mean_topk_score": 0.85
+                },
+                "faithfulness_score": 0.9,
+                "confidence_score": 0.4
+            }
+        },
+        "actual_behavior": {
+            "route": "rag",
+            "tool_calls": [],
+            "executed_tools": [],
+            "retrieval_performed": true,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "The retrieved documents do not provide conflicting return windows. Document 2 states a 30-day return window for standard items, while Documents 1 and 3 clarify that clearance and final sale items are typically non-returnable. Please check the specific product description to confirm eligibility.",
+            "status": "human_review",
+            "error": null
+        }
+    },
+    {
+        "id": "tool_001",
+        "category": "tool",
+        "input": {
+            "query": "Check the status of order 12345."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "get_order"
+            ],
+            "executed_tools": [
+                "get_order"
+            ],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Order 12345 is currently processing.",
+            "status": "success",
+            "error": null
+        }
+    },
+    {
+        "id": "tool_002",
+        "category": "tool",
+        "input": {
+            "query": "Create a support ticket because my device will not turn on."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "create_ticket"
+            ],
+            "executed_tools": [
+                "create_ticket"
+            ],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Your support ticket has been successfully created with the subject \"Device will not turn on\". Our team will review the issue and contact you with next steps.",
+            "status": "success",
+            "error": null
+        }
+    },
+    {
+        "id": "tool_003",
+        "category": "tool",
+        "input": {
+            "query": "Find the current status of order 99887."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "get_order"
+            ],
+            "executed_tools": [
+                "get_order"
+            ],
+            "retrieval_performed": false,
+            "human_review_required": false
+        },
+        "actual_outcome": {
+            "final_answer": "Order 99887 is currently processing.",
+            "status": "success",
+            "error": null
+        }
+    },
+    {
+        "id": "human_review_001",
+        "category": "human_review",
+        "input": {
+            "query": "Cancel order 24680."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        }
+    },
+    {
+        "id": "human_review_002",
+        "category": "human_review",
+        "input": {
+            "query": "Please cancel order 77701."
+        },
+        "actual_behavior": {
+            "route": "tool",
+            "tool_calls": [
+                "cancel_order"
+            ],
+            "executed_tools": [],
+            "retrieval_performed": false,
+            "human_review_required": true
+        },
+        "actual_outcome": {
+            "final_answer": "Your request needs approval from a human agent. No action has been taken yet.",
+            "status": "human_review",
+            "error": null
+        }
+    }
+]
