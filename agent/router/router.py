@@ -32,7 +32,7 @@ class KeywordRouter(BaseRouter):
     """
 
     def __init__(self):
-        self.classifier = KeywordIntentClassifier
+        self.classifier = KeywordIntentClassifier()
 
 
     def route(self, state: AgentState) -> Route:
