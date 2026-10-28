@@ -1,0 +1,546 @@
+{
+    "generated_at": "2026-10-28T14:25:06",
+    "warnings": [],
+    "evaluators": {
+        "routing": {
+            "dataset_path": "evaluation\\dataset\\agent_evaluation.json",
+            "outcome_path": "evaluation\\dataset\\agent_outcome.json",
+            "summary": {
+                "passed": 34,
+                "total": 44,
+                "by_category": {
+                    "direct": {
+                        "passed": 10,
+                        "total": 11
+                    },
+                    "rag": {
+                        "passed": 6,
+                        "total": 11
+                    },
+                    "tool": {
+                        "passed": 7,
+                        "total": 11
+                    },
+                    "human_review": {
+                        "passed": 11,
+                        "total": 11
+                    }
+                },
+                "confusion": {
+                    "direct": {
+                        "direct": 10,
+                        "rag": 1
+                    },
+                    "rag": {
+                        "rag": 11
+                    },
+                    "tool": {
+                        "tool": 22
+                    }
+                }
+            },
+            "failures": [
+                {
+                    "id": "direct_007",
+                    "category": "direct",
+                    "reason": "route: expected 'direct', got 'rag'; retrieval: expected False, got True; human_review: expected False, got True"
+                },
+                {
+                    "id": "rag_002",
+                    "category": "rag",
+                    "reason": "human_review: expected True, got False"
+                },
+                {
+                    "id": "rag_004",
+                    "category": "rag",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "rag_008",
+                    "category": "rag",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "rag_010",
+                    "category": "rag",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "rag_011",
+                    "category": "rag",
+                    "reason": "human_review: expected True, got False"
+                },
+                {
+                    "id": "tool_004",
+                    "category": "tool",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "tool_006",
+                    "category": "tool",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "tool_007",
+                    "category": "tool",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "tool_009",
+                    "category": "tool",
+                    "reason": "human_review: expected False, got True"
+                }
+            ]
+        },
+        "tool": {
+            "dataset_path": "evaluation\\dataset\\agent_evaluation.json",
+            "outcome_path": "evaluation\\dataset\\agent_outcome.json",
+            "summary": {
+                "passed": 39,
+                "total": 44,
+                "by_category": {
+                    "direct": {
+                        "passed": 11,
+                        "total": 11
+                    },
+                    "rag": {
+                        "passed": 11,
+                        "total": 11
+                    },
+                    "tool": {
+                        "passed": 6,
+                        "total": 11
+                    },
+                    "human_review": {
+                        "passed": 11,
+                        "total": 11
+                    }
+                },
+                "critical_failures": [],
+                "tool_stats": {
+                    "tool_calls": {
+                        "get_order": {
+                            "expected": 7,
+                            "missing": 0,
+                            "extra": 4
+                        },
+                        "create_ticket": {
+                            "expected": 9,
+                            "missing": 5,
+                            "extra": 0
+                        },
+                        "cancel_order": {
+                            "expected": 11,
+                            "missing": 0,
+                            "extra": 7
+                        },
+                        "get_customer_info": {
+                            "expected": 0,
+                            "missing": 0,
+                            "extra": 3
+                        }
+                    },
+                    "executed_tools": {
+                        "get_order": {
+                            "expected": 7,
+                            "missing": 4,
+                            "extra": 0
+                        },
+                        "create_ticket": {
+                            "expected": 9,
+                            "missing": 5,
+                            "extra": 0
+                        },
+                        "get_customer_info": {
+                            "expected": 0,
+                            "missing": 0,
+                            "extra": 1
+                        }
+                    }
+                }
+            },
+            "failures": [
+                {
+                    "id": "tool_004",
+                    "category": "tool",
+                    "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order', 'get_customer_info', 'get_customer_info', 'get_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+                },
+                {
+                    "id": "tool_006",
+                    "category": "tool",
+                    "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order', 'cancel_order', 'cancel_order', 'cancel_order', 'get_order', 'get_order', 'get_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+                },
+                {
+                    "id": "tool_007",
+                    "category": "tool",
+                    "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+                },
+                {
+                    "id": "tool_009",
+                    "category": "tool",
+                    "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+                },
+                {
+                    "id": "tool_011",
+                    "category": "tool",
+                    "reason": "tool_calls: missing ['create_ticket'], extra ['get_customer_info']; executed_tools: missing ['create_ticket'], extra ['get_customer_info']"
+                }
+            ]
+        }
+    },
+    "critical_failures": [],
+    "scenarios": [
+        {
+            "id": "direct_001",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "direct_002",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "direct_003",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "direct_004",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "direct_005",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "direct_006",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "direct_007",
+            "category": "direct",
+            "results": {
+                "routing": false,
+                "tool": true
+            }
+        },
+        {
+            "id": "direct_008",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "direct_009",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "direct_010",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "direct_011",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_001",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_002",
+            "category": "rag",
+            "results": {
+                "routing": false,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_003",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_004",
+            "category": "rag",
+            "results": {
+                "routing": false,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_005",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_006",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_007",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_008",
+            "category": "rag",
+            "results": {
+                "routing": false,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_009",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_010",
+            "category": "rag",
+            "results": {
+                "routing": false,
+                "tool": true
+            }
+        },
+        {
+            "id": "rag_011",
+            "category": "rag",
+            "results": {
+                "routing": false,
+                "tool": true
+            }
+        },
+        {
+            "id": "tool_001",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "tool_002",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "tool_003",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "tool_004",
+            "category": "tool",
+            "results": {
+                "routing": false,
+                "tool": false
+            }
+        },
+        {
+            "id": "tool_005",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "tool_006",
+            "category": "tool",
+            "results": {
+                "routing": false,
+                "tool": false
+            }
+        },
+        {
+            "id": "tool_007",
+            "category": "tool",
+            "results": {
+                "routing": false,
+                "tool": false
+            }
+        },
+        {
+            "id": "tool_008",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "tool_009",
+            "category": "tool",
+            "results": {
+                "routing": false,
+                "tool": false
+            }
+        },
+        {
+            "id": "tool_010",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "tool_011",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": false
+            }
+        },
+        {
+            "id": "human_review_001",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "human_review_002",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "human_review_003",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "human_review_004",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "human_review_005",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "human_review_006",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "human_review_007",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "human_review_008",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "human_review_009",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "human_review_010",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        },
+        {
+            "id": "human_review_011",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true
+            }
+        }
+    ]
+}
