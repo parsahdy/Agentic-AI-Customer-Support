@@ -98,6 +98,16 @@ def _build_outcome(scenario, result):
             "retrieved_documents": retrieved_documents,
             "tool_calls": tool_calls,
             "tool_results": tool_results,
+            "scores": {
+                key: result.get(key)
+                for key in (
+                    "top1_score",
+                    "mean_topk_score",
+                    "retrieval_score",
+                    "faithfulness_score",
+                    "confidence_score",
+                )
+            },
         },
     }
 
