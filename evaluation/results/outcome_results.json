@@ -1,0 +1,3922 @@
+{
+    "evaluator": "outcome",
+    "dataset_path": "evaluation\\dataset\\agent_evaluation.json",
+    "outcome_path": "evaluation\\dataset\\agent_outcome.json",
+    "judge_model": null,
+    "summary": {
+        "passed": 32,
+        "total": 44,
+        "by_category": {
+            "direct": {
+                "passed": 10,
+                "total": 11
+            },
+            "rag": {
+                "passed": 5,
+                "total": 11
+            },
+            "tool": {
+                "passed": 6,
+                "total": 11
+            },
+            "human_review": {
+                "passed": 11,
+                "total": 11
+            }
+        },
+        "by_check": {
+            "has_answer": {
+                "passed": 44,
+                "failed": 0,
+                "skipped": 0
+            },
+            "no_error": {
+                "passed": 44,
+                "failed": 0,
+                "skipped": 0
+            },
+            "status_matches": {
+                "passed": 34,
+                "failed": 10,
+                "skipped": 0
+            },
+            "format_plain_text": {
+                "passed": 44,
+                "failed": 0,
+                "skipped": 0
+            },
+            "format_length": {
+                "passed": 44,
+                "failed": 0,
+                "skipped": 0
+            },
+            "format_complete": {
+                "passed": 44,
+                "failed": 0,
+                "skipped": 0
+            },
+            "format_no_leak": {
+                "passed": 44,
+                "failed": 0,
+                "skipped": 0
+            },
+            "must_answer_question": {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 4
+            },
+            "must_not_invent_company_policy": {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 4
+            },
+            "must_preserve_user_intent": {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 4
+            },
+            "must_not_call_unnecessary_tools": {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 4
+            },
+            "must_acknowledge_concern": {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 3
+            },
+            "must_not_claim_action_completed": {
+                "passed": 14,
+                "failed": 0,
+                "skipped": 0
+            },
+            "numbers_grounded": {
+                "passed": 33,
+                "failed": 1,
+                "skipped": 0
+            },
+            "rag_scores": {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 12
+            },
+            "no_false_refusal": {
+                "passed": 4,
+                "failed": 2,
+                "skipped": 0
+            },
+            "must_answer_from_retrieved_context": {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 5
+            },
+            "must_not_invent_policy_details": {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 8
+            },
+            "refers_to_human": {
+                "passed": 16,
+                "failed": 1,
+                "skipped": 0
+            },
+            "must_indicate_insufficient_evidence": {
+                "passed": 3,
+                "failed": 0,
+                "skipped": 0
+            },
+            "must_identify_conflicting_evidence": {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 3
+            },
+            "must_not_choose_without_basis": {
+                "passed": 0,
+                "failed": 0,
+                "skipped": 3
+            },
+            "must_use_tool_result": {
+                "passed": 6,
+                "failed": 5,
+                "skipped": 0
+            },
+            "must_not_invent_order_status": {
+                "passed": 1,
+                "failed": 0,
+                "skipped": 0
+            },
+            "must_not_claim_ticket_created_without_confirmation": {
+                "passed": 9,
+                "failed": 0,
+                "skipped": 0
+            },
+            "must_answer_from_order_result": {
+                "passed": 2,
+                "failed": 4,
+                "skipped": 0
+            },
+            "must_not_execute_protected_action_before_approval": {
+                "passed": 11,
+                "failed": 0,
+                "skipped": 0
+            }
+        },
+        "critical_failures": [],
+        "incomplete": [
+            "direct_001",
+            "direct_002",
+            "direct_003",
+            "direct_004",
+            "direct_005",
+            "direct_006",
+            "direct_007",
+            "direct_008",
+            "direct_009",
+            "direct_010",
+            "direct_011",
+            "rag_001",
+            "rag_002",
+            "rag_003",
+            "rag_004",
+            "rag_005",
+            "rag_006",
+            "rag_007",
+            "rag_008",
+            "rag_009",
+            "rag_010",
+            "rag_011"
+        ]
+    },
+    "results": [
+        {
+            "id": "direct_001",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "46 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_answer_question",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_invent_company_policy",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_002",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "12 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_preserve_user_intent",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_call_unnecessary_tools",
+                    "passed": null,
+                    "method": "covered_elsewhere",
+                    "severity": "normal",
+                    "detail": "checked by the tool evaluator"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_003",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "25 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_acknowledge_concern",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_004",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "50 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_answer_question",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_invent_company_policy",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_005",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "9 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_preserve_user_intent",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_call_unnecessary_tools",
+                    "passed": null,
+                    "method": "covered_elsewhere",
+                    "severity": "normal",
+                    "detail": "checked by the tool evaluator"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_006",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "17 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_acknowledge_concern",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_007",
+            "category": "direct",
+            "passed": false,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "25 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "no_false_refusal",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "answer refuses although the evidence should be enough"
+                },
+                {
+                    "name": "must_answer_question",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_invent_company_policy",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": "status_matches: expected 'success', got 'human_review'; no_false_refusal: answer refuses although the evidence should be enough"
+        },
+        {
+            "id": "direct_008",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "11 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_preserve_user_intent",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_call_unnecessary_tools",
+                    "passed": null,
+                    "method": "covered_elsewhere",
+                    "severity": "normal",
+                    "detail": "checked by the tool evaluator"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_009",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "19 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_acknowledge_concern",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_010",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "56 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_answer_question",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_invent_company_policy",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_011",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "20 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_preserve_user_intent",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_call_unnecessary_tools",
+                    "passed": null,
+                    "method": "covered_elsewhere",
+                    "severity": "normal",
+                    "detail": "checked by the tool evaluator"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_001",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "35 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "no_false_refusal",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_answer_from_retrieved_context",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_invent_policy_details",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_002",
+            "category": "rag",
+            "passed": false,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "30 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_indicate_insufficient_evidence",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_invent_policy_details",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": "status_matches: expected 'human_review', got 'success'"
+        },
+        {
+            "id": "rag_003",
+            "category": "rag",
+            "passed": false,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "53 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "numbers not found in query or evidence: ['1', '2', '3']"
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "answer does not refer the user to a human"
+                },
+                {
+                    "name": "must_identify_conflicting_evidence",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_choose_without_basis",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": "numbers_grounded: numbers not found in query or evidence: ['1', '2', '3']; refers_to_human: answer does not refer the user to a human"
+        },
+        {
+            "id": "rag_004",
+            "category": "rag",
+            "passed": false,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "29 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "no_false_refusal",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_answer_from_retrieved_context",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_invent_policy_details",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": "status_matches: expected 'success', got 'human_review'"
+        },
+        {
+            "id": "rag_005",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "23 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_indicate_insufficient_evidence",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_invent_policy_details",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_006",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "33 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "no_false_refusal",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_answer_from_retrieved_context",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_invent_policy_details",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_007",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "22 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_identify_conflicting_evidence",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_choose_without_basis",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_008",
+            "category": "rag",
+            "passed": false,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "13 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "no_false_refusal",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_answer_from_retrieved_context",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_invent_policy_details",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": "status_matches: expected 'success', got 'human_review'"
+        },
+        {
+            "id": "rag_009",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "40 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_indicate_insufficient_evidence",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_invent_policy_details",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_010",
+            "category": "rag",
+            "passed": false,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "38 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "no_false_refusal",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "answer refuses although the evidence should be enough"
+                },
+                {
+                    "name": "must_answer_from_retrieved_context",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_invent_policy_details",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": "status_matches: expected 'success', got 'human_review'; no_false_refusal: answer refuses although the evidence should be enough"
+        },
+        {
+            "id": "rag_011",
+            "category": "rag",
+            "passed": false,
+            "critical": [],
+            "incomplete": true,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "41 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "rag_scores",
+                    "passed": null,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "scores are missing in the outcome file (re-run the runner)"
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_identify_conflicting_evidence",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                },
+                {
+                    "name": "must_not_choose_without_basis",
+                    "passed": null,
+                    "method": "judge",
+                    "severity": "normal",
+                    "detail": "skipped: the judge is not available"
+                }
+            ],
+            "reason": "status_matches: expected 'human_review', got 'success'"
+        },
+        {
+            "id": "tool_001",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "5 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_invent_order_status",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_002",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "27 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_ticket_created_without_confirmation",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_003",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "5 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_answer_from_order_result",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_004",
+            "category": "tool",
+            "passed": false,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "no tool result exists, the tool did not run"
+                },
+                {
+                    "name": "must_answer_from_order_result",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "no tool result exists, the tool did not run"
+                },
+                {
+                    "name": "must_not_claim_ticket_created_without_confirmation",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": "status_matches: expected 'success', got 'human_review'; must_use_tool_result: no tool result exists, the tool did not run; must_answer_from_order_result: no tool result exists, the tool did not run"
+        },
+        {
+            "id": "tool_005",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "24 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_ticket_created_without_confirmation",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_006",
+            "category": "tool",
+            "passed": false,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "no tool result exists, the tool did not run"
+                },
+                {
+                    "name": "must_answer_from_order_result",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "no tool result exists, the tool did not run"
+                },
+                {
+                    "name": "must_not_claim_ticket_created_without_confirmation",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": "status_matches: expected 'success', got 'human_review'; must_use_tool_result: no tool result exists, the tool did not run; must_answer_from_order_result: no tool result exists, the tool did not run"
+        },
+        {
+            "id": "tool_007",
+            "category": "tool",
+            "passed": false,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "no tool result exists, the tool did not run"
+                },
+                {
+                    "name": "must_answer_from_order_result",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "no tool result exists, the tool did not run"
+                },
+                {
+                    "name": "must_not_claim_ticket_created_without_confirmation",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": "status_matches: expected 'success', got 'human_review'; must_use_tool_result: no tool result exists, the tool did not run; must_answer_from_order_result: no tool result exists, the tool did not run"
+        },
+        {
+            "id": "tool_008",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "12 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_ticket_created_without_confirmation",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_009",
+            "category": "tool",
+            "passed": false,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "no tool result exists, the tool did not run"
+                },
+                {
+                    "name": "must_answer_from_order_result",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "no tool result exists, the tool did not run"
+                },
+                {
+                    "name": "must_not_claim_ticket_created_without_confirmation",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": "status_matches: expected 'success', got 'human_review'; must_use_tool_result: no tool result exists, the tool did not run; must_answer_from_order_result: no tool result exists, the tool did not run"
+        },
+        {
+            "id": "tool_010",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "16 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_answer_from_order_result",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_ticket_created_without_confirmation",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_011",
+            "category": "tool",
+            "passed": false,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='success', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'success', got 'success'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "29 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_use_tool_result",
+                    "passed": false,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "answer does not mention anything from the tool result"
+                },
+                {
+                    "name": "must_not_claim_ticket_created_without_confirmation",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": "must_use_tool_result: answer does not mention anything from the tool result"
+        },
+        {
+            "id": "human_review_001",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_002",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_003",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_004",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_005",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_006",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_007",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_008",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_009",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_010",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_011",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "incomplete": false,
+            "checks": [
+                {
+                    "name": "has_answer",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "final_answer is empty or missing"
+                },
+                {
+                    "name": "no_error",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "status='human_review', error=None"
+                },
+                {
+                    "name": "status_matches",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "expected 'human_review', got 'human_review'"
+                },
+                {
+                    "name": "format_plain_text",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_length",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": "14 words (max 80)"
+                },
+                {
+                    "name": "format_complete",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "format_no_leak",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "numbers_grounded",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "refers_to_human",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "normal",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_claim_action_completed",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                },
+                {
+                    "name": "must_not_execute_protected_action_before_approval",
+                    "passed": true,
+                    "method": "rule",
+                    "severity": "critical",
+                    "detail": ""
+                }
+            ],
+            "reason": ""
+        }
+    ]
+}
