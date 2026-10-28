@@ -136,21 +136,6 @@ def md_table(headers, rows):
     return lines
 
 
-def md_table(headers, rows):
-    def cell(value):
-        return str(value).replace("|", "\\|")
-
-    lines = [
-        "| " + " | ".join(headers) + " |",
-        "| " + " | ".join("---" for _ in headers) + " |",
-    ]
-
-    for row in rows:
-        lines.append("| " + " | ".join(cell(c) for c in row) + " |")
-
-    return lines
-
-
 def render_by_category(summary):
     rows = [
         (category, stats["passed"], stats["total"])
@@ -200,9 +185,31 @@ def render_tool_details(summary):
     return lines
 
 
+def render_outcome_details(summary):
+    rows = [
+        (name, s["passed"], s["failed"], s["skipped"])
+        for name, s in sorted(summary.get("by_check", {}).items())
+    ]
+
+    lines = ["### Checks", ""]
+    lines += md_table(["check", "passed", "failed", "skipped"], rows)
+
+    incomplete = summary.get("incomplete", [])
+
+    if incomplete:
+        lines += [
+            "",
+            "Incomplete scenarios (some checks were skipped): "
+            + ", ".join(incomplete),
+        ]
+
+    return lines
+
+
 DETAIL_RENDERERS = {
     "routing": render_routing_details,
     "tool": render_tool_details,
+    "outcome": render_outcome_details,
 }
 
 
