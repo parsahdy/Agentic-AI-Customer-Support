@@ -1,15 +1,15 @@
 from datetime import datetime, UTC
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from api.schemas import AskRequest, AskResponse, PendingReview
+from app.schemas import AskRequest, AskResponse, PendingReview
 from sqlalchemy import update
 from sqlalchemy.orm import Session
 
 from agent import AgentService
 from agent.human_loop.models import HumanDecision
 
-from api import database
-from api.models import PendingReview as PendingReviewRow
+from app import database
+from app.models import PendingReview as PendingReviewRow
 
 
 router = APIRouter(
@@ -87,7 +87,7 @@ def _to_response(
 
 @router.post("/ask", response_model=AskResponse)
 def ask(
-    body: AskResponse,
+    body: AskRequest,
     request: Request,
     db: Session = Depends(database.get_db),
 ):
@@ -104,7 +104,7 @@ def ask(
     except ValueError as exc:        # guardrail / validation errors    
         raise HTTPException(status_code=400, detail=str(exc))
 
-    return _to_response(output, body.user_id, body.session_id)
+    return _to_response(output, body.user_id, body.session_id, db=db)
 
 
 @router.get("/reviews/pending", response_model=list[PendingReview])
@@ -174,7 +174,7 @@ def decide(
     review.status = "decide"
     review.decision = decision.decision
     review.comment = decision.comment
-    review.decided_at = decision.now(UTC)
+    review.decided_at = datetime.now(UTC)
     db.commit()
 
-    return _to_response(output, review.user_id, review.session_id)
+    return _to_response(output, review.user_id, review.session_id, db=db)
