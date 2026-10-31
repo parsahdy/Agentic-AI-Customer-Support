@@ -1,0 +1,1365 @@
+{
+    "evaluator": "tool",
+    "dataset_path": "evaluation\\dataset\\agent_evaluation.json",
+    "outcome_path": "evaluation\\dataset\\agent_outcome.json",
+    "summary": {
+        "passed": 39,
+        "total": 44,
+        "by_category": {
+            "direct": {
+                "passed": 11,
+                "total": 11
+            },
+            "rag": {
+                "passed": 11,
+                "total": 11
+            },
+            "tool": {
+                "passed": 6,
+                "total": 11
+            },
+            "human_review": {
+                "passed": 11,
+                "total": 11
+            }
+        },
+        "critical_failures": [],
+        "tool_stats": {
+            "tool_calls": {
+                "get_order": {
+                    "expected": 7,
+                    "missing": 0,
+                    "extra": 4
+                },
+                "create_ticket": {
+                    "expected": 9,
+                    "missing": 5,
+                    "extra": 0
+                },
+                "cancel_order": {
+                    "expected": 11,
+                    "missing": 0,
+                    "extra": 7
+                },
+                "get_customer_info": {
+                    "expected": 0,
+                    "missing": 0,
+                    "extra": 3
+                }
+            },
+            "executed_tools": {
+                "get_order": {
+                    "expected": 7,
+                    "missing": 4,
+                    "extra": 0
+                },
+                "create_ticket": {
+                    "expected": 9,
+                    "missing": 5,
+                    "extra": 0
+                },
+                "get_customer_info": {
+                    "expected": 0,
+                    "missing": 0,
+                    "extra": 1
+                }
+            }
+        }
+    },
+    "results": [
+        {
+            "id": "direct_001",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_002",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_003",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_004",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_005",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_006",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_007",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_008",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_009",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_010",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_011",
+            "category": "direct",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_001",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_002",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_003",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_004",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_005",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_006",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_007",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_008",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_009",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_010",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_011",
+            "category": "rag",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_001",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "get_order"
+                    ],
+                    "actual": [
+                        "get_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "get_order"
+                    ],
+                    "actual": [
+                        "get_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_002",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "create_ticket"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "create_ticket"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_003",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "get_order"
+                    ],
+                    "actual": [
+                        "get_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "get_order"
+                    ],
+                    "actual": [
+                        "get_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_004",
+            "category": "tool",
+            "passed": false,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "get_order",
+                        "cancel_order",
+                        "get_customer_info",
+                        "get_order",
+                        "get_customer_info"
+                    ],
+                    "missing": [
+                        "create_ticket"
+                    ],
+                    "extra": [
+                        "cancel_order",
+                        "get_customer_info",
+                        "get_customer_info",
+                        "get_order"
+                    ],
+                    "passed": false
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "actual": [],
+                    "missing": [
+                        "create_ticket",
+                        "get_order"
+                    ],
+                    "extra": [],
+                    "passed": false
+                }
+            ],
+            "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order', 'get_customer_info', 'get_customer_info', 'get_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+        },
+        {
+            "id": "tool_005",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "create_ticket"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "create_ticket"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_006",
+            "category": "tool",
+            "passed": false,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "get_order",
+                        "cancel_order",
+                        "get_order",
+                        "cancel_order",
+                        "get_order",
+                        "cancel_order",
+                        "get_order",
+                        "cancel_order"
+                    ],
+                    "missing": [
+                        "create_ticket"
+                    ],
+                    "extra": [
+                        "cancel_order",
+                        "cancel_order",
+                        "cancel_order",
+                        "cancel_order",
+                        "get_order",
+                        "get_order",
+                        "get_order"
+                    ],
+                    "passed": false
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "actual": [],
+                    "missing": [
+                        "create_ticket",
+                        "get_order"
+                    ],
+                    "extra": [],
+                    "passed": false
+                }
+            ],
+            "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order', 'cancel_order', 'cancel_order', 'cancel_order', 'get_order', 'get_order', 'get_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+        },
+        {
+            "id": "tool_007",
+            "category": "tool",
+            "passed": false,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "get_order",
+                        "cancel_order"
+                    ],
+                    "missing": [
+                        "create_ticket"
+                    ],
+                    "extra": [
+                        "cancel_order"
+                    ],
+                    "passed": false
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "actual": [],
+                    "missing": [
+                        "create_ticket",
+                        "get_order"
+                    ],
+                    "extra": [],
+                    "passed": false
+                }
+            ],
+            "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+        },
+        {
+            "id": "tool_008",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "create_ticket"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "create_ticket"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_009",
+            "category": "tool",
+            "passed": false,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "get_order",
+                        "cancel_order"
+                    ],
+                    "missing": [
+                        "create_ticket"
+                    ],
+                    "extra": [
+                        "cancel_order"
+                    ],
+                    "passed": false
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "actual": [],
+                    "missing": [
+                        "create_ticket",
+                        "get_order"
+                    ],
+                    "extra": [],
+                    "passed": false
+                }
+            ],
+            "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+        },
+        {
+            "id": "tool_010",
+            "category": "tool",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "get_order",
+                        "create_ticket"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_011",
+            "category": "tool",
+            "passed": false,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "get_customer_info"
+                    ],
+                    "missing": [
+                        "create_ticket"
+                    ],
+                    "extra": [
+                        "get_customer_info"
+                    ],
+                    "passed": false
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [
+                        "create_ticket"
+                    ],
+                    "actual": [
+                        "get_customer_info"
+                    ],
+                    "missing": [
+                        "create_ticket"
+                    ],
+                    "extra": [
+                        "get_customer_info"
+                    ],
+                    "passed": false
+                }
+            ],
+            "reason": "tool_calls: missing ['create_ticket'], extra ['get_customer_info']; executed_tools: missing ['create_ticket'], extra ['get_customer_info']"
+        },
+        {
+            "id": "human_review_001",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_002",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_003",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_004",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_005",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_006",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_007",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_008",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_009",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_010",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_011",
+            "category": "human_review",
+            "passed": true,
+            "critical": [],
+            "checks": [
+                {
+                    "name": "tool_calls",
+                    "expected": [
+                        "cancel_order"
+                    ],
+                    "actual": [
+                        "cancel_order"
+                    ],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                },
+                {
+                    "name": "executed_tools",
+                    "expected": [],
+                    "actual": [],
+                    "missing": [],
+                    "extra": [],
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        }
+    ]
+}

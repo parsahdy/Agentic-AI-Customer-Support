@@ -1,0 +1,840 @@
+{
+    "generated_at": "2026-10-28T19:09:46",
+    "warnings": [],
+    "evaluators": {
+        "routing": {
+            "dataset_path": "evaluation\\dataset\\agent_evaluation.json",
+            "outcome_path": "evaluation\\dataset\\agent_outcome.json",
+            "summary": {
+                "passed": 34,
+                "total": 44,
+                "by_category": {
+                    "direct": {
+                        "passed": 10,
+                        "total": 11
+                    },
+                    "rag": {
+                        "passed": 6,
+                        "total": 11
+                    },
+                    "tool": {
+                        "passed": 7,
+                        "total": 11
+                    },
+                    "human_review": {
+                        "passed": 11,
+                        "total": 11
+                    }
+                },
+                "confusion": {
+                    "direct": {
+                        "direct": 10,
+                        "rag": 1
+                    },
+                    "rag": {
+                        "rag": 11
+                    },
+                    "tool": {
+                        "tool": 22
+                    }
+                }
+            },
+            "failures": [
+                {
+                    "id": "direct_007",
+                    "category": "direct",
+                    "reason": "route: expected 'direct', got 'rag'; retrieval: expected False, got True; human_review: expected False, got True"
+                },
+                {
+                    "id": "rag_002",
+                    "category": "rag",
+                    "reason": "human_review: expected True, got False"
+                },
+                {
+                    "id": "rag_004",
+                    "category": "rag",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "rag_008",
+                    "category": "rag",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "rag_010",
+                    "category": "rag",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "rag_011",
+                    "category": "rag",
+                    "reason": "human_review: expected True, got False"
+                },
+                {
+                    "id": "tool_004",
+                    "category": "tool",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "tool_006",
+                    "category": "tool",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "tool_007",
+                    "category": "tool",
+                    "reason": "human_review: expected False, got True"
+                },
+                {
+                    "id": "tool_009",
+                    "category": "tool",
+                    "reason": "human_review: expected False, got True"
+                }
+            ]
+        },
+        "tool": {
+            "dataset_path": "evaluation\\dataset\\agent_evaluation.json",
+            "outcome_path": "evaluation\\dataset\\agent_outcome.json",
+            "summary": {
+                "passed": 39,
+                "total": 44,
+                "by_category": {
+                    "direct": {
+                        "passed": 11,
+                        "total": 11
+                    },
+                    "rag": {
+                        "passed": 11,
+                        "total": 11
+                    },
+                    "tool": {
+                        "passed": 6,
+                        "total": 11
+                    },
+                    "human_review": {
+                        "passed": 11,
+                        "total": 11
+                    }
+                },
+                "critical_failures": [],
+                "tool_stats": {
+                    "tool_calls": {
+                        "get_order": {
+                            "expected": 7,
+                            "missing": 0,
+                            "extra": 4
+                        },
+                        "create_ticket": {
+                            "expected": 9,
+                            "missing": 5,
+                            "extra": 0
+                        },
+                        "cancel_order": {
+                            "expected": 11,
+                            "missing": 0,
+                            "extra": 7
+                        },
+                        "get_customer_info": {
+                            "expected": 0,
+                            "missing": 0,
+                            "extra": 3
+                        }
+                    },
+                    "executed_tools": {
+                        "get_order": {
+                            "expected": 7,
+                            "missing": 4,
+                            "extra": 0
+                        },
+                        "create_ticket": {
+                            "expected": 9,
+                            "missing": 5,
+                            "extra": 0
+                        },
+                        "get_customer_info": {
+                            "expected": 0,
+                            "missing": 0,
+                            "extra": 1
+                        }
+                    }
+                }
+            },
+            "failures": [
+                {
+                    "id": "tool_004",
+                    "category": "tool",
+                    "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order', 'get_customer_info', 'get_customer_info', 'get_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+                },
+                {
+                    "id": "tool_006",
+                    "category": "tool",
+                    "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order', 'cancel_order', 'cancel_order', 'cancel_order', 'get_order', 'get_order', 'get_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+                },
+                {
+                    "id": "tool_007",
+                    "category": "tool",
+                    "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+                },
+                {
+                    "id": "tool_009",
+                    "category": "tool",
+                    "reason": "tool_calls: missing ['create_ticket'], extra ['cancel_order']; executed_tools: missing ['create_ticket', 'get_order'], extra []"
+                },
+                {
+                    "id": "tool_011",
+                    "category": "tool",
+                    "reason": "tool_calls: missing ['create_ticket'], extra ['get_customer_info']; executed_tools: missing ['create_ticket'], extra ['get_customer_info']"
+                }
+            ]
+        },
+        "outcome": {
+            "dataset_path": "evaluation\\dataset\\agent_evaluation.json",
+            "outcome_path": "evaluation\\dataset\\agent_outcome.json",
+            "summary": {
+                "passed": 32,
+                "total": 44,
+                "by_category": {
+                    "direct": {
+                        "passed": 10,
+                        "total": 11
+                    },
+                    "rag": {
+                        "passed": 5,
+                        "total": 11
+                    },
+                    "tool": {
+                        "passed": 6,
+                        "total": 11
+                    },
+                    "human_review": {
+                        "passed": 11,
+                        "total": 11
+                    }
+                },
+                "by_check": {
+                    "has_answer": {
+                        "passed": 44,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "no_error": {
+                        "passed": 44,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "status_matches": {
+                        "passed": 34,
+                        "failed": 10,
+                        "skipped": 0
+                    },
+                    "format_plain_text": {
+                        "passed": 44,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "format_length": {
+                        "passed": 44,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "format_complete": {
+                        "passed": 44,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "format_no_leak": {
+                        "passed": 44,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "must_answer_question": {
+                        "passed": 0,
+                        "failed": 0,
+                        "skipped": 4
+                    },
+                    "must_not_invent_company_policy": {
+                        "passed": 0,
+                        "failed": 0,
+                        "skipped": 4
+                    },
+                    "must_preserve_user_intent": {
+                        "passed": 0,
+                        "failed": 0,
+                        "skipped": 4
+                    },
+                    "must_not_call_unnecessary_tools": {
+                        "passed": 0,
+                        "failed": 0,
+                        "skipped": 4
+                    },
+                    "must_acknowledge_concern": {
+                        "passed": 0,
+                        "failed": 0,
+                        "skipped": 3
+                    },
+                    "must_not_claim_action_completed": {
+                        "passed": 14,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "numbers_grounded": {
+                        "passed": 33,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "rag_scores": {
+                        "passed": 0,
+                        "failed": 0,
+                        "skipped": 12
+                    },
+                    "no_false_refusal": {
+                        "passed": 4,
+                        "failed": 2,
+                        "skipped": 0
+                    },
+                    "must_answer_from_retrieved_context": {
+                        "passed": 0,
+                        "failed": 0,
+                        "skipped": 5
+                    },
+                    "must_not_invent_policy_details": {
+                        "passed": 0,
+                        "failed": 0,
+                        "skipped": 8
+                    },
+                    "refers_to_human": {
+                        "passed": 16,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "must_indicate_insufficient_evidence": {
+                        "passed": 3,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "must_identify_conflicting_evidence": {
+                        "passed": 0,
+                        "failed": 0,
+                        "skipped": 3
+                    },
+                    "must_not_choose_without_basis": {
+                        "passed": 0,
+                        "failed": 0,
+                        "skipped": 3
+                    },
+                    "must_use_tool_result": {
+                        "passed": 6,
+                        "failed": 5,
+                        "skipped": 0
+                    },
+                    "must_not_invent_order_status": {
+                        "passed": 1,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "must_not_claim_ticket_created_without_confirmation": {
+                        "passed": 9,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "must_answer_from_order_result": {
+                        "passed": 2,
+                        "failed": 4,
+                        "skipped": 0
+                    },
+                    "must_not_execute_protected_action_before_approval": {
+                        "passed": 11,
+                        "failed": 0,
+                        "skipped": 0
+                    }
+                },
+                "critical_failures": [],
+                "incomplete": [
+                    "direct_001",
+                    "direct_002",
+                    "direct_003",
+                    "direct_004",
+                    "direct_005",
+                    "direct_006",
+                    "direct_007",
+                    "direct_008",
+                    "direct_009",
+                    "direct_010",
+                    "direct_011",
+                    "rag_001",
+                    "rag_002",
+                    "rag_003",
+                    "rag_004",
+                    "rag_005",
+                    "rag_006",
+                    "rag_007",
+                    "rag_008",
+                    "rag_009",
+                    "rag_010",
+                    "rag_011"
+                ]
+            },
+            "failures": [
+                {
+                    "id": "direct_007",
+                    "category": "direct",
+                    "reason": "status_matches: expected 'success', got 'human_review'; no_false_refusal: answer refuses although the evidence should be enough"
+                },
+                {
+                    "id": "rag_002",
+                    "category": "rag",
+                    "reason": "status_matches: expected 'human_review', got 'success'"
+                },
+                {
+                    "id": "rag_003",
+                    "category": "rag",
+                    "reason": "numbers_grounded: numbers not found in query or evidence: ['1', '2', '3']; refers_to_human: answer does not refer the user to a human"
+                },
+                {
+                    "id": "rag_004",
+                    "category": "rag",
+                    "reason": "status_matches: expected 'success', got 'human_review'"
+                },
+                {
+                    "id": "rag_008",
+                    "category": "rag",
+                    "reason": "status_matches: expected 'success', got 'human_review'"
+                },
+                {
+                    "id": "rag_010",
+                    "category": "rag",
+                    "reason": "status_matches: expected 'success', got 'human_review'; no_false_refusal: answer refuses although the evidence should be enough"
+                },
+                {
+                    "id": "rag_011",
+                    "category": "rag",
+                    "reason": "status_matches: expected 'human_review', got 'success'"
+                },
+                {
+                    "id": "tool_004",
+                    "category": "tool",
+                    "reason": "status_matches: expected 'success', got 'human_review'; must_use_tool_result: no tool result exists, the tool did not run; must_answer_from_order_result: no tool result exists, the tool did not run"
+                },
+                {
+                    "id": "tool_006",
+                    "category": "tool",
+                    "reason": "status_matches: expected 'success', got 'human_review'; must_use_tool_result: no tool result exists, the tool did not run; must_answer_from_order_result: no tool result exists, the tool did not run"
+                },
+                {
+                    "id": "tool_007",
+                    "category": "tool",
+                    "reason": "status_matches: expected 'success', got 'human_review'; must_use_tool_result: no tool result exists, the tool did not run; must_answer_from_order_result: no tool result exists, the tool did not run"
+                },
+                {
+                    "id": "tool_009",
+                    "category": "tool",
+                    "reason": "status_matches: expected 'success', got 'human_review'; must_use_tool_result: no tool result exists, the tool did not run; must_answer_from_order_result: no tool result exists, the tool did not run"
+                },
+                {
+                    "id": "tool_011",
+                    "category": "tool",
+                    "reason": "must_use_tool_result: answer does not mention anything from the tool result"
+                }
+            ]
+        }
+    },
+    "critical_failures": [],
+    "scenarios": [
+        {
+            "id": "direct_001",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "direct_002",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "direct_003",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "direct_004",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "direct_005",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "direct_006",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "direct_007",
+            "category": "direct",
+            "results": {
+                "routing": false,
+                "tool": true,
+                "outcome": false
+            }
+        },
+        {
+            "id": "direct_008",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "direct_009",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "direct_010",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "direct_011",
+            "category": "direct",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "rag_001",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "rag_002",
+            "category": "rag",
+            "results": {
+                "routing": false,
+                "tool": true,
+                "outcome": false
+            }
+        },
+        {
+            "id": "rag_003",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": false
+            }
+        },
+        {
+            "id": "rag_004",
+            "category": "rag",
+            "results": {
+                "routing": false,
+                "tool": true,
+                "outcome": false
+            }
+        },
+        {
+            "id": "rag_005",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "rag_006",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "rag_007",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "rag_008",
+            "category": "rag",
+            "results": {
+                "routing": false,
+                "tool": true,
+                "outcome": false
+            }
+        },
+        {
+            "id": "rag_009",
+            "category": "rag",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "rag_010",
+            "category": "rag",
+            "results": {
+                "routing": false,
+                "tool": true,
+                "outcome": false
+            }
+        },
+        {
+            "id": "rag_011",
+            "category": "rag",
+            "results": {
+                "routing": false,
+                "tool": true,
+                "outcome": false
+            }
+        },
+        {
+            "id": "tool_001",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "tool_002",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "tool_003",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "tool_004",
+            "category": "tool",
+            "results": {
+                "routing": false,
+                "tool": false,
+                "outcome": false
+            }
+        },
+        {
+            "id": "tool_005",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "tool_006",
+            "category": "tool",
+            "results": {
+                "routing": false,
+                "tool": false,
+                "outcome": false
+            }
+        },
+        {
+            "id": "tool_007",
+            "category": "tool",
+            "results": {
+                "routing": false,
+                "tool": false,
+                "outcome": false
+            }
+        },
+        {
+            "id": "tool_008",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "tool_009",
+            "category": "tool",
+            "results": {
+                "routing": false,
+                "tool": false,
+                "outcome": false
+            }
+        },
+        {
+            "id": "tool_010",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "tool_011",
+            "category": "tool",
+            "results": {
+                "routing": true,
+                "tool": false,
+                "outcome": false
+            }
+        },
+        {
+            "id": "human_review_001",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "human_review_002",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "human_review_003",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "human_review_004",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "human_review_005",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "human_review_006",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "human_review_007",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "human_review_008",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "human_review_009",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "human_review_010",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        },
+        {
+            "id": "human_review_011",
+            "category": "human_review",
+            "results": {
+                "routing": true,
+                "tool": true,
+                "outcome": true
+            }
+        }
+    ]
+}

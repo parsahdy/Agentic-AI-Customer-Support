@@ -157,5 +157,6 @@ def router_prompt(query: str) -> str:
         "- \"Thanks, that was helpful\" -> direct\n"
         "- \"Make this email sound more formal: ...\" -> direct\n"
         "- \"What does the word 'backorder' mean?\" -> direct\n\n"
+        "Answer with exactly one word: rag, tool or direct.\n\n"
         f"User query:\n{query}"
     )

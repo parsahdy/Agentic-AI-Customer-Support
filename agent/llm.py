@@ -28,9 +28,7 @@ def create_llm(max_tokens: int | None=None) -> ChatOpenAI:
         base_url=config.BASE_URL,
         temperature=config.TEMPERATURE,
         max_tokens=max_tokens if max_tokens else config.MAX_TOKENS,
-        model_kwargs={
-            "reasoning_effort": "none",
-        },
+        reasoning_effort="none",
     )
  
  

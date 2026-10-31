@@ -86,6 +86,7 @@ INTENT_KEYWORDS = {
         "price",
         "available",
         "in stock",
+        "tickets",
 
         # Payment
         "payment",

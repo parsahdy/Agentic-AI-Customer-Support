@@ -3,7 +3,7 @@
     "id": "direct_001",
     "category": "direct",
     "input": {
-      "query": "What is the difference between a refund and a return?"
+      "query": "What is the difference between an AI agent and a chatbot?"
     },
     "expected_behavior": {
       "route": "direct",
@@ -51,6 +51,150 @@
     "expected_outcome": {
       "must_acknowledge_concern": true,
       "must_not_claim_action_completed": true
+    }
+  },
+  {
+    "id": "direct_004",
+    "category": "direct",
+    "input": {
+      "query": "Explain what an AI customer support agent does in simple terms."
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_answer_question": true,
+      "must_not_invent_company_policy": true
+    }
+  },
+  {
+    "id": "direct_005",
+    "category": "direct",
+    "input": {
+      "query": "Make this sentence more professional: I need help with my order."
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_preserve_user_intent": true,
+      "must_not_call_unnecessary_tools": true
+    }
+  },
+  {
+    "id": "direct_006",
+    "category": "direct",
+    "input": {
+      "query": "Thank you for helping me with my problem."
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_acknowledge_concern": true,
+      "must_not_claim_action_completed": true
+    }
+  },
+  {
+    "id": "direct_007",
+    "category": "direct",
+    "input": {
+      "query": "What information should I include when contacting customer support?"
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_answer_question": true,
+      "must_not_invent_company_policy": true
+    }
+  },
+  {
+    "id": "direct_008",
+    "category": "direct",
+    "input": {
+      "query": "Rewrite this message in a friendly tone: I have not received a response to my email."
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_preserve_user_intent": true,
+      "must_not_call_unnecessary_tools": true
+    }
+  },
+  {
+    "id": "direct_009",
+    "category": "direct",
+    "input": {
+      "query": "I am disappointed with how long this has taken."
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_acknowledge_concern": true,
+      "must_not_claim_action_completed": true
+    }
+  },
+  {
+    "id": "direct_010",
+    "category": "direct",
+    "input": {
+      "query": "Explain the difference between an AI assistant and a traditional FAQ page."
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_answer_question": true,
+      "must_not_invent_company_policy": true
+    }
+  },
+  {
+    "id": "direct_011",
+    "category": "direct",
+    "input": {
+      "query": "Please make this message more polite: Your service has been very slow."
+    },
+    "expected_behavior": {
+      "route": "direct",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_preserve_user_intent": true,
+      "must_not_call_unnecessary_tools": true
     }
   },
   {
@@ -135,6 +279,222 @@
     }
   },
   {
+    "id": "rag_004",
+    "category": "rag",
+    "input": {
+      "query": "How long do I have to return an unused product?",
+      "simulation": {
+        "retrieval_fixture": "sufficient_return_policy",
+        "retrieval_scores": {
+          "top1_score": 0.92,
+          "mean_topk_score": 0.88
+        },
+        "faithfulness_score": 0.94,
+        "confidence_score": 0.91
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_answer_from_retrieved_context": true,
+      "must_not_invent_policy_details": true
+    }
+  },
+  {
+    "id": "rag_005",
+    "category": "rag",
+    "input": {
+      "query": "Does the company offer a warranty for refurbished devices?",
+      "simulation": {
+        "retrieval_fixture": "no_relevant_document",
+        "retrieval_scores": {
+          "top1_score": 0.18,
+          "mean_topk_score": 0.12
+        },
+        "faithfulness_score": 0.88,
+        "confidence_score": 0.28
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": true
+    },
+    "expected_outcome": {
+      "must_indicate_insufficient_evidence": true,
+      "must_not_invent_policy_details": true
+    }
+  },
+  {
+    "id": "rag_006",
+    "category": "rag",
+    "input": {
+      "query": "Can I return an item after opening its packaging?",
+      "simulation": {
+        "retrieval_fixture": "sufficient_return_policy",
+        "retrieval_scores": {
+          "top1_score": 0.89,
+          "mean_topk_score": 0.84
+        },
+        "faithfulness_score": 0.92,
+        "confidence_score": 0.86
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_answer_from_retrieved_context": true,
+      "must_not_invent_policy_details": true
+    }
+  },
+  {
+    "id": "rag_007",
+    "category": "rag",
+    "input": {
+      "query": "The knowledge base contains two different warranty durations. Which duration applies?",
+      "simulation": {
+        "retrieval_fixture": "conflicting_policy_documents",
+        "retrieval_scores": {
+          "top1_score": 0.93,
+          "mean_topk_score": 0.87
+        },
+        "faithfulness_score": 0.91,
+        "confidence_score": 0.38
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": true
+    },
+    "expected_outcome": {
+      "must_identify_conflicting_evidence": true,
+      "must_not_choose_without_basis": true
+    }
+  },
+  {
+    "id": "rag_008",
+    "category": "rag",
+    "input": {
+      "query": "What documents are required to request a refund?",
+      "simulation": {
+        "retrieval_fixture": "sufficient_refund_requirements",
+        "retrieval_scores": {
+          "top1_score": 0.91,
+          "mean_topk_score": 0.86
+        },
+        "faithfulness_score": 0.93,
+        "confidence_score": 0.89
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_answer_from_retrieved_context": true,
+      "must_not_invent_policy_details": true
+    }
+  },
+  {
+    "id": "rag_009",
+    "category": "rag",
+    "input": {
+      "query": "Does the company ship replacement parts internationally?",
+      "simulation": {
+        "retrieval_fixture": "no_relevant_document",
+        "retrieval_scores": {
+          "top1_score": 0.15,
+          "mean_topk_score": 0.11
+        },
+        "faithfulness_score": 0.90,
+        "confidence_score": 0.25
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": true
+    },
+    "expected_outcome": {
+      "must_indicate_insufficient_evidence": true,
+      "must_not_invent_policy_details": true
+    }
+  },
+  {
+    "id": "rag_010",
+    "category": "rag",
+    "input": {
+      "query": "According to the support documentation, how can I troubleshoot a device that will not charge?",
+      "simulation": {
+        "retrieval_fixture": "sufficient_troubleshooting_guide",
+        "retrieval_scores": {
+          "top1_score": 0.94,
+          "mean_topk_score": 0.89
+        },
+        "faithfulness_score": 0.96,
+        "confidence_score": 0.92
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_answer_from_retrieved_context": true,
+      "must_not_invent_policy_details": true
+    }
+  },
+  {
+    "id": "rag_011",
+    "category": "rag",
+    "input": {
+      "query": "The retrieved policy documents disagree about whether sale items can be returned. Can you confirm the rule?",
+      "simulation": {
+        "retrieval_fixture": "conflicting_policy_documents",
+        "retrieval_scores": {
+          "top1_score": 0.88,
+          "mean_topk_score": 0.82
+        },
+        "faithfulness_score": 0.89,
+        "confidence_score": 0.35
+      }
+    },
+    "expected_behavior": {
+      "route": "rag",
+      "expected_tool_calls": [],
+      "expected_executed_tools": [],
+      "retrieval_expected": true,
+      "human_review_expected": true
+    },
+    "expected_outcome": {
+      "must_identify_conflicting_evidence": true,
+      "must_not_choose_without_basis": true
+    }
+  },
+  {
     "id": "tool_001",
     "category": "tool",
     "input": {
@@ -201,6 +561,197 @@
     }
   },
   {
+    "id": "tool_004",
+    "category": "tool",
+    "input": {
+      "query": "Check order 54321 and create a support ticket reporting that its shipment has been delayed."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "get_order",
+        "create_ticket"
+      ],
+      "expected_executed_tools": [
+        "get_order",
+        "create_ticket"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_answer_from_order_result": true,
+      "must_not_claim_ticket_created_without_confirmation": true
+    }
+  },
+  {
+    "id": "tool_005",
+    "category": "tool",
+    "input": {
+      "query": "Open a support ticket for my laptop because it keeps shutting down unexpectedly."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "create_ticket"
+      ],
+      "expected_executed_tools": [
+        "create_ticket"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_not_claim_ticket_created_without_confirmation": true
+    }
+  },
+  {
+    "id": "tool_006",
+    "category": "tool",
+    "input": {
+      "query": "Look up order 67219 and create a support ticket because the package has not arrived."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "get_order",
+        "create_ticket"
+      ],
+      "expected_executed_tools": [
+        "get_order",
+        "create_ticket"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_answer_from_order_result": true,
+      "must_not_claim_ticket_created_without_confirmation": true
+    }
+  },
+  {
+    "id": "tool_007",
+    "category": "tool",
+    "input": {
+      "query": "Check the delivery status of order 86420, then register a support ticket about the missing delivery."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "get_order",
+        "create_ticket"
+      ],
+      "expected_executed_tools": [
+        "get_order",
+        "create_ticket"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_answer_from_order_result": true,
+      "must_not_claim_ticket_created_without_confirmation": true
+    }
+  },
+  {
+    "id": "tool_008",
+    "category": "tool",
+    "input": {
+      "query": "Create a support ticket for my phone because it will not connect to Wi-Fi."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "create_ticket"
+      ],
+      "expected_executed_tools": [
+        "create_ticket"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_not_claim_ticket_created_without_confirmation": true
+    }
+  },
+  {
+    "id": "tool_009",
+    "category": "tool",
+    "input": {
+      "query": "Retrieve order 31975 and open a support ticket about the damaged item I received."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "get_order",
+        "create_ticket"
+      ],
+      "expected_executed_tools": [
+        "get_order",
+        "create_ticket"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_answer_from_order_result": true,
+      "must_not_claim_ticket_created_without_confirmation": true
+    }
+  },
+  {
+    "id": "tool_010",
+    "category": "tool",
+    "input": {
+      "query": "Check order 28514 and create a ticket asking support to investigate its late delivery."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "get_order",
+        "create_ticket"
+      ],
+      "expected_executed_tools": [
+        "get_order",
+        "create_ticket"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_answer_from_order_result": true,
+      "must_not_claim_ticket_created_without_confirmation": true
+    }
+  },
+  {
+    "id": "tool_011",
+    "category": "tool",
+    "input": {
+      "query": "Register a support ticket for my tablet because its screen keeps freezing."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "create_ticket"
+      ],
+      "expected_executed_tools": [
+        "create_ticket"
+      ],
+      "retrieval_expected": false,
+      "human_review_expected": false
+    },
+    "expected_outcome": {
+      "must_use_tool_result": true,
+      "must_not_claim_ticket_created_without_confirmation": true
+    }
+  },
+  {
     "id": "human_review_001",
     "category": "human_review",
     "input": {
@@ -226,6 +777,195 @@
     "category": "human_review",
     "input": {
       "query": "Please cancel order 77701."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  },
+  {
+    "id": "human_review_003",
+    "category": "human_review",
+    "input": {
+      "query": "I want to cancel order 58124 immediately."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  },
+  {
+    "id": "human_review_004",
+    "category": "human_review",
+    "input": {
+      "query": "Could you cancel my order, number 40219?"
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  },
+  {
+    "id": "human_review_005",
+    "category": "human_review",
+    "input": {
+      "query": "Please stop the shipment by cancelling order 63590."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  },
+  {
+    "id": "human_review_006",
+    "category": "human_review",
+    "input": {
+      "query": "I changed my mind. Cancel order 91826, please."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  },
+  {
+    "id": "human_review_007",
+    "category": "human_review",
+    "input": {
+      "query": "Can you cancel order 30468? I no longer need the item."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  },
+  {
+    "id": "human_review_008",
+    "category": "human_review",
+    "input": {
+      "query": "Please cancel order 85271 before it is dispatched."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  },
+  {
+    "id": "human_review_009",
+    "category": "human_review",
+    "input": {
+      "query": "I accidentally placed order 19463. Please cancel it."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  },
+  {
+    "id": "human_review_010",
+    "category": "human_review",
+    "input": {
+      "query": "Would you cancel order 72615 for me? I ordered the wrong model."
+    },
+    "expected_behavior": {
+      "route": "tool",
+      "expected_tool_calls": [
+        "cancel_order"
+      ],
+      "expected_executed_tools": [],
+      "retrieval_expected": false,
+      "human_review_expected": true,
+      "expected_policy_action": "human_review"
+    },
+    "expected_outcome": {
+      "must_not_claim_action_completed": true,
+      "must_not_execute_protected_action_before_approval": true
+    }
+  },
+  {
+    "id": "human_review_011",
+    "category": "human_review",
+    "input": {
+      "query": "Please cancel order 46082. I no longer want it delivered."
     },
     "expected_behavior": {
       "route": "tool",

@@ -1,0 +1,1273 @@
+{
+    "evaluator": "routing",
+    "dataset_path": "evaluation\\dataset\\agent_evaluation.json",
+    "outcome_path": "evaluation\\dataset\\agent_outcome.json",
+    "summary": {
+        "passed": 34,
+        "total": 44,
+        "by_category": {
+            "direct": {
+                "passed": 10,
+                "total": 11
+            },
+            "rag": {
+                "passed": 6,
+                "total": 11
+            },
+            "tool": {
+                "passed": 7,
+                "total": 11
+            },
+            "human_review": {
+                "passed": 11,
+                "total": 11
+            }
+        },
+        "confusion": {
+            "direct": {
+                "direct": 10,
+                "rag": 1
+            },
+            "rag": {
+                "rag": 11
+            },
+            "tool": {
+                "tool": 22
+            }
+        }
+    },
+    "results": [
+        {
+            "id": "direct_001",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "direct",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "direct",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_002",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "direct",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "direct",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_003",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "direct",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "direct",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_004",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "direct",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "direct",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_005",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "direct",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "direct",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_006",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "direct",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "direct",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_007",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "rag",
+            "passed": false,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "rag",
+                    "passed": false
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": true,
+                    "passed": false
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": true,
+                    "passed": false
+                }
+            ],
+            "reason": "route: expected 'direct', got 'rag'; retrieval: expected False, got True; human_review: expected False, got True"
+        },
+        {
+            "id": "direct_008",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "direct",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "direct",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_009",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "direct",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "direct",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_010",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "direct",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "direct",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "direct_011",
+            "category": "direct",
+            "expected_route": "direct",
+            "actual_route": "direct",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "direct",
+                    "actual": "direct",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_001",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_002",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": false,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": false,
+                    "passed": false
+                }
+            ],
+            "reason": "human_review: expected True, got False"
+        },
+        {
+            "id": "rag_003",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_004",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": false,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": true,
+                    "passed": false
+                }
+            ],
+            "reason": "human_review: expected False, got True"
+        },
+        {
+            "id": "rag_005",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_006",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_007",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_008",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": false,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": true,
+                    "passed": false
+                }
+            ],
+            "reason": "human_review: expected False, got True"
+        },
+        {
+            "id": "rag_009",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "rag_010",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": false,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": true,
+                    "passed": false
+                }
+            ],
+            "reason": "human_review: expected False, got True"
+        },
+        {
+            "id": "rag_011",
+            "category": "rag",
+            "expected_route": "rag",
+            "actual_route": "rag",
+            "passed": false,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "rag",
+                    "actual": "rag",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": false,
+                    "passed": false
+                }
+            ],
+            "reason": "human_review: expected True, got False"
+        },
+        {
+            "id": "tool_001",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_002",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_003",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_004",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": false,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": true,
+                    "passed": false
+                }
+            ],
+            "reason": "human_review: expected False, got True"
+        },
+        {
+            "id": "tool_005",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_006",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": false,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": true,
+                    "passed": false
+                }
+            ],
+            "reason": "human_review: expected False, got True"
+        },
+        {
+            "id": "tool_007",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": false,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": true,
+                    "passed": false
+                }
+            ],
+            "reason": "human_review: expected False, got True"
+        },
+        {
+            "id": "tool_008",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_009",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": false,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": true,
+                    "passed": false
+                }
+            ],
+            "reason": "human_review: expected False, got True"
+        },
+        {
+            "id": "tool_010",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "tool_011",
+            "category": "tool",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_001",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_002",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_003",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_004",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_005",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_006",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_007",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_008",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_009",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_010",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        },
+        {
+            "id": "human_review_011",
+            "category": "human_review",
+            "expected_route": "tool",
+            "actual_route": "tool",
+            "passed": true,
+            "checks": [
+                {
+                    "name": "route",
+                    "expected": "tool",
+                    "actual": "tool",
+                    "passed": true
+                },
+                {
+                    "name": "retrieval",
+                    "expected": false,
+                    "actual": false,
+                    "passed": true
+                },
+                {
+                    "name": "human_review",
+                    "expected": true,
+                    "actual": true,
+                    "passed": true
+                }
+            ],
+            "reason": ""
+        }
+    ]
+}
