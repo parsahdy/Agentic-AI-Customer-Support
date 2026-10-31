@@ -77,15 +77,7 @@ def wrap_node(
             except GraphInterrupt as interrupt:
                 raise
             
-            except Exception as exc:
-                print(
-                    f"[ERROR] Node '{node_name}' failed: "
-                    f"{type(exc).__name__}: {exc}"
-                )
                 action = error_policy.policy(exc, state)
-                print(
-                    f"[ERROR] Recovery action: {action}"
-                )
 
                 if action == RecoveryAction.RETRY:
                     if retry_count >= retry_policy.max_retries:
@@ -290,18 +282,10 @@ def router_node(state: AgentState) -> dict:
         if classified["error_type"] == ErrorType.TRANSIENT:
             raise
 
-        print(
-            f"[WARNING] Main router failed "
-            f"({type(exc).__name__}: {exc}). "
-            f"Using the keyword router as fallback."
-        )
-
         route = None
 
     if route not in {"rag", "tool", "direct"}:
         route = fallback_router.route(state)
-
-    print(f"[DEBUG] Router returned: {route!r}")
 
     return {
         "route": route,
