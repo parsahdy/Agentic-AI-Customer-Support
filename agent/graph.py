@@ -63,8 +63,6 @@ def route_after_router(state: AgentState) -> str:
  
     route = state.get("route")
  
-    print(f"[DEBUG] State route after router: {route!r}")
- 
     if route is None:
         raise ValueError(
             "Route is required after router node."
