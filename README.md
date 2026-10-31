@@ -181,7 +181,7 @@ Set database hosts to `localhost` in your local `.env` connection strings, then 
 uvicorn app.main:app --reload
 ```
 
-The database must be running and the configured database must already exist.
+The PostgreSQL server must be running, and the databases referenced by `DATABASE_URL` and `MEMORY_DATABASE_URL` must already exist.
 
 ## API Endpoints
 
