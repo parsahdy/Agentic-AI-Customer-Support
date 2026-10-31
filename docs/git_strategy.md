@@ -14,7 +14,7 @@ main
 
 - **main:** Stable project history.
 - **develop:** Integration branch for completed development work.
-- **feature branches:** Short-lived branches for focused changes. Merge them into `develop) after review and testing.
+- **feature branches:** Short-lived branches for focused changes. Merge them into `develop` after review and testing.
 
 ## Commit Messages
 
