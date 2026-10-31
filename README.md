@@ -69,7 +69,6 @@ For sensitive operations, the graph can pause through LangGraph `interrupt()`. T
 | Agent orchestration | LangGraph, LangChain |
 | API | FastAPI, Pydantic |
 | Database | PostgreSQL, SQLAlchemy |
-| Cache / infrastructure | Redis (integration/configuration as the project evolves) |
 | Retrieval | Sentence Transformers, FAISS |
 | LLM providers | OpenAI-compatible APIs (configured for Groq / other providers) |
 | Evaluation | Custom retrieval, faithfulness, and confidence evaluators |
