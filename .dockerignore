@@ -1,0 +1,22 @@
+.git
+.gitignore
+.venv
+venv
+env
+__pycache__/
+*.pyc
+.pytest_cache
+
+# secrets: never bake them into the image
+.env
+.env.*
+!.env.example
+
+tests/
+docs/
+evaluation/results/
+
+Dockerfile
+docker-compose.yml
+compose.yaml
+dockercompose.yml

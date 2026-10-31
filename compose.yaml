@@ -1,0 +1,50 @@
+# Shared by the app and the evaluation runner.
+# Inside the compose network the database host is the service name: "db".
+x-app-env: &app-env
+  GROQ_API_KEY: ${GROQ_API_KEY}
+  DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+  MEMORY_DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    image: customer-support-agent:latest
+    restart: unless-stopped
+    environment: *app-env
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Not started by "docker compose up". Run it on demand:
+  #   docker compose --profile eval run --rm evaluation
+  evaluation:
+    image: customer-support-agent:latest
+    profiles: ["eval"]
+    environment: *app-env
+    volumes:
+      # results written by the runner and evaluators land on your machine
+      - ./evaluation:/app/evaluation
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["python", "-m", "evaluation.runner.agent_evaluation_runner"]
+
+volumes:
+  pgdata:
