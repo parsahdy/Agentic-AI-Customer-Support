@@ -1,371 +1,257 @@
 # Agentic AI Customer Support
 
-An agentic AI customer support system built with **LangGraph** and **LLMs** to handle customer requests, retrieve relevant knowledge, use business tools, maintain conversation memory, evaluate responses, and route sensitive operations to human review.
+An AI-powered customer-support agent built with **LangGraph**, **LangChain**, and **FastAPI**. The system routes customer requests, retrieves information from a knowledge base, uses business tools, maintains conversation memory, evaluates RAG responses, and pauses sensitive operations for human review.
 
-## Overview
+> The project is an evolving engineering implementation. The documentation describes the current `develop` branch; planned improvements are listed separately.
 
-The goal of this project is to build a realistic customer-support AI agent rather than a simple chatbot.
+## Key Features
 
-The agent can:
-
-* Understand customer requests
-* Classify the request and select an appropriate route
-* Answer simple questions directly with an LLM
-* Retrieve information from the Knowledge Base using RAG
-* Use business tools such as order lookup and order cancellation
-* Maintain conversation memory
-* Evaluate RAG-generated responses
-* Detect sensitive operations
-* Pause the workflow and request human review
-* Handle errors and retry transient failures
-
----
+- **Agentic workflow:** LangGraph orchestrates direct, RAG, and tool-based request paths.
+- **Knowledge retrieval:** A document pipeline builds embeddings and a FAISS vector index.
+- **Business tools:** The agent can look up orders, cancel orders, create tickets, retrieve customer information, and search the knowledge base.
+- **Conversation memory:** Memory and graph checkpointing support conversation context and paused workflows.
+- **Evaluation:** Retrieval relevance, answer faithfulness, and confidence signals are used in the RAG path.
+- **Human-in-the-loop:** Sensitive operations and low-confidence responses can pause for operator review.
+- **Guardrails:** Input and output validation help prevent invalid or unsafe content from passing through the workflow.
+- **Error recovery:** Error classification and retry policies handle recoverable failures.
+- **API:** FastAPI exposes agent and human-review endpoints.
+- **Containerization:** Docker Compose runs the API and PostgreSQL services.
 
 ## Architecture
 
-The current workflow is based on LangGraph:
-
 ![Agentic AI Customer Support Architecture](docs/images/agent-architecture.svg)
 
-### Routes
-
-The router currently selects one of three main routes:
-
-* `direct` — simple requests answered directly by the LLM
-* `rag` — requests requiring knowledge retrieval
-* `tool` — requests requiring a business operation
-
----
-
-## Main Components
-
-### Agent
-
-The agent coordinates the overall workflow using LangGraph.
-
-Main responsibilities:
-
-* Routing
-* LLM interaction
-* Tool execution
-* RAG
-* Evaluation
-* Human review
-* Memory management
-* Error handling
-
-### Knowledge Base
-
-The Knowledge Base provides information required for customer-support questions.
-
-The RAG pipeline currently includes:
+The main request flow is:
 
 ```text
-Query
-  ↓
-Retriever
-  ↓
-Retrieved Documents
-  ↓
-LLM
-  ↓
-Generated Answer
-  ↓
-Evaluation
+Client
+  |
+FastAPI
+  |
+AgentService
+  |
+Load Memory -> Router
+                 |
+       +---------+---------+
+       |         |         |
+     Direct     RAG       Tool
+       |         |         |
+       LLM    Retriever  Tool Selection
+                 |         |
+                LLM    Human Policy
+                 |         |
+             Evaluation  Review if needed
+                 |         |
+             Human Policy  Tool Execution
+                 |         |
+          Human Review?    LLM
+                 |         |
+             Save Memory <-+
+                 |
+                END
 ```
 
-Retrieval results include information such as:
+The router selects one of three routes:
 
-* Retrieved documents
-* Retrieval scores
-* Top-1 score
-* Mean retrieval score
+| Route | Use |
+|---|---|
+| `direct` | General requests that do not require retrieval or business tools. |
+| `rag` | Questions that need information from the knowledge base. |
+| `tool` | Requests that require a business operation or lookup. |
 
-The system also evaluates the generated answer using faithfulness/groundedness information.
-
----
-
-## Tools
-
-Business operations are exposed to the agent as tools.
-
-Current examples include:
-
-* `get_order`
-* `cancel_order`
-* `create_ticket`
-* `customer_info`
-* `search_knowledge_base`
-
-The architecture separates the business function from tool execution.
-
-```text
-Tool
- ↓
-ToolExecutor
- ↓
-ToolResult
- ↓
-ToolNode
- ↓
-Agent State
-```
-
-### ToolExecutor
-
-`ToolExecutor` is responsible for runtime execution and error handling.
-
-It handles:
-
-* Tool lookup
-* Tool execution
-* Retry logic
-* Error classification
-* Returning a standardized `ToolResult`
-
-Example result:
-
-```python
-ToolResult(
-    tool_name="get_order",
-    success=True,
-    result={
-        "order_id": 1234,
-        "status": "processing"
-    }
-)
-```
-
----
-
-## Memory
-
-The agent uses a `MemoryService` for conversation memory.
-
-Memory is loaded at the beginning of the workflow:
-
-```text
-START
- ↓
-Load Memory
- ↓
-Router
-```
-
-and saved after the workflow is completed:
-
-```text
-LLM / Tool Workflow
- ↓
-Save Memory
- ↓
-END
-```
-
-This allows the agent to maintain context across conversations and sessions.
-
----
-
-## Human Review
-
-Sensitive operations should not be executed automatically.
-
-For example:
-
-```text
-Customer:
-"I want my order with id 1234 to be canceled."
-
-        ↓
-
-Router
-        ↓
-Tool Route
-        ↓
-cancel_order
-        ↓
-Human Policy
-        ↓
-Sensitive Operation
-        ↓
-Human Review
-        ↓
-LangGraph interrupt
-```
-
-The system currently uses **LangGraph `interrupt()`** to pause the workflow.
-
-At this stage, the workflow stops at the human-review interrupt. The external approval/resume mechanism will be implemented later when an API or UI is added.
-
----
-
-## Error Handling
-
-The project has a dedicated error-handling layer.
-
-Errors are classified into categories such as:
-
-* `TRANSIENT`
-* `PERMANENT`
-* `UNKNOWN`
-
-The system uses an `ErrorPolicy` to decide what should happen after an error.
-
-Possible recovery actions include:
-
-* Retry
-* Human review
-* Fail
-
-Transient errors can be retried using the project's `RetryPolicy`.
-
-The retry mechanism includes:
-
-* Maximum retries
-* Initial delay
-* Maximum delay
-* Backoff factor
-* Jitter
-
-The node wrapper applies this policy around agent nodes.
-
-LangGraph control-flow exceptions such as `interrupt()` are preserved so that LangGraph can handle them correctly.
-
----
-
-## Testing
-
-Testing is an important part of the project.
-
-The test suite covers components such as:
-
-* Agent workflow
-* Router
-* Error handling
-* Error policy
-* Retry policy
-* Human review
-* Tool execution
-
-Workflow integration tests use the **real selected LLM** where appropriate to verify the actual model and integration configuration.
-
-Mocks can still be used for heavy or isolated dependencies when necessary.
-
----
+For sensitive operations, the graph can pause through LangGraph `interrupt()`. The API exposes the pending review to an operator and resumes the same graph thread after a decision is submitted.
 
 ## Technology Stack
 
-* **Python**
-* **LangGraph**
-* **LangChain**
-* **LLM / ChatOpenAI-compatible API**
-* **RAG**
-* **Sentence Transformers**
-* **FAISS**
-* **PostgreSQL**
-* **Redis**
-* **Docker**
-* **Git / GitHub**
-* **unittest**
-
----
+| Area | Technologies |
+|---|---|
+| Language | Python 3.13 |
+| Agent orchestration | LangGraph, LangChain |
+| API | FastAPI, Pydantic |
+| Database | PostgreSQL, SQLAlchemy |
+| Cache / infrastructure | Redis (integration/configuration as the project evolves) |
+| Retrieval | Sentence Transformers, FAISS |
+| LLM providers | OpenAI-compatible APIs (configured for Groq / other providers) |
+| Evaluation | Custom retrieval, faithfulness, and confidence evaluators |
+| Observability | LangSmith |
+| Containerization | Docker, Docker Compose |
+| Testing | unittest |
 
 ## Project Structure
 
-The main project areas are organized around the agent, knowledge base, evaluation, tools, memory, and tests.
-
 ```text
 Agentic-AI-Customer-Support/
-│
 ├── agent/
-│   ├── errors/
-│   ├── human_loop/
-│   ├── memory/
-│   ├── tools/
-│   ├── nodes.py
+│   ├── errors/          # Error classification and retry policies
+│   ├── guardrails/      # Input and output validation
+│   ├── human_loop/      # Human-review models, policies, and handler
+│   ├── memory/          # Conversation memory and persistence
+│   ├── router/          # Request routing
+│   ├── tools/           # Business tools, registry, and executor
+│   ├── agent_service.py
 │   ├── graph.py
+│   ├── nodes.py
 │   └── state.py
-│
-├── knowledge_base/
-│   ├── loaders/
-│   ├── processing/
-│   ├── embeddings/
-│   ├── retriever/
-│   └── vector_stores/
-│
+├── app/
+│   ├── routes/          # FastAPI endpoints
+│   ├── admincli.py      # Terminal operator client
+│   ├── database.py
+│   ├── main.py
+│   ├── models.py
+│   └── schemas.py
+├── knowledge_base/      # Loading, processing, chunking, embeddings, FAISS, retrieval
 ├── evaluation/
-│
+│   ├── dataset/
+│   ├── evaluators/
+│   ├── reporting/
+│   └── runner/
 ├── tests/
-│   └── agent_tests/
-│
-├── docs/
-│
-├── scripts/
-│
 ├── data/
-│
+├── docs/
 ├── Dockerfile
-├── docker-compose.yml
-└── README.md
+├── compose.yaml
+├── requirements.txt
+└── .env.example
 ```
 
----
+## Getting Started
 
-## Running the Project
+### Prerequisites
 
-Create and activate the virtual environment:
+- Python 3.13
+- Git
+- Docker Desktop with Docker Compose (for containerized setup)
+- API key for the configured LLM provider
 
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/parsahdy/Agentic-AI-Customer-Support.git
+cd Agentic-AI-Customer-Support
+git switch develop
+```
+
+### 2. Configure environment variables
+
+Create your local environment file:
+
+**PowerShell**
+```powershell
+Copy-Item .env.example .env
+```
+
+Set real credentials in `.env`. At minimum, configure the PostgreSQL values used by `compose.yaml` (`POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB`) and the LLM provider key (`GROQ_API_KEY`). Keep `.env` out of version control; never commit API keys or passwords.
+
+### 3. Run with Docker Compose
+
+```bash
+docker compose up --build
+```
+
+Compose starts PostgreSQL and waits for its health check before starting the API. The API is available at:
+
+- API: http://localhost:8000
+- Swagger UI: http://localhost:8000/docs
+
+Stop the services with:
+
+```bash
+docker compose down
+```
+
+To remove the persisted PostgreSQL volume as well (this deletes local database data):
+
+```bash
+docker compose down -v
+```
+
+### 4. Run locally without Docker
+
+Create and activate a virtual environment, install dependencies, and configure a locally reachable PostgreSQL instance.
+
+**PowerShell**
 ```powershell
 python -m venv venv
 .\venv\Scripts\Activate.ps1
-```
-
-Install dependencies:
-
-```powershell
 pip install -r requirements.txt
 ```
 
-Configure the required environment variables in `.env`.
-
-Run the agent workflow tests:
+Set database hosts to `localhost` in your local `.env` connection strings, then start the API:
 
 ```powershell
+uvicorn app.main:app --reload
+```
+
+The database must be running and the configured database must already exist.
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/agent/ask` | Submit a query to the agent. |
+| GET | `/agent/reviews/pending` | Retrieve requests waiting for human review. |
+| POST | `/agent/reviews/{review_id}/decision` | Submit `approve`, `reject`, or `escalate` and resume the workflow. |
+
+Example request:
+
+```json
+{
+  "query": "What is the status of order 1234?",
+  "user_id": "customer-001",
+  "session_id": "session-001"
+}
+```
+
+The terminal operator client can be run separately while the API is running:
+
+```bash
+python -m app.admincli
+```
+
+It polls the pending-review endpoint and sends the operator's decision to the API.
+
+## Evaluation
+
+The scenario dataset is located at `evaluation/dataset/agent_evaluation.json`. Run the evaluation workflow with:
+
+```bash
+python -m evaluation.runner.agent_evaluation_runner
+```
+
+The runner stores observed outcomes in `evaluation/dataset/agent_outcome.json`.
+
+With Docker Compose, run the optional evaluation service using:
+
+```bash
+docker compose --profile eval run --rm evaluation
+```
+
+## Tests
+
+Run the agent workflow tests from the project root:
+
+```bash
 python -m tests.agent_tests.agent_workflow_test
 ```
 
----
+Other tests are organized under `tests/` by component.
+
+## Documentation
+
+- [System Architecture](docs/architecture.md)
+- [Agent Workflow](docs/agent_architecture.md)
+- [API Structure](docs/api_structure.md)
+- [Knowledge Base](docs/knowledge_base_structure.md)
+- [Evaluation Strategy](docs/evaluation_strategy.md)
+- [Project Roadmap](docs/project_steps.md)
+- [Git Strategy](docs/git_strategy.md)
 
 ## Current Status
 
-### Implemented
+The repository includes the core agent workflow, RAG integration, business tool execution, memory/checkpointing, human-review pause/resume, guardrails, FastAPI endpoints, Docker Compose configuration, and a scenario evaluation runner.
 
-* [x] LangGraph agent workflow
-* [x] Direct LLM route
-* [x] RAG route
-* [x] Tool route
-* [x] Tool registry
-* [x] Tool executor
-* [x] Tool error handling
-* [x] Retry policy
-* [x] Conversation memory
-* [x] RAG evaluation
-* [x] Human review policy
-* [x] Sensitive tool operation detection
-* [x] LangGraph interrupt for human review
-* [x] Agent workflow tests
+Further work includes richer evaluation reporting, a web-based operator interface, expanded automated tests, and production hardening.
 
-### Planned
+## License
 
-* [ ] Human approval/resume flow
-* [ ] API layer
-* [ ] Customer-support UI
-* [ ] Production database integration
-* [ ] More business tools
-* [ ] More comprehensive evaluation and monitoring
-
----
-
-## Project Goal
-
-The long-term goal is to build a production-oriented **Agentic AI Customer Support Platform** where an AI agent can understand customer requests, retrieve reliable information, perform controlled business operations, remember conversation context, evaluate its own answers, and involve human operators when necessary.
+See [LICENSE](LICENSE).
